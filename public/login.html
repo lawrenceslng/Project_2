@@ -1,3 +1,30 @@
 <!-- My original thought is for the login page to be completely different from the other pages -->
 <!-- Similar to how a lot of login pages only contain a username input and password input -->
 <!-- So we should be able to use sendFile in express to send this standalone page -->
+
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Portal Login</title>
+</head>
+<body>
+    <div class = "container">
+        <form method="POST" action ="">
+            <label for="username"><b>Username</b></label>
+            <input type="text" placeholder="Enter Username" name="username" required>
+            <br>
+            <label for="password"><b>Password</b></label>
+            <input type="password" placeholder="Enter Password" name="password" required>
+            <br>
+            <button type="submit">Login</button>
+            <label>
+              <input type="checkbox" checked="unchecked" name="remember"> Remember me
+            </label>
+
+
+        </form>
+    </div>
+    
+
+</body>
+</html>
