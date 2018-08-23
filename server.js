@@ -34,7 +34,7 @@ var connection = mysql.createConnection({
   
     // Your password
     password: process.env.Password,  //placeholder for your own mySQL password that you store in your own .env file
-    database: ""    //TBD
+    database: "WebDevFlashcard_db"    //TBD
   });
 
 
