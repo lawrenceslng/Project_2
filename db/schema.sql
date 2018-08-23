@@ -14,9 +14,12 @@ CREATE TABLE users(
 	PRIMARY KEY (id)
 );
 
+-- each user has a profile that they can store information (like a short bio, contact info); we can create another table and link it to the users table
 CREATE TABLE userProfile(
 	id INT NOT NULL AUTO_INCREMENT,
 	users_id INT NOT NULL,
 	PRIMARY KEY (id)
     FOREIGN KEY (users_id) REFERENCES users(id)
 )
+
+-- 
