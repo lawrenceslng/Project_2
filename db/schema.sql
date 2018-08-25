@@ -32,6 +32,7 @@ CREATE TABLE cards(
 	category VARCHAR (255) NOT NULL,
 	front TEXT NOT NULL,
 	back TEXT NOT NULL,
+	difficulty ENUM('Easy', 'Medium', 'Hard') NOT NULL,
 	votes INT DEFAULT 0,
 	creator_id INT NOT NULL,
 	users_account ENUM('Student', 'Instructor', 'Administrator') NOT NULL,
