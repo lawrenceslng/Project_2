@@ -30,7 +30,6 @@ CREATE TABLE userProfile(
 CREATE TABLE cards(
 	id INT NOT NULL AUTO_INCREMENT,
 	category VARCHAR (255) NOT NULL,
-	-- subcategory VARCHAR (255) NOT NULL,
 	front TEXT NOT NULL,
 	back TEXT NOT NULL,
 	votes INT DEFAULT 0,
@@ -42,14 +41,14 @@ CREATE TABLE cards(
     FOREIGN KEY (users_account) REFERENCES users(account_type)
 );
 
-CREATE TABLE subcategories(
-	id INT NOT NULL AUTO_INCREMENT,
-	cards_id INT NOT NULL,
-	subcategory VARCHAR(255) NOT NULL,
-	PRIMARY KEY (id),
-	FOREIGN KEY (cards_id) REFERENCES cards(id)
+-- CREATE TABLE subcategories(
+-- 	id INT NOT NULL AUTO_INCREMENT,
+-- 	cards_id INT NOT NULL,
+-- 	subcategory VARCHAR(255) NOT NULL,
+-- 	PRIMARY KEY (id),
+-- 	FOREIGN KEY (cards_id) REFERENCES cards(id)
 
-);
+-- );
 
 -- table holds all the decks (the users_id is the foreign key that links the deck to the user)
 CREATE TABLE decks(
