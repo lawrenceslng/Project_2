@@ -1,1 +1,5 @@
 /* we should utilize bootstrap as much as possible */
+html, body{
+    width: 100%;
+    margin: 0 auto;
+}
