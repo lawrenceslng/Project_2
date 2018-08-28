@@ -23,18 +23,16 @@ FOREIGN KEY (users_id) REFERENCES users(id)
 );
 -- table that holds all the cards (the category and subcategory that the card belongs to, front: question, back: answer, and how many votes each card gets from the community and the creator_id is the users_id of the person who created the card)
 CREATE TABLE cards(
-    id INT NOT NULL AUTO_INCREMENT,
-    category VARCHAR (255) NOT NULL,
-    front TEXT NOT NULL,
-    back TEXT NOT NULL,
-    difficulty ENUM('Easy', 'Medium', 'Hard') NOT NULL,
-    votes INT DEFAULT 0,
-    creator_id INT NOT NULL,
-    users_account ENUM('Student', 'Instructor', 'Administrator') NOT NULL,
-    date TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
-    PRIMARY KEY (id),
-FOREIGN KEY (creator_id) REFERENCES users(id),
-FOREIGN KEY (users_account) REFERENCES users(account_type)
+	id INT NOT NULL AUTO_INCREMENT,
+	category VARCHAR (255) NOT NULL,
+	front TEXT NOT NULL,
+	back TEXT NOT NULL,
+	difficulty ENUM('Easy', 'Medium', 'Hard') NOT NULL,
+	votes INT DEFAULT 0,
+	creator_id INT NOT NULL,
+	date TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
+	PRIMARY KEY (id),
+  FOREIGN KEY (creator_id) REFERENCES users(id)
 );
 -- CREATE TABLE subcategories(
 --  id INT NOT NULL AUTO_INCREMENT,
