@@ -28,7 +28,7 @@ VALUES("mySQL", "What are joins?", "Joins are commands that are used to query da
 INSERT INTO cards(category,front,back,difficulty, creator_id)
 VALUES("mySQL", "What do DDL, DML, and DCL stand for?", "DDL stands for Data Definition Language e.g. CREATE TABLE command, DML stands for Data Manipulation Language e.g. SELECT, INSERT commands, DCL stands for Data Control Language e.g. GRANT, EVOKE commands>", "Hard", 3);
 
---------------------------------------APIs
+---APIs---
 
 INSERT INTO cards (category, front, back, difficulty, creator_id)
 VALUES("APIs", "What does API stand for?", "Application Programming Interface", "Easy", 2);
@@ -49,7 +49,7 @@ INSERT INTO cards (category, front, back, difficulty, creator_id)
 VALUES("APIs", "What is the architectural style for creating Web APIs?", "HTTP for client server communication<br>XML/JSON as the formatting language<br>Simple URI as the address for the services", "Hard", 2);
 
 
---------------------------------------Bootstrap
+---Bootstrap---
 
 INSERT INTO cards (category, front, back, difficulty, creator_id)
 VALUES("Bootstrap", "What Bootstrap 4 class is used to create a flexbox container and transform direct children into flex items?", "d-flex", "Hard", 2);
@@ -70,7 +70,7 @@ INSERT INTO cards (category, front, back, difficulty, creator_id)
 VALUES("Bootstrap","What two Bootstap classes are used to create a standard navigation bar that is responsive and collapsing?", ".navbar .navbar-expand-sm","Medium", 2);
 
 
---------------------------------------Command Line Interface
+---Command Line Interface---
 
 INSERT INTO cards (category, front, back, difficulty, creator_id)
 VALUES("Command Line Interface", "What is the command to display the current working directory?", "pwd", "Easy", 2);
@@ -90,7 +90,7 @@ VALUES("Command Line Interface", "What is the command to move filename 1 into fi
 INSERT INTO cards (category, front, back, difficulty, creator_id)
 VALUES("Command Line Interface", "What is the command to delete a folder?", "rm -r [name of directory to remove]", "Hard", 2);
 
---------------------------------------Git Commands
+---Git Commands---
 
 INSERT INTO cards (category, front, back, difficulty, creator_id)
 VALUES("Git", "Once a repository is created and linked to GitHub, what are the three commands you need to do each time you create or modify files to send something up to GitHub?", "git add .<br>git commit -m <comment><br>git push origin <branch name>", "Easy", 2);
@@ -111,7 +111,7 @@ INSERT INTO cards (category, front, back, difficulty, creator_id)
 VALUES("Git", " How do you update your local repository from GitHub?", "git pull origin <branch name>", "Hard", 2);
 
 
---------------------------------------JavaScript
+---JavaScript---
 
 INSERT INTO cards (category, front, back, difficulty, creator_id)
 VALUES("JavaScript", "The first position of any string is ______.", "0", "Easy", 2);
@@ -132,7 +132,7 @@ INSERT INTO cards (category, front, back, difficulty, creator_id)
 VALUES("JavaScript", "Return a random number between and including min and max numbers.", "Math.floor(Math.random() * (max - min + 1)) + min;", "Hard", 2);
 
 
---------------------------------------NodeJS
+---NodeJS---
 
 INSERT INTO cards (category, front, back, difficulty, creator_id)
 VALUES("Node.js", "How do you initiate the Node.js file 'server.js' in your command line interface program on your computer?", "node server.js", "Easy", 2);
