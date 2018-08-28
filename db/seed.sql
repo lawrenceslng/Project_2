@@ -1,34 +1,34 @@
 
 
----HTML---
+
 INSERT INTO cards(category,front,back,difficulty, creator_id)
-VALUES("HTML", "What is the syntax for sourcing an image file?", "<img src="" alt"">", "Easy", 3); 
+VALUES("HTML", "What is the syntax for sourcing an image file?", "<img src='' alt''>", "Easy", 3); 
 
 INSERT INTO cards(category,front,back,difficulty, creator_id)
 VALUES("HTML", "What is the difference between a span and div element?", "span elements are inline element whereas a div is a block element.", "Medium", 3);
 
----jQuery---
+
 INSERT INTO cards(category,front,back,difficulty, creator_id)
 VALUES("jQuery", "What is jQuery?", "jQuery is a Javascript library that simplifies code through the use of jQuery methods", "Easy", 3);
 
 INSERT INTO cards(category,front,back,difficulty, creator_id)
 VALUES("jQuery", "What is the syntax for a click event?","$('#target').on('click', function(){});", "Medium", 3);
 
----AJAX---
+
 INSERT INTO cards(category,front,back,difficulty, creator_id)
 VALUES("AJAX", "What is AJAX", "AJAX stands for Asynchronus Javascript and XML. It is a client-side script that exchanges data with servers and updates webpages without the need to reload the entire page.", "Medium", 3);
 
 INSERT INTO cards(category,front,back,difficulty, creator_id)
 VALUES("AJAX", "What is an Asynchronous AJAX request", "An Asynchronous AJAX request is a request that does not wait for a server to reply and handles the response as it comes, allowing other components of the page to continue to process", "Hard", 3);
 
----mySQL--
+
 INSERT INTO cards(category,front,back,difficulty, creator_id)
 VALUES("mySQL", "What are joins?", "Joins are commands that are used to query data from two or more tables", "Easy", 3);
 
 INSERT INTO cards(category,front,back,difficulty, creator_id)
 VALUES("mySQL", "What do DDL, DML, and DCL stand for?", "DDL stands for Data Definition Language e.g. CREATE TABLE command, DML stands for Data Manipulation Language e.g. SELECT, INSERT commands, DCL stands for Data Control Language e.g. GRANT, EVOKE commands>", "Hard", 3);
 
----APIs---
+
 
 INSERT INTO cards (category, front, back, difficulty, creator_id)
 VALUES("APIs", "What does API stand for?", "Application Programming Interface", "Easy", 2);
@@ -49,7 +49,7 @@ INSERT INTO cards (category, front, back, difficulty, creator_id)
 VALUES("APIs", "What is the architectural style for creating Web APIs?", "HTTP for client server communication<br>XML/JSON as the formatting language<br>Simple URI as the address for the services", "Hard", 2);
 
 
----Bootstrap---
+
 
 INSERT INTO cards (category, front, back, difficulty, creator_id)
 VALUES("Bootstrap", "What Bootstrap 4 class is used to create a flexbox container and transform direct children into flex items?", "d-flex", "Hard", 2);
@@ -70,7 +70,7 @@ INSERT INTO cards (category, front, back, difficulty, creator_id)
 VALUES("Bootstrap","What two Bootstap classes are used to create a standard navigation bar that is responsive and collapsing?", ".navbar .navbar-expand-sm","Medium", 2);
 
 
----Command Line Interface---
+
 
 INSERT INTO cards (category, front, back, difficulty, creator_id)
 VALUES("Command Line Interface", "What is the command to display the current working directory?", "pwd", "Easy", 2);
@@ -90,7 +90,7 @@ VALUES("Command Line Interface", "What is the command to move filename 1 into fi
 INSERT INTO cards (category, front, back, difficulty, creator_id)
 VALUES("Command Line Interface", "What is the command to delete a folder?", "rm -r [name of directory to remove]", "Hard", 2);
 
----Git Commands---
+
 
 INSERT INTO cards (category, front, back, difficulty, creator_id)
 VALUES("Git", "Once a repository is created and linked to GitHub, what are the three commands you need to do each time you create or modify files to send something up to GitHub?", "git add .<br>git commit -m <comment><br>git push origin <branch name>", "Easy", 2);
@@ -111,7 +111,7 @@ INSERT INTO cards (category, front, back, difficulty, creator_id)
 VALUES("Git", " How do you update your local repository from GitHub?", "git pull origin <branch name>", "Hard", 2);
 
 
----JavaScript---
+
 
 INSERT INTO cards (category, front, back, difficulty, creator_id)
 VALUES("JavaScript", "The first position of any string is ______.", "0", "Easy", 2);
@@ -132,7 +132,6 @@ INSERT INTO cards (category, front, back, difficulty, creator_id)
 VALUES("JavaScript", "Return a random number between and including min and max numbers.", "Math.floor(Math.random() * (max - min + 1)) + min;", "Hard", 2);
 
 
----NodeJS---
 
 INSERT INTO cards (category, front, back, difficulty, creator_id)
 VALUES("Node.js", "How do you initiate the Node.js file 'server.js' in your command line interface program on your computer?", "node server.js", "Easy", 2);
@@ -153,22 +152,7 @@ INSERT INTO cards (category, front, back, difficulty, creator_id)
 VALUES("Node.js", "What is REPL in Node.js?", "REPL stands for Read-Eval-Print-Loop and it is a virtual environment that comes with Node.js where We can quickly test our JavaScript code. To launch REPL in Node.js, just open the command prompt and type node.", "Hard", 2);
 
 
--- CREATE TABLE cards(
--- 	id INT NOT NULL AUTO_INCREMENT,
--- 	category VARCHAR (255) NOT NULL,
--- 	front TEXT NOT NULL,
--- 	back TEXT NOT NULL,
--- 	difficulty ENUM('Easy', 'Medium', 'Hard') NOT NULL,
--- 	votes INT DEFAULT 0,
--- 	creator_id INT NOT NULL,
--- 	users_account ENUM('Student', 'Instructor', 'Administrator') NOT NULL,
--- 	date TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
--- 	PRIMARY KEY (id),
---     FOREIGN KEY (creator_id) REFERENCES users(id),
---     FOREIGN KEY (users_account) REFERENCES users(account_type)
--- );
 
--- CSS
 INSERT INTO cards (category, front, back, difficulty, creator_id)
 VALUES ("CSS","With what punctuation mark do you enclose CSS declarations in a CSS file?","Curly Braces {}","Easy",1);
 
@@ -184,7 +168,7 @@ VALUES ("CSS", "What are the three ways to link a stylesheet to an HTML?","1. Ex
 INSERT INTO cards (category, front, back, difficulty, creator_id)
 VALUES ("CSS", "Where does the style tag go within the HTML?","Inside the <head> section of the HTML.","Easy",1);
 
--- JSON
+
 INSERT INTO cards (category, front, back, difficulty, creator_id)
 VALUES ("JSON","What does the acronym JSON stand for?","JavaScript Object Notation","Easy",1);
 
@@ -200,7 +184,7 @@ VALUES ("JSON", "What is the syntax to convert data from a string to an object?"
 INSERT INTO cards (category, front, back, difficulty, creator_id)
 VALUES ("JSON", "Describe how the keys and values differ between JSON and JavaScript.","Keys in JSON MUST be a string while keys in JavaScript can be strings, numbers, or identifier names. Values in JSON MUST be a string, number, an object, an array, a boolean, or null while values in JavaScript can also be a function, a date, or undefined.","Easy",1);
 
--- NPM
+
 INSERT INTO cards (category, front, back, difficulty, creator_id)
 VALUES ("NPM", "What is a package?","A package is a building block of code written by developers and shared with others for use. ","Easy",1);
 
@@ -216,7 +200,7 @@ VALUES ("NPM", "What package would you need to install if you want to make an in
 INSERT INTO cards (category, front, back, difficulty, creator_id)
 VALUES ("NPM", "What package would you need to install in order to work with routing in your backend?","Express","Easy",1);
 
--- Templating
+
 INSERT INTO cards (category, front, back, difficulty, creator_id)
 VALUES ("Templating", "What are the benefits of template engines?","Template engines allow developers to inject snippets of code into different HTML easily without copy and pasting (lowers likelihood of mistakes when creating new pages). Template engines also allow changes to be made in one centralized file for each feature of a web application rather than tracking down all the codes in many different HTMLs. ","Easy",1);
 
@@ -232,7 +216,7 @@ VALUES ("Templating","What is the syntax to make the backend use a EJS file and 
 INSERT INTO cards (category, front, back, difficulty, creator_id)
 VALUES ("Templating", "What folder must the templates be in in order for Express to correctly locate them?","The 'Views' folder","Easy",1);
 
--- Git
+
 INSERT INTO cards (category, front, back, difficulty, creator_id)
 VALUES ("Git", "What is Git?","Git is a version control system. It allows developers to easily track changes in their code and revert back to a known working code as well as test new features to the code without impacting existing code.","Easy",1);
 
@@ -243,7 +227,7 @@ INSERT INTO cards (category, front, back, difficulty, creator_id)
 VALUES ("Git", "If you do not wish to include certain files or directories in your Git upload, what do you need to do in your project folder?","You need to create a .gitignore file and include within it the names of the files and folders you do not wish to include in your upload. This is important as you do not want to upload your own credentials or all the node_modules you use in your project.","Easy",1);
 
 
--- Terminal
+
 INSERT INTO cards (category, front, back, difficulty, creator_id)
 VALUES ("Terminal", "What is the command to create a new folder?","mkdir folder_name","Easy",1);
 
