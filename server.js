@@ -1,3 +1,4 @@
+//List of NPM and inherent packages
 var mysql = require("mysql");
 require("dotenv").config();
 var fs = require("fs");
@@ -6,28 +7,23 @@ var app = express();
 var router = express.Router();
 var methodOverride = require('method-override');
 var bcrypt = require('bcryptjs');
-app.use(methodOverride('_method'));
-//you need this to be able to process information sent to a POST route
 var bodyParser = require('body-parser');
 var cookieParser = require('cookie-parser');
-
 var session = require('express-session');
-//allow sessions
+var path = require("path");
+
+app.use(methodOverride('_method'));
 app.use(session({ secret: 'app', cookie: { maxAge: 1*1000*60*60*24*365 }}));
 app.use(cookieParser());
-// parse application/x-www-form-urlencoded
 app.use(bodyParser.urlencoded({ extended: true }));
-
-// parse application/json
 app.use(bodyParser.json());
-
-var path = require("path");
 
 // Serve static content for the app from the "public" directory in the application directory.
 // you need this line here so you don't have to create a route for every single file in the public folder (css, js, image, etc)
 //index.html in the public folder will over ride the root route
 app.use(express.static("public"));
 
+//sets EJS available
 app.set('view engine', 'ejs');
 
 // Initializes the connection variable to sync with a MySQL database
@@ -52,8 +48,9 @@ app.get('/', function(req, res) {
   console.log("getting root");
 });
 app.get('/home/:username', function(req, res) {
-  res.render('pages/landing-page', {data: {username: req.params.username}});
-  console.log("landing page");
+  if(req.session.username)   res.render('pages/landing-page', {data: req.params.username});
+  else  res.send("Error, not logged in");
+  // console.log(req.session.username);
 });
 app.get('/login', function(req, res) {
 	res.sendFile(path.join(__dirname, 'public/login.html'));
@@ -142,10 +139,13 @@ app.post('/register', function(req, res){
 // module.exports = router;
 
 
+//Uncomment below to enable routing
+// var questionRoutes = require('./routes/questions.js');
+// // var commentRoutes = require('./routes/comments.js');
+// var classmateRoutes = require('./routes/classmates.js');
 
 
-
-
+// app.use('/questions', questionRoutes);
 
 
 app.listen(3000);
