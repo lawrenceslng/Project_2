@@ -14,6 +14,8 @@ CREATE TABLE users(
 	password BINARY NOT NULL,
 	account_type ENUM('Student', 'Instructor', 'Administrator') NOT NULL,
 	date TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
+	UNIQUE (username),
+	UNIQUE (email),
 	PRIMARY KEY (id)
 );
 
