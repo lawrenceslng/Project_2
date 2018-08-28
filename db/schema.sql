@@ -38,8 +38,7 @@ CREATE TABLE cards(
 	users_account ENUM('Student', 'Instructor', 'Administrator') NOT NULL,
 	date TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
 	PRIMARY KEY (id),
-    FOREIGN KEY (creator_id) REFERENCES users(id),
-    FOREIGN KEY (users_account) REFERENCES users(account_type)
+    -- FOREIGN KEY (creator_id) REFERENCES users(id),
 );
 
 -- CREATE TABLE subcategories(
