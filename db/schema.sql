@@ -14,6 +14,8 @@ CREATE TABLE users(
 	password BINARY NOT NULL,
 	account_type ENUM('Student', 'Instructor', 'Administrator') NOT NULL,
 	date TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
+	UNIQUE (username),
+	UNIQUE (email),
 	PRIMARY KEY (id)
 );
 
@@ -62,17 +64,5 @@ CREATE TABLE deck_cards(
 	decks_id INT NOT NULL,
 	cards_id INT NOT NULL,
 	FOREIGN KEY (decks_id) REFERENCES decks(id),
-	FOREIGN KEY (cards_id) REFERENCES cards(id)
-);
-
--- table that holds all the comments and references the user who created the comment and the card the comment if for
-CREATE TABLE comments(
-	id INT NOT NULL AUTO_INCREMENT,
-	users_id INT NOT NULL,
-	cards_id INT NOT NULL,
-	comment TEXT NOT NULL,
-	date TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
-	PRIMARY KEY (id),
-	FOREIGN KEY (users_id) REFERENCES users(id),
 	FOREIGN KEY (cards_id) REFERENCES cards(id)
 );
