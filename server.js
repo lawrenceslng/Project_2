@@ -48,7 +48,8 @@ var connection = mysql.createConnection({
 
 //routes  
 app.get('/', function(req, res) {
-	res.render('pages/index');
+  res.render('pages/index');
+  console.log("getting root");
 });
 
 app.get('/login', function(req, res) {
@@ -63,38 +64,57 @@ app.post('/log', function(req, res){
   var username = req.body.username;
   var password = req.body.password;
   console.log(username + " " + password);
-  connection.query('SELECT * FROM users WHERE username = ? AND password = ?', [username, password],function (error, results, fields) {
+  connection.query('SELECT * FROM users WHERE username = ?', [username],function (error, results, fields) {
     if (error) throw error;
-    console.log(results[0]);
-    console.log("logged in");
-    res.redirect('/home');
-})});
+  
+    //  res.json(results);
+      
+      if (results.length == 0){
+        res.send('try again');
+      }else {
+        bcrypt.compare(password, results[0].password, function(err, result) {
+            
+            if (result == true){
+  
+              req.session.user_id = results[0].id;
+              req.session.email = results[0].email;
+              req.session.username = results[0].username;
+              req.session.firstName = results[0].first_name;
+              req.session.lastName = results[0].last_name;
 
+  
+              res.send('you are logged in:');
+              console.log(req.session);
+            }else{
+              res.redirect('/');
+            }
+        });
+      }
+    });
+  });
+    // console.log(results[0]);
+    // console.log("logged in");
+    // res.redirect('/home');
+
+    app.get('/user-info', function(req, res){
+      var user_info = {
+        user_id : req.session.user_id,
+        email: req.session.email
+      }
+    
+      res.json(user_info);
+    });
+    
+    app.get('/logout', function(req, res){
+      req.session.destroy(function(err){
+        res.send('you are logged out');
+      })
+    });
 
 
 //register get and post 
 app.get('/signup', function(req, res){
   res.sendFile(path.join(__dirname, 'public/registration.html'));
-	// bcrypt.genSalt(10, function(err, salt) {
-	//     // res.send(salt);
-	//     bcrypt.hash(req.params.password, salt, function(err, p_hash) { 
-
-	//     	// res.send(p_hash);
-
-	//     	connection.query('INSERT INTO users (email, password_hash) VALUES (?, ?)', [req.params.email, p_hash],function (error, results, fields) {
-	    	  
-	//     	  var what_user_sees = "";
-	//     	  if (error){
-	//     	  	what_user_sees = 'you need to use a unique email';
-	//     	  }else{
-	//     	  	what_user_sees = 'you have signed up - please go login at the login route';
-	//     	  }
-
-	//     	  res.send(what_user_sees);
-	    	  
-	//     	});
-	//     });
-	// });
 });
 
 app.post('/register', function(req, res){
@@ -105,12 +125,15 @@ app.post('/register', function(req, res){
   var lastName = req.body.last_name;
   var email = req.body.email;
   console.log(username + " " + password + " " + firstName + " " + lastName + " " + email);
-  connection.query('INSERT INTO users (username, password, first_name, last_name, email)', [username, password, firstName, lastName, email],function (error, results, fields) {
+  bcrypt.genSalt(10, function(err, salt) {
+	    // res.send(salt);
+	    bcrypt.hash(password, salt, function(err, p_hash) { 
+        connection.query('INSERT INTO users (username, password, first_name, last_name, email) VALUES (?,?,?,?,?)', [username, p_hash, firstName, lastName, email],function (error, results, fields) {
     if (error) throw error;
     console.log(results[0]);
     console.log("logged in");
     res.redirect('/home');
-})
+})})})
 });
 
 module.exports = router;
