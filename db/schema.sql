@@ -12,7 +12,7 @@ CREATE TABLE users(
 	first_name VARCHAR(255) NOT NULL,
 	last_name VARCHAR (255) NOT NULL, 
 	email VARCHAR(100) NOT NULL,   
-	password BINARY NOT NULL,
+	password VARCHAR(255) BINARY NOT NULL,
 	account_type ENUM('Student', 'Instructor', 'Administrator') NOT NULL,	-- this specifies whether the user is a student, instructor, or administrator
 	date TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
 	PRIMARY KEY (id)
