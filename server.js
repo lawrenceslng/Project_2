@@ -51,7 +51,10 @@ app.get('/', function(req, res) {
   res.render('pages/index');
   console.log("getting root");
 });
-
+app.get('/home/:username', function(req, res) {
+  res.render('pages/landing-page', {data: {username: req.params.username}});
+  console.log("landing page");
+});
 app.get('/login', function(req, res) {
 	res.sendFile(path.join(__dirname, 'public/login.html'));
 });
@@ -82,11 +85,11 @@ app.post('/log', function(req, res){
               req.session.firstName = results[0].first_name;
               req.session.lastName = results[0].last_name;
 
-  
-              res.send('you are logged in:');
-              console.log(req.session);
+              res.redirect('/home/'+ req.session.username);
+              // res.send('you are logged in:');
+              // console.log('/home/'+ req.session.username);
             }else{
-              res.redirect('/');
+              res.redirect('/login');
             }
         });
       }
@@ -136,7 +139,7 @@ app.post('/register', function(req, res){
 })})})
 });
 
-module.exports = router;
+// module.exports = router;
 
 
 
