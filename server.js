@@ -44,8 +44,8 @@ var connection = mysql.createConnection({
 
 //routes  
 app.get('/', function(req, res) {
-  res.render('pages/index');
-  console.log("getting root");
+  res.redirect('/home');
+  // console.log("getting root");
 });
 app.get('/home/:username', function(req, res) {
   if(req.session.username)   res.render('pages/landing-page', {data: req.params.username});
@@ -57,7 +57,8 @@ app.get('/login', function(req, res) {
 });
 
 app.get('/home', function(req, res) {
-	res.sendFile(path.join(__dirname, 'public/home.html'));
+  // res.sendFile(path.join(__dirname, 'public/home.html'));
+  res.render('pages/index');
 });
 app.post('/log', function(req, res){
 	
