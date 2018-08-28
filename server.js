@@ -72,29 +72,45 @@ app.post('/log', function(req, res){
 
 
 
-//register page
+//register get and post 
 app.get('/signup', function(req, res){
   res.sendFile(path.join(__dirname, 'public/registration.html'));
-	bcrypt.genSalt(10, function(err, salt) {
-	    // res.send(salt);
-	    bcrypt.hash(req.params.password, salt, function(err, p_hash) { 
+	// bcrypt.genSalt(10, function(err, salt) {
+	//     // res.send(salt);
+	//     bcrypt.hash(req.params.password, salt, function(err, p_hash) { 
 
-	    	// res.send(p_hash);
+	//     	// res.send(p_hash);
 
-	    	connection.query('INSERT INTO users (email, password_hash) VALUES (?, ?)', [req.params.email, p_hash],function (error, results, fields) {
+	//     	connection.query('INSERT INTO users (email, password_hash) VALUES (?, ?)', [req.params.email, p_hash],function (error, results, fields) {
 	    	  
-	    	  var what_user_sees = "";
-	    	  if (error){
-	    	  	what_user_sees = 'you need to use a unique email';
-	    	  }else{
-	    	  	what_user_sees = 'you have signed up - please go login at the login route';
-	    	  }
+	//     	  var what_user_sees = "";
+	//     	  if (error){
+	//     	  	what_user_sees = 'you need to use a unique email';
+	//     	  }else{
+	//     	  	what_user_sees = 'you have signed up - please go login at the login route';
+	//     	  }
 
-	    	  res.send(what_user_sees);
+	//     	  res.send(what_user_sees);
 	    	  
-	    	});
-	    });
-	});
+	//     	});
+	//     });
+	// });
+});
+
+app.post('/register', function(req, res){
+	
+  var username = req.body.username;
+  var password = req.body.password;
+  var firstName = req.body.first_name;
+  var lastName = req.body.last_name;
+  var email = req.body.email;
+  console.log(username + " " + password + " " + firstName + " " + lastName + " " + email);
+  connection.query('INSERT INTO users (username, password, first_name, last_name, email)', [username, password, firstName, lastName, email],function (error, results, fields) {
+    if (error) throw error;
+    console.log(results[0]);
+    console.log("logged in");
+    res.redirect('/home');
+})
 });
 
 module.exports = router;
