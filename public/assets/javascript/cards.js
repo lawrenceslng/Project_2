@@ -49,3 +49,16 @@ $(window).ready(function(){
 
 });
 
+// if the left key on keyboard is pressed then the subtract function is run and if the right key on the keyboard is pressed then the add function is run
+$("body").keydown(function(e){
+    // left arrow
+    if ((e.keyCode || e.which) == 37)
+    {   
+        subtract();
+    }
+    // right arrow
+    if ((e.keyCode || e.which) == 39)
+    {
+        add();
+    }   
+});
