@@ -48,7 +48,7 @@ app.get('/', function(req, res) {
   // console.log("getting root");
 });
 app.get('/home/:username', function(req, res) {
-  if(req.session.username)   res.render('pages/landing-page', {data: req.params.username});
+  if(req.session.username)   res.render('pages/decks', {data: req.params.username});
   else  res.send("Error, not logged in");
   // console.log(req.session.username);
 });
@@ -115,34 +115,55 @@ app.post('/log', function(req, res){
     
     app.get('/logout', function(req, res){
       req.session.destroy(function(err){
-        res.send('you are logged out');
+        res.redirect("/home");
       })
     });
 
 
 //register get and post 
 app.get('/signup', function(req, res){
-  res.sendFile(path.join(__dirname, 'public/registration.html'));
+  // res.sendFile(path.join(__dirname, 'public/registration.html'));
+  res.render('pages/registration', {data: false})
 });
 
 
-app.post('/register', function(req, res){
+app.post('/signup', function(req, res){
 	
   var username = req.body.username;
   var password = req.body.password;
   var firstName = req.body.first_name;
   var lastName = req.body.last_name;
   var email = req.body.email;
-  console.log(username + " " + password + " " + firstName + " " + lastName + " " + email);
-  bcrypt.genSalt(10, function(err, salt) {
-	    // res.send(salt);
-	    bcrypt.hash(password, salt, function(err, p_hash) { 
-        connection.query('INSERT INTO users (username, password, first_name, last_name, email) VALUES (?,?,?,?,?)', [username, p_hash, firstName, lastName, email],function (error, results, fields) {
-    if (error) throw error;
-    console.log(results[0]);
-    console.log("logged in");
-    res.redirect('/home');
-})})})
+  // console.log(username + " " + password + " " + firstName + " " + lastName + " " + email);
+
+  //need to add restrictions on username (must be unique), email (must be unique), password (must be between 8 - 16 characters)
+  var query = connection.query("SELECT * FROM users WHERE username = ? OR email = ?", [username, email],function (error, results, fields) {
+    if(error) throw error;
+    if(results.length == 0)
+    {
+      console.log("no duplicate username or email" + password.length);
+      
+      bcrypt.genSalt(10, function(err, salt) {
+        // res.send(salt);
+        bcrypt.hash(password, salt, function(err, p_hash) { 
+          connection.query('INSERT INTO users (username, password, first_name, last_name, email) VALUES (?,?,?,?,?)', [username, p_hash, firstName, lastName, email],function (error, results, fields) {
+            if (error) throw error;
+            console.log(results[0]);
+            // console.log("logged in");
+            // res.redirect('/home/'+username);
+            // start a session and then direct to landing page
+            res.send("Account Created, go to home page and login");
+            })
+        })
+      })
+    }
+    else{
+      console.log("username/email taken");
+      res.render('pages/registration', {data: true});
+    }
+  });
+
+
 });
 
 // module.exports = router;

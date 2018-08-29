@@ -6,6 +6,10 @@
 </head>
 <body>
     <div class = "container">
+        <!-- errors go here -->
+        <% if (data == true){ %>
+            <p>The username is taken</p>
+        <% } %>
         <form>
             <label for="username"><b>Username</b></label>
             <input type="text" placeholder="Enter Username" name="username" required>
@@ -56,7 +60,7 @@
                 else
                 {
                     $("form").attr("method","POST");
-                    $("form").attr("action","/signup");
+                    $("form").attr("action","/register");
                     $("form").submit();
                 }
                 console.log(PWL);
@@ -65,7 +69,7 @@
         })
 
  
-    </script>>
+    </script>
 
    
 
