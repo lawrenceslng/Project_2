@@ -56,6 +56,13 @@ app.get('/login', function(req, res) {
 	res.sendFile(path.join(__dirname, 'public/login.html'));
 });
 
+
+var flashcardRoutes = require('./routes/flashcards.js');
+var deckRoutes = require('./routes/decks.js');
+
+app.use('/flashcards', flashcardRoutes);
+app.use('/decks', deckRoutes);
+
 app.get('/home', function(req, res) {
   // res.sendFile(path.join(__dirname, 'public/home.html'));
   res.render('pages/index');
@@ -117,6 +124,7 @@ app.post('/log', function(req, res){
 app.get('/signup', function(req, res){
   res.sendFile(path.join(__dirname, 'public/registration.html'));
 });
+
 
 app.post('/register', function(req, res){
 	
