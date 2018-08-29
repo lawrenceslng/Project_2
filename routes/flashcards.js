@@ -75,13 +75,30 @@ router.post('/create', function(req, res){
 
         res.json(results);
     })
-
-
 });
 
+router.get('/all_cards', function(req, res){
+    // res.render('pages/flashcards');
+    // connection.query('SELECT * FROM cards', function (error, results, fields) {
+    //     if (error) throw error;
+        
+        // res.json(results);
+        
+        // res.render('pages/all_cards', {
+        //     data: results
+        // });
 
+        res.render('pages/all_cards');
+    // });
+});
 
-
+router.get('/community_cards/', function(req, res){
+	connection.query('SELECT * FROM cards',function (error, results, fields) {
+	  if (error) throw error;
+      res.json(results);
+    //   console.log(results);
+	});
+});
 
 
 module.exports = router;
