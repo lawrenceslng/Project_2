@@ -39,12 +39,12 @@ var connection = mysql.createConnection({
 
 
 //routes  
-// app.get('/hi', function(req, res) {
-// 	res.send("hi");
-// });
+app.get('/hi', function(req, res) {
+	res.send("hi");
+});
 
 app.get('/flashcards/:category/:id', function(req, res){
-
+    // res.render('pages/flashcards');
 	connection.connect(function(err) {
 	  if (err) {
 	    console.error("error connecting: " + err.stack);
@@ -53,11 +53,11 @@ app.get('/flashcards/:category/:id', function(req, res){
 	    connection.query('SELECT * FROM cards WHERE category = ? AND id = ?', [req.params.category, req.params.id], function (error, results, fields) {
         if (error) throw error;
         
-        res.json(results);
+        // res.json(results);
 	    
-	    // res.render('pages/flashcards', {
-        //     data: results
-        // });
+	    res.render('pages/flashcards', {
+            data: results
+        });
         });
 	});
 });

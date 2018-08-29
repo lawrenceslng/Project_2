@@ -1,0 +1,7 @@
+.flashcard{
+    height: 200px;
+    width: 400px;
+    margin: 0 auto;
+    border: 1px black solid;
+    background-color: yellow;
+}
