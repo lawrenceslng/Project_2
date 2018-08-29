@@ -43,6 +43,11 @@ app.get('/', function(req, res) {
 	res.render('pages/index');
 });
 
+var flashcardRoutes = require('./routes/flashcards.js');
+var deckRoutes = require('./routes/decks.js');
+
+app.use('/flashcards', flashcardRoutes);
+app.use('/decks', deckRoutes);
 
 
 
