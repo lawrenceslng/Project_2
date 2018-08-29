@@ -49,7 +49,8 @@ app.get('/', function(req, res) {
 });
 app.get('/home', function(req, res) {
   // res.sendFile(path.join(__dirname, 'public/home.html'));
-  res.render('pages/index');
+  if(req.session.username)   res.render('pages/decks', {data: req.session.username});
+  else res.render('pages/index');
 });
 app.get('/login', function(req, res) {
 	res.sendFile(path.join(__dirname, 'public/login.html'));
@@ -77,7 +78,7 @@ app.post('/login', function(req, res){
               req.session.firstName = results[0].first_name;
               req.session.lastName = results[0].last_name;
 
-              res.redirect('/home/'+ req.session.username);
+              res.redirect('/home');
               // res.send('you are logged in:');
               // console.log('/home/'+ req.session.username);
             }else{
@@ -87,11 +88,11 @@ app.post('/login', function(req, res){
       }
     });
   });
-app.get('/home/:username', function(req, res) {
-  if(req.session.username)   res.render('pages/decks', {data: req.params.username});
-  else  res.send("Error, not logged in");
-  // console.log(req.session.username);
-});
+// app.get('/home/:username', function(req, res) {
+//   if(req.session.username)   res.render('pages/decks', {data: req.params.username});
+//   else  res.sendFile(path.join(__dirname, 'public/unauthorized.html'));
+//   // console.log(req.session.username);
+// });
 app.get('/logout', function(req, res){
   req.session.destroy(function(err){
     res.redirect("/home");
