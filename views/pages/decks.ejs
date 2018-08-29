@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <% include ../partials/head %>
+</head>
+<body class="container">
+
+	<header>
+		<% include ../partials/header %>
+	</header>
+
+	<main>
+		<div class="jumbotron">
+			<h1>This is great</h1>
+			<p>Welcome to templating using EJS</p>
+        </div>
+        <div class="container">
+            <div class="decks">
+                    <% if(!Array.isArray(data) || !data.length) { %>
+                        <p>You have no decks</p>
+                    <% } else{ %>
+                        <p>You have decks</p>
+                    <% } %>
+                <form method = "POST" action="/decks/create">
+                    <input type="text" name="name" placeholder="Enter Name of Deck">
+                    <button>Submit</button>
+                </form>
+            </div>
+            <div><i class="fas fa-arrow-left"></i></div>
+            <div><i class="fas fa-arrow-right"></i> </div>
+        </div>
+
+	</main>
+
+	<footer>
+		<% include ../partials/footer %>
+	</footer>
+	
+</body>
+</html>
