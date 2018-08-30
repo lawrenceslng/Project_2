@@ -63,25 +63,42 @@ router.get('/:category/:id', function(req, res){
 	});
 });
 
-router.get('/newCard', function(req, res){
+router.get('/new_card', function(req, res){
     res.render('pages/create_cards');
 
 })
 
 router.post('/create', function(req, res){
     console.log(req.body);
-    connection.query('INSERT INTO cards (creator_id, category, front, back, difficulty) VALUES (?,?, ?, ?, ?);', [1, req.body.category, req.body.front, req.body.back, req.body.difficulty],function(error, results, fields){
+    connection.query('INSERT INTO cards (creator_id, category, front, back, difficulty) VALUES (?,?, ?, ?, ?);', [req.session.user_id, req.body.category, req.body.front, req.body.back, req.body.difficulty],function(error, results, fields){
         if (error) throw error;
 
-        res.json(results);
+        res.redirect('/flashcards/all_cards');
     })
-
-
 });
 
+router.get('/all_cards', function(req, res){
+    // res.render('pages/flashcards');
+    // connection.query('SELECT * FROM cards', function (error, results, fields) {
+    //     if (error) throw error;
+        
+        // res.json(results);
+        
+        // res.render('pages/all_cards', {
+        //     data: results
+        // });
 
+        res.render('pages/all_cards');
+    // });
+});
 
-
+router.get('/community_cards/', function(req, res){
+	connection.query('SELECT * FROM cards',function (error, results, fields) {
+	  if (error) throw error;
+      res.json(results);
+    //   console.log(results);
+	});
+});
 
 
 module.exports = router;
