@@ -42,32 +42,20 @@ var connection = mysql.createConnection({
   });
 
 
-//routes  
+//base routes (Home page, login, registration page, logout)  
 app.get('/', function(req, res) {
   res.redirect('/home');
   // console.log("getting root");
 });
-app.get('/home/:username', function(req, res) {
-  if(req.session.username)   res.render('pages/landing-page', {data: req.params.username});
-  else  res.send("Error, not logged in");
-  // console.log(req.session.username);
+app.get('/home', function(req, res) {
+  // res.sendFile(path.join(__dirname, 'public/home.html'));
+  if(req.session.username)   res.render('pages/decks', {data: req.session.username});
+  else res.render('pages/index');
 });
 app.get('/login', function(req, res) {
 	res.sendFile(path.join(__dirname, 'public/login.html'));
 });
-
-
-var flashcardRoutes = require('./routes/flashcards.js');
-var deckRoutes = require('./routes/decks.js');
-
-app.use('/flashcards', flashcardRoutes);
-app.use('/decks', deckRoutes);
-
-app.get('/home', function(req, res) {
-  // res.sendFile(path.join(__dirname, 'public/home.html'));
-  res.render('pages/index');
-});
-app.post('/log', function(req, res){
+app.post('/login', function(req, res){
 	
   var username = req.body.username;
   var password = req.body.password;
@@ -90,7 +78,7 @@ app.post('/log', function(req, res){
               req.session.firstName = results[0].first_name;
               req.session.lastName = results[0].last_name;
 
-              res.redirect('/home/'+ req.session.username);
+              res.redirect('/home');
               // res.send('you are logged in:');
               // console.log('/home/'+ req.session.username);
             }else{
@@ -100,52 +88,42 @@ app.post('/log', function(req, res){
       }
     });
   });
+// app.get('/home/:username', function(req, res) {
+//   if(req.session.username)   res.render('pages/decks', {data: req.params.username});
+//   else  res.sendFile(path.join(__dirname, 'public/unauthorized.html'));
+//   // console.log(req.session.username);
+// });
+app.get('/logout', function(req, res){
+  req.session.destroy(function(err){
+    res.redirect("/home");
+  })
+})
+
+//external routes
+var flashcardRoutes = require('./routes/flashcards.js');
+var deckRoutes = require('./routes/decks.js');
+var signupRoutes = require('./routes/signup.js');
+app.use('/flashcards', flashcardRoutes);
+app.use('/decks', deckRoutes);
+app.use('/signup', signupRoutes);
+
+
     // console.log(results[0]);
     // console.log("logged in");
     // res.redirect('/home');
 
-    app.get('/user-info', function(req, res){
-      var user_info = {
-        user_id : req.session.user_id,
-        email: req.session.email
-      }
-    
-      res.json(user_info);
-    });
-    
-    app.get('/logout', function(req, res){
-      req.session.destroy(function(err){
-        res.send('you are logged out');
-      })
-    });
+// app.get('/user-info', function(req, res){
+//   var user_info = {
+//     user_id : req.session.user_id,
+//     email: req.session.email
+//   }
+
+//   res.json(user_info);
+// });
 
 
-//register get and post 
-app.get('/signup', function(req, res){
-  res.sendFile(path.join(__dirname, 'public/registration.html'));
-});
 
 
-app.post('/register', function(req, res){
-	
-  var username = req.body.username;
-  var password = req.body.password;
-  var firstName = req.body.first_name;
-  var lastName = req.body.last_name;
-  var email = req.body.email;
-  console.log(username + " " + password + " " + firstName + " " + lastName + " " + email);
-  bcrypt.genSalt(10, function(err, salt) {
-	    // res.send(salt);
-	    bcrypt.hash(password, salt, function(err, p_hash) { 
-        connection.query('INSERT INTO users (username, password, first_name, last_name, email) VALUES (?,?,?,?,?)', [username, p_hash, firstName, lastName, email],function (error, results, fields) {
-    if (error) throw error;
-    console.log(results[0]);
-    console.log("logged in");
-    res.redirect('/home');
-})})})
-});
-
-// module.exports = router;
 
 
 //Uncomment below to enable routing
