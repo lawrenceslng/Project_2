@@ -44,24 +44,16 @@ var connection = mysql.createConnection({
 // 	res.send("hi");
 // });
 
-router.get('/:category/:id', function(req, res){
+router.get('/view_cards', function(req, res){
     // res.render('pages/flashcards');
-	connection.connect(function(err) {
-	  if (err) {
-	    console.error("error connecting: " + err.stack);
-	  }
 
-	    connection.query('SELECT * FROM cards WHERE category = ? AND id = ?', [req.params.category, req.params.id], function (error, results, fields) {
+    connection.query('SELECT * FROM cards WHERE creator_id = ?', [req.session.user_id], function (error, results, fields) {
         if (error) throw error;
-        
-        // res.json(results);
-	    
-	    res.render('pages/flashcards', {
-            data: results
-        });
-        });
-	});
+        res.json(results);
+    });
+
 });
+
 
 router.get('/new_card', function(req, res){
     res.render('pages/create_cards');
@@ -92,7 +84,7 @@ router.get('/all_cards', function(req, res){
     // });
 });
 
-router.get('/community_cards/', function(req, res){
+router.get('/community_cards', function(req, res){
 	connection.query('SELECT * FROM cards',function (error, results, fields) {
 	  if (error) throw error;
       res.json(results);
