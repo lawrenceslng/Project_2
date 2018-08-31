@@ -103,9 +103,11 @@ app.get('/logout', function(req, res){
 var flashcardRoutes = require('./routes/flashcards.js');
 var deckRoutes = require('./routes/decks.js');
 var signupRoutes = require('./routes/signup.js');
+var profileRoutes = require('./routes/routesLN.js');
 app.use('/flashcards', flashcardRoutes);
 app.use('/decks', deckRoutes);
 app.use('/signup', signupRoutes);
+app.use('/profile',profileRoutes);
 
 
     // console.log(results[0]);
