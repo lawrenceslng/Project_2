@@ -42,9 +42,9 @@ var collection = [];
 
 router.get('/', function(req,res){
     res.render('pages/decks')
-    // , {
-    //     data: collection
-    // }
+    , {
+        data: req
+    }
 
 });
 

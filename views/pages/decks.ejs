@@ -11,8 +11,8 @@
 
 	<main>
 		<div class="jumbotron">
-			<h1>This is great</h1>
-			<p>Welcome to templating using EJS</p>
+			<h1><%= data %></h1>
+			<p>Welcome to your Decks!</p>
         </div>
         <div class="container">
             <h2>Create a New Deck</h2>
@@ -22,14 +22,13 @@
                     <input type="submit" value="submit">
                 </form>
             </div>
-            <h2>View Your Decks</h2>
+            <h2>View Your Deck Details</h2>
             <div class="viewer">
                 <form method = "GET" action="/decks/viewer">
                 <button type="submit" value="submit">View</button></form>
             </div>
             <h2>List of Decks</h2>
-            <ul>
-               <li></li> 
+            <ul class="deckHolder">
             </ul>
 
         </div>
@@ -39,6 +38,6 @@
 	<footer>
 		<% include ../partials/footer %>
 	</footer>
-	
+	<% include ../partials/script %>
 </body>
 </html>

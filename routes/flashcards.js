@@ -59,6 +59,8 @@ router.get('/:category/:id', function(req, res){
 	    res.render('pages/flashcards', {
             data: results
         });
+
+        console.log(results);
         });
 	});
 });
