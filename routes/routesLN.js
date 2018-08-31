@@ -25,6 +25,19 @@ app.use(express.static("public"));
 
 //sets EJS available
 app.set('view engine', 'ejs');
+var connection = mysql.createConnection({
+    host: process.env.DB_HOST,
+  
+    // Your port; if not 3306
+    port: 3306,
+  
+    // Your username
+    user: process.env.DB_USER,
+  
+    // Your password
+    password: process.env.DB_PASSWORD,  //placeholder for your own mySQL password that you store in your own .env file
+    database: process.env.DB_NAME    //TBD
+  });
 
 router.get('/', function(req, res){
     console.log(req.session);
@@ -35,4 +48,32 @@ router.get('/', function(req, res){
     else res.sendFile(path.join(__dirname, '../public/unauthorized.html'));
 });
 
+router.post('/', function(req, res){
+    console.log(req.body.password + "       " + req.session.user_id);
+    console.log("updating PW");
+    bcrypt.genSalt(10, function(err, salt) {
+        // res.send(salt);
+        bcrypt.hash(req.body.password, salt, function(err, p_hash) { 
+            connection.query('UPDATE users SET password = ? WHERE id = ? ;', [p_hash, req.session.user_id],function(error, results, fields){
+                if (error) throw error;
+        
+               res.redirect("/home");
+            })
+        })
+    })
+   
+    //need to 
+    //1) Connect to database
+    //2) do a put (update) to the password field of this user
+    //3) destroy current session /skip
+    //4) create new session for user /skip
+    //5) redirect to login again /skip
+    // res.redirect("/home");
+});
+
+router.post('/update', function(req, res){
+    console.log(req.body.email);
+    console.log("updating email");
+    res.redirect("/home");
+});
 module.exports = router;

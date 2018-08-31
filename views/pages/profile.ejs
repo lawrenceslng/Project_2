@@ -15,7 +15,7 @@
             <% include ../partials/SideBar %>
 			
         <div class = "col-10">
-        <form method="POST" action="/update">
+        <form method="POST" action="/profile/update">
                 <label for="username"><b>Username</b></label>
                 <input type="text" name="username" value="<%=data.username%>" disabled>
                 <br>
@@ -29,16 +29,47 @@
                 <label for="email"><b>Email</b></label>
                 <input type="email" name="email" value="<%=data.email%>" required>
                 <br>
-                <button type="submit" formaction="/updateEmail">Update Email Address</button>
-            
+                <button type="submit">Update Email Address</button>
+            </form>
                 <br>
-                <button>Reset Password</button> 
+                <!-- Buttons -->
+                <button type="button" data-toggle="modal" data-target="#pwreset">Reset Password</button>
+                    <!-- Modal -->
+                    <div id="pwreset" class="modal fade" role="dialog">
+                            <div class="modal-dialog">
+                            
+                              <!-- Modal content-->
+                              <div class="modal-content">
+                                <div class="modal-header">
+                                    <h1>Password Reset</h1>
+                                  <button type="button" class="close" data-dismiss="modal">&times;</button>
+                                  
+                                </div>
+                                <form>
+                                    <div class="modal-body">
+                                        <label for="password"><b>New Password:</b></label>
+                                        <input class="pw" type="password" placeholder="Enter Password" name="password" required>
+                                        <br>
+                                        <label for="password_reenter"><b>Re-Enter New Password:</b></label>
+                                        <input class="repw" type="password" placeholder="Enter Password" name="password_reenter" required>
+                                        <br>
+                                        <span>Password must be between 8-16 characters in length</span>
+                                    </div>
+                                    <div class="modal-footer">
+                                      <button type="button" class="btn btn-default"     data-dismiss="modal">Close</button>
+                                      <button type="submit" class="btn btn-default next">Next</button>
+                                    </div>
+                                </form>
+                              </div>
+                          
+                            </div>
+                          </div>
                 <h6>Insert a short biography to tell other users who you are:</h6>
                 <textarea name="biography" rows="5" cols="60">
                         
                 </textarea>
     
-        </form>
+        
         
 
 
@@ -51,6 +82,42 @@
 	<footer>
 		<% include ../partials/footer %>
 	</footer>
-	
+	<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js"     integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49"     crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.2/js/bootstrap.min.js" integrity="sha384-o+RDsa0aLu++PJvFqy8fFScvbHFLtbvScb8AjopnFD+iEQ7wo/CG0xlczd+2O/em" crossorigin="anonymous"></script>
+    <script type="text/javascript">
+    $(".next").on("click",function(event){
+        event.preventDefault();
+        var PW = $(".pw").val();
+        var RePW = $(".repw").val();
+        if(PW !== RePW)
+        {
+            alert("Passwords do not match");
+            $(".pw").val("");
+            $(".repw").val("");
+        }
+        else
+        {
+            var PWL = $(".pw").val().length;
+            // alert(PWL);
+            if(PWL < 8 || PWL > 16)
+            {
+                alert("Password must be between 8 to 16 characters long");
+                $(".pw").val("");
+                $(".repw").val("");
+            }
+            else
+            {
+                $("form").attr("method","POST");
+                $("form").attr("action","/profile");
+                $("form").submit();
+            }
+            console.log(PWL);
+        }
+     
+    })
+</script>
+
+
 </body>
 </html>
