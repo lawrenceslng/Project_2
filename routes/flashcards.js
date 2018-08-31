@@ -53,11 +53,16 @@ router.put('/edit', function(req, res){
     
             res.json(results);
         });
+
+
+        //console.log(results);
+
     }else if(req.body.back){
         connection.query('UPDATE cards SET back = ? WHERE id = ?', [req.body.back, req.body.id],function(error, results, fields){
             if (error) throw error;
     
             res.json(results);
+
         });
     }else if(req.body.category){
         connection.query('UPDATE cards SET category = ? WHERE id = ?', [req.body.category, req.body.id],function(error, results, fields){
