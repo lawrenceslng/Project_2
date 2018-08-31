@@ -63,7 +63,7 @@ router.get('/dash', function(req, res){
 
         collection = results;
 
-        // console.log(collection);
+        console.log(collection);
         
         });
     });
