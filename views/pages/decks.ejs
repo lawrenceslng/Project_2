@@ -14,21 +14,24 @@
 			<h1>This is great</h1>
 			<p>Welcome to templating using EJS</p>
         </div>
-        <div>This is <%= data %>'s page</div>
         <div class="container">
+            <h2>Create a New Deck</h2>
             <div class="decks">
-                    <% if(!Array.isArray(data) || !data.length) { %>
-                        <p>You have no decks</p>
-                    <% } else{ %>
-                        <p>You have decks</p>
-                    <% } %>
                 <form method = "POST" action="/decks/create">
                     <input type="text" name="name" placeholder="Enter Name of Deck">
-                    <button>Submit</button>
+                    <input type="submit" value="submit">
                 </form>
             </div>
-            <div><i class="fas fa-arrow-left"></i></div>
-            <div><i class="fas fa-arrow-right"></i> </div>
+            <h2>View Your Decks</h2>
+            <div class="viewer">
+                <form method = "GET" action="/decks/viewer">
+                <button type="submit" value="submit">View</button></form>
+            </div>
+            <h2>List of Decks</h2>
+            <ul>
+            
+            </ul>
+
         </div>
 
 	</main>
