@@ -14,10 +14,10 @@ function updateCard(int){
     }).then(function(res){
         length = res.length;
         console.log(res);
-        var category = $("<p>").html(res[int].category).addClass('edit').attr('data-name', 'category').attr('data-id', res[int].id);
-        var front = $("<p>").html(res[int].front).addClass('edit').attr('data-name', 'front').attr('data-id', res[int].id);
-        var back = $("<p>").html(res[int].back).addClass('edit').attr('data-name', 'back').attr('data-id', res[int].id);
-        var difficulty = $("<p>").html(res[int].difficulty).addClass('edit').attr('data-name', 'difficulty').attr('data-id', res[int].id);
+        var category = $("<p>").html(res[int].category).addClass('edit corner-ribbon').attr('id', 'category').attr('data-cardId', res[int].id);
+        var front = $("<p>").html(res[int].front).addClass('edit').attr('id', 'front').attr('data-cardId', res[int].id);
+        var back = $("<p>").html(res[int].back).addClass('edit').attr('id', 'back').attr('data-cardId', res[int].id);
+        var difficulty = $("<p>").html(res[int].difficulty).addClass('edit corner-ribbon').attr('id', 'difficulty').attr('data-cardId', res[int].id);
         $('.front').append(category, front);
         $('.back').append(back, difficulty);
     });
@@ -25,18 +25,25 @@ function updateCard(int){
  
 // onclick of .leftArrow the subtract function is called that decreases the variable i by 1 and then executes the updateCard function with i as its argument
 function subtract(){
-    if(i > 0){
-        i--;
-        updateCard(i);
-    }
+    $('.flashcard').removeClass('is-flipped');
+    setTimeout(function(){
+        if(i > 0){
+            i--;
+            updateCard(i);
+        }
+    }, 500);
 }
 
 // onclick of the .rightArrow the add function is called that increases the variable i by 1 and then executes the updateCard function with i as its argument
 function add(){
-    if(i <= length-2){
-        i++;
-        updateCard(i);
-    }
+    $('.flashcard').removeClass('is-flipped');
+    setTimeout(function(){
+        if(i <= length-2){
+            i++;
+            updateCard(i);
+        }
+    }, 500);
+    
 }
 
 //function allows user to edit the text on page (when they double click on text)
@@ -60,10 +67,10 @@ function doneEditText(event){
         }
         else{
             
-            colkey = $(this).attr('data-name');
+            colkey = $(this).attr('id');
             colval = $(this).text();
             idkey = "id"
-            idval = $(this).attr('data-id');
+            idval = $(this).attr('data-cardId');
 
             var dataOb = {};
             dataOb[colkey]= colval;
@@ -78,6 +85,23 @@ function doneEditText(event){
             });
         }
     }
+}
+
+function switchCards(){
+    // left arrow
+    if ((event.keyCode || event.which) == 37)
+    {   
+        subtract();
+        // $('.flashcard').removeClass('is-flipped');
+        // setTimeout(subtract, 1000);
+    }
+    // right arrow
+    if ((event.keyCode || event.which) == 39)
+    {
+        add();
+        // $('.flashcard').removeClass('is-flipped');
+        // setTimeout(add, 1000);
+    }   
 }
 
 // when the page loads and the window is ready, the updateCard function is executed with variable i= 0 as its argument
@@ -99,18 +123,16 @@ $(window).ready(function(){
 $(document).on('keydown', function(){
     if(canSwitch){
         switchCards();
+        flipCards();
     }
 });
-    
-function switchCards(){
-    // left arrow
-    if ((event.keyCode || event.which) == 37)
-    {   
-        subtract();
+
+function flipCards(){
+    if((event.keyCode || event.which) == 32){
+        $('.flashcard').toggleClass('is-flipped');
     }
-    // right arrow
-    if ((event.keyCode || event.which) == 39)
-    {
-        add();
-    }   
 }
+
+$('.flashcard').on('click', function(){
+    $('.flashcard').toggleClass('is-flipped');
+})
