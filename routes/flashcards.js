@@ -38,14 +38,14 @@ var connection = mysql.createConnection({
     database: process.env.DB_NAME    //TBD
 });
 
+router.get('/', function(req, res){
+	    
+    res.render('pages/flashcards');
+    
+});
 
-//routes  
-// router.get('/hi', function(req, res) {
-// 	res.send("hi");
-// });
 
 router.get('/view_cards', function(req, res){
-    // res.render('pages/flashcards');
 
     connection.query('SELECT * FROM cards WHERE creator_id = ?', [req.session.user_id], function (error, results, fields) {
         if (error) throw error;
@@ -70,25 +70,14 @@ router.post('/create', function(req, res){
 });
 
 router.get('/all_cards', function(req, res){
-    // res.render('pages/flashcards');
-    // connection.query('SELECT * FROM cards', function (error, results, fields) {
-    //     if (error) throw error;
-        
-        // res.json(results);
-        
-        // res.render('pages/all_cards', {
-        //     data: results
-        // });
-
+    
         res.render('pages/all_cards');
-    // });
 });
 
 router.get('/community_cards', function(req, res){
 	connection.query('SELECT * FROM cards',function (error, results, fields) {
 	  if (error) throw error;
       res.json(results);
-    //   console.log(results);
 	});
 });
 
