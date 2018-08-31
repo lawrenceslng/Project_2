@@ -86,14 +86,5 @@ router.post('/create', function(req, res){
     })
 });
 
-// router.get('/my', function(req, res){
-// 	connection.query('SELECT * FROM decks WHERE user_id =?',[req.session.user_id],function (error, results, fields) {
-// 	  if (error) throw error;
-//       res.json(results);
-// 	});
-// });
-
-
-
 
 module.exports = router;
