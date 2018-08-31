@@ -38,32 +38,58 @@ var connection = mysql.createConnection({
     database: process.env.DB_NAME    //TBD
 });
 
-
-//routes  
-// router.get('/hi', function(req, res) {
-// 	res.send("hi");
-// });
-
-router.get('/:category/:id', function(req, res){
-    // res.render('pages/flashcards');
-	connection.connect(function(err) {
-	  if (err) {
-	    console.error("error connecting: " + err.stack);
-	  }
-
-	    connection.query('SELECT * FROM cards WHERE category = ? AND id = ?', [req.params.category, req.params.id], function (error, results, fields) {
-        if (error) throw error;
-        
-        // res.json(results);
+router.get('/', function(req, res){
 	    
-	    res.render('pages/flashcards', {
-            data: results
+    res.render('pages/flashcards');
+
+});
+
+router.put('/edit', function(req, res){
+    console.log(req.body);
+
+    if(req.body.front){
+        connection.query('UPDATE cards SET front = ? WHERE id = ?', [req.body.front, req.body.id],function(error, results, fields){
+            if (error) throw error;
+    
+            res.json(results);
         });
 
-        console.log(results);
+
+        //console.log(results);
+
+    }else if(req.body.back){
+        connection.query('UPDATE cards SET back = ? WHERE id = ?', [req.body.back, req.body.id],function(error, results, fields){
+            if (error) throw error;
+    
+            res.json(results);
+
         });
-	});
+    }else if(req.body.category){
+        connection.query('UPDATE cards SET category = ? WHERE id = ?', [req.body.category, req.body.id],function(error, results, fields){
+            if (error) throw error;
+    
+            res.json(results);
+        });
+    }else{
+        connection.query('UPDATE cards SET difficulty = ? WHERE id = ?', [req.body.difficulty, req.body.id],function(error, results, fields){
+            if (error) throw error;
+    
+            res.json(results);
+        }); 
+    }
+
 });
+
+
+router.get('/view_cards', function(req, res){
+
+    connection.query('SELECT * FROM cards WHERE creator_id = ?', [req.session.user_id], function (error, results, fields) {
+        if (error) throw error;
+        res.json(results);
+    });
+
+});
+
 
 router.get('/new_card', function(req, res){
     res.render('pages/create_cards');
@@ -80,27 +106,20 @@ router.post('/create', function(req, res){
 });
 
 router.get('/all_cards', function(req, res){
-    // res.render('pages/flashcards');
-    // connection.query('SELECT * FROM cards', function (error, results, fields) {
-    //     if (error) throw error;
-        
-        // res.json(results);
-        
-        // res.render('pages/all_cards', {
-        //     data: results
-        // });
-
+    
         res.render('pages/all_cards');
-    // });
 });
 
-router.get('/community_cards/', function(req, res){
+router.get('/community_cards', function(req, res){
 	connection.query('SELECT * FROM cards',function (error, results, fields) {
 	  if (error) throw error;
       res.json(results);
-    //   console.log(results);
 	});
 });
+
+
+
+
 
 
 module.exports = router;

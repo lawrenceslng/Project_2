@@ -14,20 +14,13 @@
 			<h1>This is great</h1>
 			<p>Welcome to templating using EJS</p>
         </div>
-        <div class="container">
-            <div class="flashcard">
-                    front: <%= data[0].front %> <br><br>
-					back: <%= data[0].back %> <br><br>
-            </div>
-            <div><i class="fas fa-arrow-left"></i></div>
-            <div><i class="fas fa-arrow-right"></i> </div>
-        </div>
-
+        
+        <% include ../partials/card %>
 	</main>
 
 	<footer>
 		<% include ../partials/footer %>
 	</footer>
-	
+	<% include ../partials/script %>
 </body>
 </html>
