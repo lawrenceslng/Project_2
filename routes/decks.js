@@ -46,8 +46,6 @@ router.get('/', function(req,res){
     //     data: collection
     // }
 
-    console.log(collection)
-
 });
 
 
