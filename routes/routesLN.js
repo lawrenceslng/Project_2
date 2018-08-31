@@ -73,7 +73,31 @@ router.post('/', function(req, res){
 
 router.post('/update', function(req, res){
     console.log(req.body.email);
-    console.log("updating email");
-    res.redirect("/home");
+    console.log(req.session.email);
+    connection.query('UPDATE users SET email = ? WHERE id = ? ;', [req.body.email, req.session.user_id],function(error, results, fields){
+        if (error) throw error;
+        console.log(req.session.email);
+        connection.query('SELECT * FROM users WHERE id = ?',[req.session.user_id],function(error, results, fields){
+            if(error) throw error;
+            console.log(results);
+            req.session.user_id = results[0].id;
+              req.session.email = results[0].email;
+              req.session.username = results[0].username;
+              req.session.firstName = results[0].first_name;
+              req.session.lastName = results[0].last_name;
+              res.render("pages/profile",{data: req.session});
+        })
+        //destroy current session and start a new session
+        // req.session.destroy(function(err){
+        //     if(err) throw err;
+        //       req.session.user_id = results[0].id;
+        //       req.session.email = results[0].email;
+        //       req.session.username = results[0].username;
+        //       req.session.firstName = results[0].first_name;
+        //       req.session.lastName = results[0].last_name;
+        //       res.render("pages/profile",{data: req.session});
+        //   })
+       
+    })
 });
 module.exports = router;
