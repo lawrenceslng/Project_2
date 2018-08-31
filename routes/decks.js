@@ -38,47 +38,49 @@ var connection = mysql.createConnection({
     database: process.env.DB_NAME    //TBD
 });
 
+var collection = []; 
 
-//routes  
-// router.get('/hi', function(req, res) {
-// 	res.send("hi");
-// });
+router.get('/', function(req,res){
+    res.render('pages/decks')
+    , {
+        data: req
+    }
 
-router.get('/:user', function(req, res){
-    // res.render('pages/flashcards');
+});
+
+router.get('/dash', function(req, res){
+    
 	connection.connect(function(err) {
 	  if (err) {
 	    console.error("error connecting: " + err.stack);
 	  }
 
-	    connection.query('SELECT * FROM decks WHERE users_id = ?;', [req.params.user], function (error, results, fields) {
+	    connection.query('SELECT * FROM decks WHERE users_id = ?;', [req.session.user_id], function (error, results, fields) {
         if (error) throw error;
         
-        // res.json(results);
+        // req.session.decks = res.json(results); 
+        res.json(results);
 
-        // console.log(results);
-	    
-	    res.render('pages/decks', {
-            data: results
+        collection = results;
+
+        console.log(collection);
+        
         });
-        });
-	});
+    });
 });
+
+router.get('/viewer',function(req,res){
+    res.redirect('/decks/dash')
+})
 
 router.post('/create', function(req, res){
     console.log(req.body.name);
-    connection.query('INSERT INTO decks (users_id, name) VALUES (?,?);', [1, req.body.name],function(error, results, fields){
+    connection.query('INSERT INTO decks (users_id, name) VALUES (?,?);', [req.session.user_id, req.body.name],function(error, results, fields){
         if (error) throw error;
 
-        res.json(results);
+        res.send('Created ' + req.body.name + ' successfully!')
     })
-
-
 });
-
-
-
-
 
 
 module.exports = router;

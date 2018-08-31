@@ -10,6 +10,7 @@
 	</header>
 
 	<main>
+
         
 		<div class="row">
             <% include ../partials/SideBar %>
@@ -17,19 +18,22 @@
         <div class = "col-10">
         <!-- <div>This is <%= data %>'s page</div> -->
         
+
             <div class="decks">
-                    <% if(!Array.isArray(data) || !data.length) { %>
-                        <p>You have no decks</p>
-                    <% } else{ %>
-                        <p>You have decks</p>
-                    <% } %>
                 <form method = "POST" action="/decks/create">
                     <input type="text" name="name" placeholder="Enter Name of Deck">
-                    <button>Submit</button>
+                    <input type="submit" value="submit">
                 </form>
             </div>
-            <div><i class="fas fa-arrow-left"></i></div>
-            <div><i class="fas fa-arrow-right"></i> </div>
+            <h2>View Your Deck Details</h2>
+            <div class="viewer">
+                <form method = "GET" action="/decks/viewer">
+                <button type="submit" value="submit">View</button></form>
+            </div>
+            <h2>List of Decks</h2>
+            <ul class="deckHolder">
+            </ul>
+
         </div>
     </div>
         
@@ -39,6 +43,6 @@
 	<footer>
 		<% include ../partials/footer %>
 	</footer>
-	
+	<% include ../partials/script %>
 </body>
 </html>

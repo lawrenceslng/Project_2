@@ -14,13 +14,8 @@
 			<h1>This is great</h1>
 			<p>Welcome to templating using EJS</p>
         </div>
-        <div class="container" id="center">
-            <div class="flashcard">
-            </div>
-            <button onclick="subtract()" id="leftArrow"><i class="fas fa-arrow-left"></i></button>
-            <button onclick = "add()" id ="rightArrow"><i class="fas fa-arrow-right"></i></button>
-        </div>
-
+        
+        <% include ../partials/card %>
 	</main>
 
 	<footer>
