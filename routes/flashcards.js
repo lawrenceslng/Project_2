@@ -41,7 +41,38 @@ var connection = mysql.createConnection({
 router.get('/', function(req, res){
 	    
     res.render('pages/flashcards');
+
+});
+
+router.put('/edit', function(req, res){
+    console.log(req.body);
+
+    if(req.body.front){
+        connection.query('UPDATE cards SET front = ? WHERE id = ?', [req.body.front, req.body.id],function(error, results, fields){
+            if (error) throw error;
     
+            res.json(results);
+        });
+    }else if(req.body.back){
+        connection.query('UPDATE cards SET back = ? WHERE id = ?', [req.body.back, req.body.id],function(error, results, fields){
+            if (error) throw error;
+    
+            res.json(results);
+        });
+    }else if(req.body.category){
+        connection.query('UPDATE cards SET category = ? WHERE id = ?', [req.body.category, req.body.id],function(error, results, fields){
+            if (error) throw error;
+    
+            res.json(results);
+        });
+    }else{
+        connection.query('UPDATE cards SET difficulty = ? WHERE id = ?', [req.body.difficulty, req.body.id],function(error, results, fields){
+            if (error) throw error;
+    
+            res.json(results);
+        }); 
+    }
+
 });
 
 
@@ -80,6 +111,10 @@ router.get('/community_cards', function(req, res){
       res.json(results);
 	});
 });
+
+
+
+
 
 
 module.exports = router;
