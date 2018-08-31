@@ -48,8 +48,6 @@ router.get('/', function(req,res){
 
 });
 
-
-
 router.get('/dash', function(req, res){
     
 	connection.connect(function(err) {
