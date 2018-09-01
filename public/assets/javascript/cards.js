@@ -1,6 +1,6 @@
 //----------------------------------Global Variables
 var i = 0;
-var length, URL, currentText;
+var length, URL, fillURL, currentText;
 var canSwitch = true;
 
 //----------------------------------Functions
@@ -110,12 +110,15 @@ $(window).ready(function(){
     // setting the URL request for ajax query based on the href of the current page
     if (window.location.href.split('/flashcards/')[1] == 'all_cards'){
         URL = '/flashcards/community_cards';
+        fillURL = '/flashcards/fill_user';
     }else if(window.location.href.split('/flashcards/')[1] == "" ){
-        URL = '/flashcards/view_cards'
+        URL = '/flashcards/view_cards';
+        fillURL = '/flashcards/fill';
         $(document).on('click', '.edit', editText);
     }
     console.log(i);
     updateCard(i);
+    fillFilter();
 
 });
 
@@ -135,4 +138,27 @@ function flipCards(){
 
 $('.flashcard').on('click', function(){
     $('.flashcard').toggleClass('is-flipped');
-})
+});
+
+function fillFilter(){
+    $.ajax({
+        url: fillURL,
+        method: 'GET'
+    }).then(function(response){
+        for(var i = 0 ; i < response.length; i++ ){
+            var option = $('<option>').attr({
+                name: "category",
+                value: response[i].category,
+            }).text(response[i].category);
+            $('#select').append(option);
+        }
+    });
+
+}
+
+function newCards(){
+    URL = '/flashcards/categories';
+    i= 0;
+    updateCard(i);
+}
+
