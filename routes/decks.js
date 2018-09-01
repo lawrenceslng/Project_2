@@ -50,10 +50,10 @@ router.get('/', function(req,res){
 
 router.get('/dash', function(req, res){
     
-	connection.connect(function(err) {
-	  if (err) {
-	    console.error("error connecting: " + err.stack);
-	  }
+	// connection.connect(function(err) {
+	//   if (err) {
+	//     console.error("error connecting: " + err.stack);
+	//   }
 
 	    connection.query('SELECT * FROM decks WHERE users_id = ?;', [req.session.user_id], function (error, results, fields) {
         if (error) throw error;
@@ -66,7 +66,7 @@ router.get('/dash', function(req, res){
         console.log(collection);
         
         });
-    });
+    // });
 });
 
 router.get('/viewer',function(req,res){

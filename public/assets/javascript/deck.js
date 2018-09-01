@@ -1,4 +1,4 @@
-const URL = '/decks/dash';
+var URL = '/decks/dash';
 
 $(document).ready(function(){
     showDecks();
