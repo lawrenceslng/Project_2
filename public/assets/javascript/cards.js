@@ -1,40 +1,107 @@
 //----------------------------------Global Variables
 var i = 0;
-var length, URL;
+var length, URL, fillURL, currentText;
+var canSwitch = true;
 
 //----------------------------------Functions
 
 // functions empties the div that contains the flashcard before invoking AJAX query to repopulate card with properties from the object at index int
 function updateCard(int){
-    $('.flashcard').empty();
+    $('.front, .back').empty();
     $.ajax({
         url: URL,
         method: 'GET'
     }).then(function(res){
         length = res.length;
         console.log(res);
-        var category = $("<p>").html("Category: " + res[int].category);
-        var front = $("<p>").html("Front: " + res[int].front);
-        var back = $("<p>").html("Back: " + res[int].back);
-
-        $('.flashcard').append(category, front, back);
+        var category = $("<p>").html(res[int].category).addClass('edit corner-ribbon').attr('id', 'category').attr('data-cardId', res[int].id);
+        var front = $("<p>").html(res[int].front).addClass('edit').attr('id', 'front').attr('data-cardId', res[int].id);
+        var back = $("<p>").html(res[int].back).addClass('edit').attr('id', 'back').attr('data-cardId', res[int].id);
+        var difficulty = $("<p>").html(res[int].difficulty).addClass('edit corner-ribbon').attr('id', 'difficulty').attr('data-cardId', res[int].id);
+        $('.front').append(category, front);
+        $('.back').append(back, difficulty);
     });
 }
  
 // onclick of .leftArrow the subtract function is called that decreases the variable i by 1 and then executes the updateCard function with i as its argument
 function subtract(){
-    if(i > 0){
-        i--;
-        updateCard(i);
-    }
+    $('.flashcard').removeClass('is-flipped');
+    setTimeout(function(){
+        if(i > 0){
+            i--;
+            updateCard(i);
+        }
+    }, 500);
 }
 
 // onclick of the .rightArrow the add function is called that increases the variable i by 1 and then executes the updateCard function with i as its argument
 function add(){
-    if(i <= length-2){
-        i++;
-        updateCard(i);
+    $('.flashcard').removeClass('is-flipped');
+    setTimeout(function(){
+        if(i <= length-2){
+            i++;
+            updateCard(i);
+        }
+    }, 500);
+    
+}
+
+//function allows user to edit the text on page (when they double click on text)
+function editText(){
+    currentText = $(this).text();
+    // contenteditable allows you to have the user edit the content of the page
+    $(this).attr('contenteditable','true');
+    canSwitch = false;
+    $(this).on('keypress',doneEditText);
+}
+
+//when key is pressed if key = return or enter then html is no longer editable by user
+// if user presses key enter and there are only white spaces typed then the text reverts back to previous text
+function doneEditText(event){
+    var y = event.which || event.keyCode;
+    if(y == 13){
+        $(this).attr('contenteditable','false');
+        canSwitch = true;
+        if($(this).text().trim().length < 1){
+            $(this).text(currentText);
+        }
+        else{
+            
+            colkey = $(this).attr('id');
+            colval = $(this).text();
+            idkey = "id"
+            idval = $(this).attr('data-cardId');
+
+            var dataOb = {};
+            dataOb[colkey]= colval;
+            dataOb["id"] = idval;
+
+            $.ajax({
+                url: '/flashcards/edit',
+                method: 'PUT',
+                data: dataOb
+            }).then(function(res){
+                console.log(res);
+            });
+        }
     }
+}
+
+function switchCards(){
+    // left arrow
+    if ((event.keyCode || event.which) == 37)
+    {   
+        subtract();
+        // $('.flashcard').removeClass('is-flipped');
+        // setTimeout(subtract, 1000);
+    }
+    // right arrow
+    if ((event.keyCode || event.which) == 39)
+    {
+        add();
+        // $('.flashcard').removeClass('is-flipped');
+        // setTimeout(add, 1000);
+    }   
 }
 
 // when the page loads and the window is ready, the updateCard function is executed with variable i= 0 as its argument
@@ -42,23 +109,56 @@ $(window).ready(function(){
     // window.location.href returns the href (URL) of the current page
     // setting the URL request for ajax query based on the href of the current page
     if (window.location.href.split('/flashcards/')[1] == 'all_cards'){
-        URL = '/flashcards/community_cards/';
+        URL = '/flashcards/community_cards';
+        fillURL = '/flashcards/fill_user';
+    }else if(window.location.href.split('/flashcards/')[1] == "" ){
+        URL = '/flashcards/view_cards';
+        fillURL = '/flashcards/fill';
+        $(document).on('click', '.edit', editText);
     }
     console.log(i);
     updateCard(i);
+    fillFilter();
 
 });
 
 // if the left key on keyboard is pressed then the subtract function is run and if the right key on the keyboard is pressed then the add function is run
-$("body").keydown(function(e){
-    // left arrow
-    if ((e.keyCode || e.which) == 37)
-    {   
-        subtract();
+$(document).on('keydown', function(){
+    if(canSwitch){
+        switchCards();
+        flipCards();
     }
-    // right arrow
-    if ((e.keyCode || e.which) == 39)
-    {
-        add();
-    }   
 });
+
+function flipCards(){
+    if((event.keyCode || event.which) == 32){
+        $('.flashcard').toggleClass('is-flipped');
+    }
+}
+
+$('.flashcard').on('click', function(){
+    $('.flashcard').toggleClass('is-flipped');
+});
+
+function fillFilter(){
+    $.ajax({
+        url: fillURL,
+        method: 'GET'
+    }).then(function(response){
+        for(var i = 0 ; i < response.length; i++ ){
+            var option = $('<option>').attr({
+                name: "category",
+                value: response[i].category,
+            }).text(response[i].category);
+            $('#select').append(option);
+        }
+    });
+
+}
+
+function newCards(){
+    URL = '/flashcards/categories';
+    i= 0;
+    updateCard(i);
+}
+

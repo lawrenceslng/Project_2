@@ -16,11 +16,17 @@
         </div>
         <div class="container">
             <form method = "POST" action="/flashcards/create">
-                <li>Category: <input type="text" name="category" placeholder="Enter Category ex. HTML"></li>
-                <li>Question: <input type="text" name ="front" placeholder="Front of Card"></li>
-                <li>Answer: <input type="text" name ="back" placeholder="Back of Card"></li> 
-                <li>Difficulty: <input type="text" name ="difficulty" placeholder="Easy, Medium, Hard"></li> 
-                <button>Submit</button>
+                <ul>
+                    <li><label>Category:</label><input type="text" name="category" placeholder="Enter Category ex. HTML"></li>
+                    <li><label>Question:</label><textarea type="text" name ="front" placeholder="Front of Card"></textarea></li>
+                    <li><label>Answer:</label><textarea type="text" name ="back" placeholder="Back of Card"></textarea></li> 
+                    <li><label>Select Difficulty:<label><select name="difficulty">
+                        <option name="difficulty" value="Easy">Easy</option>
+                        <option name="difficulty" value="Medium">Medium</option>
+                        <option name="difficulty" value="Hard">Hard</option>
+                        </select>
+                    </ul>
+                <button onsubmit= newCards>Submit</button>
             </form>
         </div>
 

@@ -1,5 +1,28 @@
 /* we should utilize bootstrap as much as possible */
 html, body{
     width: 100%;
-    margin: 0 auto;
+    margin: 0;
+}
+.container-fluid{
+    padding-left: 0;
+    padding-right: 0;
+}
+.row{
+    margin-right: 0;
+    margin-left: 0;
+}
+h2{
+    text-align: center;
+}
+.sidebar{
+    padding-top: 20px;
+    text-align: center;
+    /* border: 1px grey; */
+    background-color: grey;
+}
+textarea{
+    align-content: center;
+}
+main{
+    height:auto;
 }
