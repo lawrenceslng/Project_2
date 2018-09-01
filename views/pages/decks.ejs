@@ -3,19 +3,22 @@
 <head>
     <% include ../partials/head %>
 </head>
-<body class="container">
+<body class="container-fluid">
 
 	<header>
 		<% include ../partials/headerLoggedIn %>
 	</header>
 
 	<main>
-		<div class="jumbotron">
-			<h1><%= data %></h1>
-			<p>Welcome to your Decks!</p>
-        </div>
-        <div class="container">
-            <h2>Create a New Deck</h2>
+
+        
+		<div class="row">
+            <% include ../partials/SideBar %>
+			
+        <div class = "col-10">
+        <!-- <div>This is <%= data %>'s page</div> -->
+        
+
             <div class="decks">
                 <form method = "POST" action="/decks/create">
                     <input type="text" name="name" placeholder="Enter Name of Deck">
@@ -32,6 +35,8 @@
             </ul>
 
         </div>
+    </div>
+        
 
 	</main>
 

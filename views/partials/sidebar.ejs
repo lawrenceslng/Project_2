@@ -1,0 +1,15 @@
+<div class="sidebar col-2">
+        <h2 id="welcome">Welcome <%= data.username %></h2>
+ 
+        <a class="nav-item nav-link" href="/profile">My Profile<span class="sr-only">(current)</span></a>
+           
+            
+        <a class="nav-item nav-link" href="/flashcards/all_cards">Community Deck</a>
+      
+        
+        <a class="nav-item nav-link" href="/decks/<%= data.user_id %>">My Decks</a>
+
+        <a class="nav-item nav-link" href="/flashcards/new_card">Create New Cards</a>
+
+        <a class="nav-item nav-link" href=""><img src="https://image.freepik.com/free-icon/question-mark-inside-a-box-outline_318-51427.jpg" width="100" height="100" title="Help" alt="Help Menu"></a>
+</div>
