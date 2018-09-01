@@ -112,6 +112,27 @@ router.get('/community_cards', function(req, res){
 	});
 });
 
+// router.get('/fill', function(req,res){
+//     connection.query('SELECT category FROM cards GROUP BY category ORDER BY category;', function(error, results, fields){
+//         if (error) throw error;
+//         res.json(results);
+//     })
+// });
+
+// router.get('/fill_user', function(req,res){
+//     connection.query('SELECT category FROM cards WHERE creator_id = ? GROUP BY category ORDER BY category;',[req.session.user_id], function(error, results, fields){
+//         if (error) throw error;
+//         res.json(results);
+//     })
+// });
+
+// router.get('/categories', function(req, res){
+// 	connection.query('SELECT * FROM cards WHERE category = ?',[req.body.category],function (error, results, fields) {
+// 	  if (error) throw error;
+//       res.json(results);
+// 	});
+// });
+
 
 
 
