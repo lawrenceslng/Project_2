@@ -83,7 +83,7 @@ router.put('/edit', function(req, res){
 
 router.get('/view_cards', function(req, res){
 
-    connection.query('SELECT * FROM cards WHERE creator_id = ?', [req.session.user_id], function (error, results, fields) {
+    connection.query('SELECT * FROM cards WHERE creator_id = ? ORDER BY id DESC;', [req.session.user_id], function (error, results, fields) {
         if (error) throw error;
         res.json(results);
     });
