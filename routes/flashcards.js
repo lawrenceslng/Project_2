@@ -97,11 +97,17 @@ router.get('/new_card', function(req, res){
 })
 
 router.post('/create', function(req, res){
-    console.log(req.body);
+    // console.log(req.body);
     connection.query('INSERT INTO cards (creator_id, category, front, back, difficulty) VALUES (?,?, ?, ?, ?);', [req.session.user_id, req.body.category, req.body.front, req.body.back, req.body.difficulty],function(error, results, fields){
         if (error) throw error;
-
-        res.redirect('/flashcards/all_cards');
+        console.log(results);
+        console.log(results.insertId);
+       
+        connection.query('INSERT INTO deck_cards (decks_id, cards_id) VALUES (?, ?);', [req.body.deck_id, results.insertId],function(error, deckRes, fields){
+            if (error) throw error;
+            console.log(deckRes);
+            res.redirect('/flashcards/');
+        })       
     })
 });
 
