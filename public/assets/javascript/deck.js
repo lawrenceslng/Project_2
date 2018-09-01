@@ -14,10 +14,11 @@ function showDecks(){
         console.log(length);
         for(var i = 0; i<length;i++){
             var deckName = res[i].name;
-            var viewCard = $('<button>').attr("href","#").text('view cards'); 
+            var viewCard = $('<a>').attr("href","/flashcards/deck/" + res[i].id).text('view cards'); 
             var newLi = $('<li>').append(deckName, viewCard);
            
             $('.deckHolder').append(newLi);
         }
     });
 }
+
