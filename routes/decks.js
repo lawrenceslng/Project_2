@@ -82,5 +82,13 @@ router.post('/create', function(req, res){
     })
 });
 
+router.get('/edit', function(req,res){
+    res.render('pages/edit_decks');
+})
+
+router.get('/edit/:id', function(req,res){
+    res.redirect('/decks/edit');
+})
+
 
 module.exports = router;
