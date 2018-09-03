@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <% include ../partials/head %>
+</head>
+<body class="container">
+
+	<header>
+		<% include ../partials/header %>
+	</header>
+
+	<main>
+		<div class="jumbotron">
+			<h1>This is your deck information</h1>
+        </div>
+        <div class="container">
+            <div class="row">
+                <div class="col" id="currCards">
+                <h2>Current Cards</h2>
+                <div>
+                    <% data.forEach(function(num) { %>
+                    <div><b>Card Front</b>: <%= num %></div>
+                    <% }); %> 
+                </div>
+                </div>
+                <div class="col" id="availCards">
+                <h2>Available Cards</h2>
+                </div>
+            </div>
+        </div>
+	</main>
+
+	<footer>
+		<% include ../partials/footer %>
+	</footer>
+	<% include ../partials/script %>
+</body>
+</html>
