@@ -129,12 +129,12 @@ $(window).ready(function(){
     // setting the URL request for ajax query based on the href of the current page
     if (window.location.href.split('/flashcards/')[1] == 'all_cards'){
         URL = '/flashcards/community_cards';
-        fillURL = '/flashcards/fill_user';
+        fillURL = '/flashcards/fill';
         deckName = 'Community';
         $('#deckName').html(`${deckName} Deck`);
     }else if(window.location.href.split('/flashcards/')[1] == "my_cards" ){
         URL = '/flashcards/view_all_my_cards';
-        fillURL = '/flashcards/fill';
+        fillURL = '/flashcards/fill_user';
         $(document).on('click', '.edit', editText);
         deckName =  "My Cards"
         $('#deckName').html(`${deckName} Deck`);
@@ -147,9 +147,7 @@ $(window).ready(function(){
         
     }
     // else if(window.location.href.indexOf('/flashcards/categories') > -1){
-    //     var res = <%= test  %>;
     // }
-    // check if no cards in deck  in AJAX
     console.log(i);
     updateCard(i);
     fillFilter();
@@ -210,7 +208,7 @@ function fillFilter(){
 }
 
 // function newCards(){
-//     URL = '/flashcards/categories';
+//     URL = '/flashcards/categories/community_cards';
 //     i= 0;
 //     updateCard(i);
 // }
