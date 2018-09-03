@@ -18,11 +18,9 @@
                 <div class="col" id="currCards">
                 <h2>Current Cards</h2>
                 <div>
-                    <ul>
                     <% data.forEach(function(num) { %>
-                    <li><%= num.myCards %></li>
+                    <div><b>Card Front</b>: <%= num %></div>
                     <% }); %> 
-                    </ul>
                 </div>
                 </div>
                 <div class="col" id="availCards">

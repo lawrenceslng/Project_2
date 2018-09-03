@@ -35,7 +35,8 @@ var connection = mysql.createConnection({
   
     // Your password
     password: process.env.DB_PASSWORD,  //placeholder for your own mySQL password that you store in your own .env file
-    database: process.env.DB_NAME    //TBD
+    database: process.env.DB_NAME,    //TBD
+    multipleStatements: true
 });
 
 var collection = []; 
@@ -54,14 +55,13 @@ router.get('/dash', function(req, res){
 	  if (err) {
 	    console.error("error connecting: " + err.stack);
 	  }
-
 	    connection.query('SELECT * FROM decks WHERE users_id = ?;', [req.session.user_id], function (error, results, fields) {
         if (error) throw error;
         
         // req.session.decks = res.json(results); 
         res.json(results);
-
-        collection = results;
+        
+        // collection = results;
         
         });
     });
@@ -81,40 +81,41 @@ router.post('/create', function(req, res){
     })
 });
 
-var myCards;
-
 router.get('/edit/:id', function(req,res){
-   connection.query('SELECT * FROM deck_cards LEFT JOIN cards ON cards_id = id', function(error, results, fields){
-    console.log(results)
-    for(var i =0; i<results.length;i++){
-        var front = results[i].front; 
-        // list = $('<li>').append(front );
-
-        // $('#currCards').append(list)
-        console.log(front); 
-    }   
-    res.render('pages/edit_decks',{
-        data: [
-            {
-                username: req.session.username,
-                myCards: JSON.stringify(results)
+    //Need to write code to check id of deck and if all params are met directs to route
+    var deckIden = req.params.id;
+    console.log(deckIden);
+    if(deckIden ==3){
+        connection.query('SELECT * FROM deck_cards LEFT JOIN cards ON cards_id = id', function(error, results, fields){
+            // console.log(results)
+            var front = '';
+            var cardsIden = '';
+            for(var i =0; i<results.length;i++){
+                    
+                front += results[i].front +'<br>'; 
+                // cardsIden += results[i].cards_id + '<br>'
             }
-        ] 
-    });
-    })  
+            if(front !=""){
+            var split = front.split('<br>');
+            // var cardSplit = cardsIden.split('<br>');
+            // console.log(cardSplit);
+            }   
+            
+            res.render('pages/edit_decks',{
+                data: split
+                // JSON.stringify(results) 
+            });
+            })  
+    }
+    else{ 
+        res.send('Error. ')
+    }
+
 });
 
 router.get('/edit', function(req,res){
     res.render('pages/edit_decks');
 
 })
-
-// router.get('/edit/cards', function(req,res){
-   
-//     connection.query('SELECT * FROM cards;', function(error, results, fields){
-//         console.log(results);
-//         res.json(results);
-//     })
-// })
 
 module.exports = router;

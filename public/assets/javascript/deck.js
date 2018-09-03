@@ -30,12 +30,13 @@ function showCards(){
         url: address,
         method: 'GET'
     }).then(function(res){
-        var length = res.length
-            for(var i = 0; i<length;i++){
-                var cardFront = res[i].front;
-                var newDiv = $('<div>').text('Card # ' + res[i].id + ' : ').append(cardFront);
-               
-                $('#availCards').append(newDiv);
+        var length = res.length;
+        for(var i = 0; i<length;i++){
+            var cardFront = res[i].front;
+            var add = $('<a>').attr('href','/decks/add/'+ res[i].id).text('[+]');
+            var newDiv = $('<div>').text('Card # ' + res[i].id + ' : ').append(cardFront, add);
+            
+            $('#availCards').append(newDiv);
         }
     });
 }
@@ -55,4 +56,3 @@ function currCards(){
         }
     });
 }
-
