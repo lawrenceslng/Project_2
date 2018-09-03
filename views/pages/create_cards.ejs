@@ -22,13 +22,10 @@
                             <option name="difficulty" value="Medium">Medium</option>
                             <option name="difficulty" value="Hard">Hard</option>
                         </select></li>
-                        <li><label>Add this card to one of your decks:</label>
-                            <select name="deck_id" class="deckOptions"> 
-                            </select>
-                        </li>
-                    </ul>
+                    <% include ../partials/add_card_to_deck %>
+                </ul>
 
-                <button onsubmit= newCards>Submit</button>
+                <button>Submit</button>
             </form>
         </div>
 
