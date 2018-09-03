@@ -1,6 +1,6 @@
 //----------------------------------Global Variables
 var i = 0;
-var length, URL, fillURL, currentText;
+var length, getURL, fillURL, currentText;
 var canSwitch = true;
 
 //----------------------------------Functions
@@ -14,12 +14,21 @@ function updateCard(int){
     }).then(function(res){
         length = res.length;
         console.log(res);
-        var category = $("<p>").html(res[int].category).addClass('edit corner-ribbon').attr('id', 'category').attr('data-cardId', res[int].id);
-        var front = $("<p>").html(res[int].front).addClass('edit').attr('id', 'front').attr('data-cardId', res[int].id);
-        var back = $("<p>").html(res[int].back).addClass('edit').attr('id', 'back').attr('data-cardId', res[int].id);
-        var difficulty = $("<p>").html(res[int].difficulty).addClass('edit corner-ribbon').attr('id', 'difficulty').attr('data-cardId', res[int].id);
-        $('.front').append(category, front);
-        $('.back').append(back, difficulty);
+        if (length > 0){
+            var category = $("<p>").html(res[int].category).addClass('edit corner-ribbon').attr('id', 'category').attr('data-cardId', res[int].id);
+            var front = $("<p>").html(res[int].front).addClass('edit').attr('id', 'front').attr('data-cardId', res[int].id);
+            var back = $("<p>").html(res[int].back).addClass('edit').attr('id', 'back').attr('data-cardId', res[int].id);
+            var difficulty = $("<p>").html(res[int].difficulty).addClass('edit corner-ribbon').attr('id', 'difficulty').attr('data-cardId', res[int].id);
+            $('.front').append(category, front);
+            $('.back').append(back, difficulty);
+        }
+        else{
+            $('main').hide();
+            var noCards = $('<h4>').html('You have no cards in this deck.')
+            var createCards = $('<a>').attr('href', '/flashcards/new_card').html('Create Cards and Add them to this deck');
+            $('body').append(noCards, createCards);
+        }
+
     });
 }
  
@@ -112,13 +121,18 @@ $(window).ready(function(){
         URL = '/flashcards/community_cards';
         fillURL = '/flashcards/fill_user';
     }else if(window.location.href.split('/flashcards/')[1] == "" ){
-        URL = '/flashcards/view_cards';
+        URL = '/flashcards/view_all_my_cards';
         fillURL = '/flashcards/fill';
         $(document).on('click', '.edit', editText);
     }
+    else if(window.location.href.indexOf('/flashcards/deck/') > -1){
+        var deckID = window.location.href.split('/deck/')[1]
+        URL = '/flashcards/view_cards/deck/'+ deckID;
+    }
+    // check if no cards in deck  in AJAX
     console.log(i);
     updateCard(i);
-    fillFilter();
+    // fillFilter();
 
 });
 
@@ -140,25 +154,25 @@ $('.flashcard').on('click', function(){
     $('.flashcard').toggleClass('is-flipped');
 });
 
-function fillFilter(){
-    $.ajax({
-        url: fillURL,
-        method: 'GET'
-    }).then(function(response){
-        for(var i = 0 ; i < response.length; i++ ){
-            var option = $('<option>').attr({
-                name: "category",
-                value: response[i].category,
-            }).text(response[i].category);
-            $('#select').append(option);
-        }
-    });
+// function fillFilter(){
+//     $.ajax({
+//         url: fillURL,
+//         method: 'GET'
+//     }).then(function(response){
+//         for(var i = 0 ; i < response.length; i++ ){
+//             var option = $('<option>').attr({
+//                 name: "category",
+//                 value: response[i].category,
+//             }).text(response[i].category);
+//             $('#select').append(option);
+//         }
+//     });
 
-}
+// }
 
-function newCards(){
-    URL = '/flashcards/categories';
-    i= 0;
-    updateCard(i);
-}
+// function newCards(){
+//     URL = '/flashcards/categories';
+//     i= 0;
+//     updateCard(i);
+// }
 
