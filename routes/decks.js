@@ -62,8 +62,6 @@ router.get('/dash', function(req, res){
         res.json(results);
 
         collection = results;
-
-        console.log(collection);
         
         });
     });
@@ -74,21 +72,42 @@ router.get('/viewer',function(req,res){
 })
 
 router.post('/create', function(req, res){
-    console.log(req.body.name);
+
     connection.query('INSERT INTO decks (users_id, name) VALUES (?,?);', [req.session.user_id, req.body.name],function(error, results, fields){
         if (error) throw error;
 
-        res.send('Created ' + req.body.name + ' successfully!')
+        res.redirect('/');
+        
     })
+});
+
+var myCards;
+
+router.get('/edit/:id', function(req,res){
+   connection.query('SELECT * FROM deck_cards LEFT JOIN cards ON ? = id', [req.params.id], function(error, results, fields){
+    console.log(results)   
+    res.render('pages/edit_decks',{
+        data: [
+            {
+                username: req.session.username,
+                myCards: results
+            }
+        ] 
+    });
+    })  
 });
 
 router.get('/edit', function(req,res){
     res.render('pages/edit_decks');
+
 })
 
-router.get('/edit/:id', function(req,res){
-    res.redirect('/decks/edit');
-})
-
+// router.get('/edit/cards', function(req,res){
+   
+//     connection.query('SELECT * FROM cards;', function(error, results, fields){
+//         console.log(results);
+//         res.json(results);
+//     })
+// })
 
 module.exports = router;
