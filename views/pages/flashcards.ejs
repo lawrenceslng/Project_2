@@ -7,17 +7,32 @@
 
 	<header>
 		<% include ../partials/header %>
+		<% include ../partials/deck_header %>
 	</header>
 
 	<main>
-		<% include ../partials/filter %>
-        <h5>Double Click on the flashcard text to edit</h5>
+		<div class="container-fluid">
+				<form action="/flashcards/categories/my_cards" method ="GET">
+					<label>Filter Based on Topic:<label>
+						<div class="checkboxes">
+		
+						</div>
+					<button>Submit</button>
+				</form>
+		</div>
+        <h5>Double Click on the flashcard text to edit and hit return/enter when done editing the cell</h5>
 		<% include ../partials/card %>
+		<form action="/flashcards/add_to_deck" method="POST" id='addCardDeck'>
+			<% include ../partials/add_card_to_deck %>
+			<input type="hidden" name ="cards_id" id="card_deck">
+		<button>Submit</button>
+		</form>
 	</main>
 
 	<footer>
 		<% include ../partials/footer %>
 	</footer>
 	<% include ../partials/script %>
+	<script src = "/assets/javascript/create_new_card.js"></script>
 </body>
 </html>
