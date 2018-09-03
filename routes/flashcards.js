@@ -81,7 +81,7 @@ router.put('/edit', function(req, res){
 });
 
 
-router.get('/view_cards', function(req, res){
+router.get('/view_all_my_cards', function(req, res){
 
     connection.query('SELECT * FROM cards WHERE creator_id = ? ORDER BY id DESC;', [req.session.user_id], function (error, results, fields) {
         if (error) throw error;
@@ -106,7 +106,7 @@ router.post('/create', function(req, res){
         connection.query('INSERT INTO deck_cards (decks_id, cards_id) VALUES (?, ?);', [req.body.deck_id, results.insertId],function(error, deckRes, fields){
             if (error) throw error;
             console.log(deckRes);
-            res.redirect('/flashcards/');
+            res.redirect('/flashcards/new_card/');
         })       
     })
 });
@@ -143,7 +143,6 @@ router.get('/community_cards', function(req, res){
 //       res.json(results);
 // 	});
 // });
-
 
 
 
