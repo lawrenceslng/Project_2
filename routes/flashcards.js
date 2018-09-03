@@ -39,10 +39,14 @@ var connection = mysql.createConnection({
 });
 
 router.get('/', function(req, res){
-	    
-    res.render('pages/flashcards');
+	 res.redirect('/flashcards/my_cards')   
+    
 
 });
+
+router.get('/my_cards', function(req,res){
+    res.render('pages/flashcards');
+})
 
 router.put('/edit', function(req, res){
     console.log(req.body);
@@ -98,17 +102,22 @@ router.get('/new_card', function(req, res){
 
 router.post('/create', function(req, res){
     // console.log(req.body);
-    connection.query('INSERT INTO cards (creator_id, category, front, back, difficulty) VALUES (?,?, ?, ?, ?);', [req.session.user_id, req.body.category, req.body.front, req.body.back, req.body.difficulty],function(error, results, fields){
-        if (error) throw error;
-        console.log(results);
-        console.log(results.insertId);
-       
-        connection.query('INSERT INTO deck_cards (decks_id, cards_id) VALUES (?, ?);', [req.body.deck_id, results.insertId],function(error, deckRes, fields){
+    if(req.session.user_id && req.body.category && req.body.front && req.body.back && req.body.difficulty && req.body.deck_id){
+        connection.query('INSERT INTO cards (creator_id, category, front, back, difficulty) VALUES (?,?, ?, ?, ?);', [req.session.user_id, req.body.category, req.body.front, req.body.back, req.body.difficulty],function(error, results, fields){
             if (error) throw error;
-            console.log(deckRes);
-            res.redirect('/flashcards/new_card/');
-        })       
-    })
+            console.log(results);
+            console.log(results.insertId);
+        
+            connection.query('INSERT INTO deck_cards (decks_id, cards_id) VALUES (?, ?);', [req.body.deck_id, results.insertId],function(error, deckRes, fields){
+                if (error) throw error;
+                console.log(deckRes);
+                res.redirect('/flashcards/new_card');
+            })       
+        })
+    }
+    else{
+        res.redirect('/flashcards/new_card');
+    }
 });
 
 router.get('/all_cards', function(req, res){
