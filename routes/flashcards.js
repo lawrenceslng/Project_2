@@ -40,7 +40,7 @@ var connection = mysql.createConnection({
 
 router.get('/', function(req, res){
 	    
-    res.render('pages/flashcards');
+    res.render('pages/flashcards', {data: [req.session]});
 
 });
 
@@ -107,7 +107,7 @@ router.post('/create', function(req, res){
 
 router.get('/all_cards', function(req, res){
     
-        res.render('pages/all_cards');
+        res.render('pages/all_cards', {data: [req.session]});
 });
 
 router.get('/community_cards', function(req, res){

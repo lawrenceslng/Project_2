@@ -2,15 +2,18 @@
 <html>
 <head>
     <title>Registration Form</title>
-    
+    <% include ../partials/head %>
 </head>
 <body>
-    <div class = "container">
+    
+    <div class = "container align-items-center">
         <!-- errors go here -->
         <% if (data == true){ %>
             <p>The username is taken</p>
         <% } %>
+        <h1>Register for a Web Development Flashcard Studies Account below!</h1>
         <form>
+            <div class="form-group">
             <label for="username"><b>Username</b></label>
             <input type="text" placeholder="Enter Username" name="username" required>
             <br>
@@ -29,8 +32,8 @@
             <label for="password_reenter"><b>Re-Enter Password</b></label>
             <input class="repw" type="password" placeholder="Enter Password" name="password_reenter" required>
             <br>
-            <button type="submit">Create Account!</button>
-
+            <button type="submit" class="btn btn-primary">Create Account!</button>
+        </div>
 
         </form>
     </div>
