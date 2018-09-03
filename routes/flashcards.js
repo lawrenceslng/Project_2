@@ -145,6 +145,29 @@ router.get('/community_cards', function(req, res){
 // });
 
 
+router.get('/deck/:id', function(req,res){
+    connection.query('SELECT * FROM decks WHERE id = ? AND users_id = ?;',[req.params.id, req.session.user_id], function (error, results, fields){
+        // console.log(results.length);
+        if (error) throw error;
+
+        else if(!results.length){
+            res.render('pages/invalid_deck');
+            
+        }
+        else{
+            res.render('pages/flashcards');
+        }
+    })
+});
+
+router.get('/view_cards/deck/:deckID', function(req, res){
+    connection.query('SELECT * FROM cards WHERE id IN (SELECT cards_id FROM deck_cards WHERE decks_id = ?)',[req.params.deckID],function(error, results,fields){
+        if (error) throw error;
+        res.json(results);
+    })
+
+
+});
 
 
 
