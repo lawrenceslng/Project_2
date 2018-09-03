@@ -80,10 +80,10 @@ router.post('/create', function(req, res){
         
     })
 });
-
+var deckIden; 
 router.get('/edit/:id', function(req,res){
     //Need to write code to check id of deck and if all params are met directs to route
-    var deckIden = req.params.id;
+    deckIden = req.params.id;
     console.log(deckIden);
     if(deckIden ==3){
         connection.query('SELECT * FROM deck_cards LEFT JOIN cards ON cards_id = id', function(error, results, fields){
@@ -116,6 +116,12 @@ router.get('/edit/:id', function(req,res){
 router.get('/edit', function(req,res){
     res.render('pages/edit_decks');
 
+})
+
+router.post('/add/:id', function(req,res){
+    connection.query('INSERT INTO decks_cards (decks_id, cards_id) VALUES (?,?);',[3,req.params.id],function(err,result,fields){
+        // console.log('successfully added card #' + req.params.id);
+    })
 })
 
 module.exports = router;

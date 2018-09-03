@@ -1,8 +1,7 @@
-
-
 $(document).ready(function(){
     showDecks();
     showCards();
+    // addCards();
 });
 
 function showDecks(){
@@ -56,3 +55,14 @@ function currCards(){
         }
     });
 }
+
+// function addCards(){
+//     var address = '/add/:id'
+//     $.ajax({
+//         url: address,
+//         method: 'POST'
+//     }).then(function(res){
+       
+
+//     });
+// }
