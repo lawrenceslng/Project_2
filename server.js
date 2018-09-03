@@ -96,7 +96,16 @@ app.get('/logout', function(req, res){
   req.session.destroy(function(err){
     res.redirect("/home");
   })
-})
+});
+
+app.get('/construction', function(req, res){
+  res.sendFile(path.join(__dirname, 'public/construction.html'));
+});
+
+app.get('/FAQ', function(req, res){
+  if(req.session.username)  res.render('pages/faq',{data: req.session});
+  else res.sendFile(path.join(__dirname, 'public/unauthorized.html'));
+});
 
 //external routes
 var flashcardRoutes = require('./routes/flashcards.js');
