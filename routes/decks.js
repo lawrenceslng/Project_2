@@ -84,8 +84,15 @@ router.post('/create', function(req, res){
 var myCards;
 
 router.get('/edit/:id', function(req,res){
-   connection.query('SELECT * FROM deck_cards LEFT JOIN cards ON ? = id', [req.params.id], function(error, results, fields){
-    console.log(results)   
+   connection.query('SELECT * FROM deck_cards LEFT JOIN cards ON cards_id = id', function(error, results, fields){
+    console.log(results)
+    for(var i =0; i<results.length;i++){
+        var front = results[i].front; 
+        // list = $('<li>').append(front );
+
+        // $('#currCards').append(list)
+        console.log(front); 
+    }   
     res.render('pages/edit_decks',{
         data: [
             {
