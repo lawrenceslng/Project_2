@@ -84,6 +84,13 @@
     /* padding-bottom: 5%; */
 }
 
+#cardNum{
+    position: absolute;
+    left: 30px;
+    bottom: 2px;
+    font-size: 18px;
+}
+
 h5{
     text-align: center;
 }
