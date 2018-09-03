@@ -68,7 +68,20 @@ router.get('/', function(req, res){
           bcrypt.hash(password, salt, function(err, p_hash) { 
             connection.query('INSERT INTO users (username, password, first_name, last_name, email) VALUES (?,?,?,?,?)', [username, p_hash, firstName, lastName, email],function (error, results, fields) {
               if (error) throw error;
-              console.log(results[0]);
+              console.log(results);
+
+
+              connection.query('SELECT id FROM users WHERE username = ?', [username],function (error, results, fields) {
+                if(error) throw error;
+                console.log(results[0].id);
+                connection.query('INSERT INTO userProfile (users_id) VALUES (?)', [results[0].id],function (error, results, fields) {
+                  if(error) throw error;
+                });
+              
+              });
+              // connection.query('INSERT INTO userProfile (users_id) VALUES (?)', [],function (error, results, fields) {
+
+
               // console.log("logged in");
               // res.redirect('/home/'+username);
               // start a session and then direct to landing page

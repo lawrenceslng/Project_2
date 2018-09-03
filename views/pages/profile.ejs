@@ -45,7 +45,7 @@
                                   <button type="button" class="close" data-dismiss="modal">&times;</button>
                                   
                                 </div>
-                                <form>
+                                <form id="pwform">
                                     <div class="modal-body">
                                         <label for="password"><b>New Password:</b></label>
                                         <input class="pw" type="password" placeholder="Enter Password" name="password" required>
@@ -65,7 +65,7 @@
                             </div>
                           </div>
                 <h6>Insert a short biography to tell other users who you are:</h6>
-                <textarea id = "bio" name="biography" rows="5" cols="60"><%=data[1]%></textarea>
+                <textarea id = "bio" name="biography" rows="5" cols="60" disabled><%=data[1]%></textarea>
                 <!-- Buttons -->
                 <button type="button" data-toggle="modal" data-target="#bioUpdate">Update Bio</button>
                     <!-- Modal -->
@@ -79,7 +79,7 @@
                                   <button type="button" class="close" data-dismiss="modal">&times;</button>
                                   
                                 </div>
-                                <form>
+                                <form id="bioform">
                                     <div class="modal-body">
                                         <textarea id = "bio" name="biography" rows="5" cols="60"></textarea>
                                     </div>
@@ -133,9 +133,9 @@
             }
             else
             {
-                $("form").attr("method","POST");
-                $("form").attr("action","/profile");
-                $("form").submit();
+                $("#pwform").attr("method","POST");
+                $("#pwform").attr("action","/profile");
+                $("#pwform").submit();
             }
             console.log(PWL);
         }
@@ -145,9 +145,9 @@
 
     $(".bionext").on("click",function(event){
         event.preventDefault();
-        $("form").attr("method","POST");
-        $("form").attr("action","/bio");
-        $("form").submit();
+        $("#bioform").attr("method","POST");
+        $("#bioform").attr("action","/bio");
+        $("#bioform").submit();
     })
 
     function bioPopulate(){
