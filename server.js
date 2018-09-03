@@ -122,7 +122,14 @@ app.use('/profile',profileRoutes);
 //   res.json(user_info);
 // });
 
-
+app.post('/bio', function(req, res){
+    console.log(req.body);
+    connection.query('UPDATE userProfile SET biography = ? WHERE users_id = ? ;', [req.body.biography,req.session.user_id],function(error, results, fields){
+      if (error) throw error;
+      
+    });
+    res.redirect("/profile");
+})
 
 
 
