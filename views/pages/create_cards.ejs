@@ -10,23 +10,22 @@
 	</header>
 
 	<main>
-		<div class="jumbotron">
-			<h1>This is great</h1>
-			<p>Welcome to templating using EJS</p>
-        </div>
         <div class="container">
             <form method = "POST" action="/flashcards/create">
                 <ul>
                     <li><label>Category:</label><input type="text" name="category" placeholder="Enter Category ex. HTML"></li>
                     <li><label>Question:</label><textarea type="text" name ="front" placeholder="Front of Card"></textarea></li>
                     <li><label>Answer:</label><textarea type="text" name ="back" placeholder="Back of Card"></textarea></li> 
-                    <li><label>Select Difficulty:<label><select name="difficulty">
-                        <option name="difficulty" value="Easy">Easy</option>
-                        <option name="difficulty" value="Medium">Medium</option>
-                        <option name="difficulty" value="Hard">Hard</option>
-                        </select>
-                    </ul>
-                <button onsubmit= newCards>Submit</button>
+                    <li><label>Select Difficulty:<label>
+                        <select name="difficulty">
+                            <option name="difficulty" value="Easy">Easy</option>
+                            <option name="difficulty" value="Medium">Medium</option>
+                            <option name="difficulty" value="Hard">Hard</option>
+                        </select></li>
+                    <% include ../partials/add_card_to_deck %>
+                </ul>
+
+                <button>Submit</button>
             </form>
         </div>
 
@@ -34,7 +33,9 @@
 
 	<footer>
 		<% include ../partials/footer %>
-	</footer>
-	
+    </footer>
+    <% include ../partials/script %>
+    <script src = "/assets/javascript/create_new_card.js"></script>
+    
 </body>
 </html>
