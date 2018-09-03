@@ -42,13 +42,18 @@ var connection = mysql.createConnection({
 router.get('/', function(req, res){
     console.log(req.session);
     if(req.session.username) {
-        res.render('pages/profile', {data: req.session});
-        
+        connection.query('SELECT biography FROM userProfile WHERE users_id = ? ;', [req.session.user_id],function(error, results, fields){
+            if (error) throw error;
+            console.log(results[0]);
+            res.render('pages/profile', {data: [req.session, results[0].biography]});
+            // console.log(data);
+        });
     }
     else res.sendFile(path.join(__dirname, '../public/unauthorized.html'));
 });
 
 router.post('/', function(req, res){
+    console.log(req.body);
     console.log(req.body.password + "       " + req.session.user_id);
     console.log("updating PW");
     bcrypt.genSalt(10, function(err, salt) {
@@ -85,7 +90,8 @@ router.post('/update', function(req, res){
               req.session.username = results[0].username;
               req.session.firstName = results[0].first_name;
               req.session.lastName = results[0].last_name;
-              res.render("pages/profile",{data: req.session});
+            //   res.render("pages/profile",{data: [req.session,results[0].biography]});
+              res.redirect("/home");
         })
         //destroy current session and start a new session
         // req.session.destroy(function(err){
@@ -100,4 +106,5 @@ router.post('/update', function(req, res){
        
     })
 });
+
 module.exports = router;

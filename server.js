@@ -77,7 +77,6 @@ app.post('/login', function(req, res){
               req.session.username = results[0].username;
               req.session.firstName = results[0].first_name;
               req.session.lastName = results[0].last_name;
-
               res.redirect('/home');
               // res.send('you are logged in:');
               // console.log('/home/'+ req.session.username);
@@ -97,7 +96,16 @@ app.get('/logout', function(req, res){
   req.session.destroy(function(err){
     res.redirect("/home");
   })
-})
+});
+
+app.get('/construction', function(req, res){
+  res.sendFile(path.join(__dirname, 'public/construction.html'));
+});
+
+app.get('/FAQ', function(req, res){
+  if(req.session.username)  res.render('pages/faq',{data: req.session});
+  else res.sendFile(path.join(__dirname, 'public/unauthorized.html'));
+});
 
 //external routes
 var flashcardRoutes = require('./routes/flashcards.js');
@@ -123,7 +131,15 @@ app.use('/profile',profileRoutes);
 //   res.json(user_info);
 // });
 
-
+app.post('/bio', function(req, res){
+    console.log(req.body);
+        connection.query('UPDATE userProfile SET biography = ? WHERE users_id = ? ;', [req.body.biography,req.session.user_id],function(error, results, fields){
+          if (error) throw error;
+          
+        });
+        res.redirect("/home");
+      });
+    
 
 
 
