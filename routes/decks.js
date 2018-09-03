@@ -90,7 +90,7 @@ router.get('/edit/:id', function(req,res){
         data: [
             {
                 username: req.session.username,
-                myCards: results
+                myCards: JSON.stringify(results)
             }
         ] 
     });
