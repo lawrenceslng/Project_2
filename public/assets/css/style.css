@@ -35,10 +35,10 @@ h2{
 textarea{
     align-content: center;
 }
-main{
+/* main{
     height:auto;
     display: flex;
-}
+} */
 footer{
     background-color: lightslategray;
     width: 100%;

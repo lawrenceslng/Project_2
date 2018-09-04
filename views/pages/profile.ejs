@@ -3,13 +3,8 @@
 <head>
     <% include ../partials/head %>
     <style>
-    /* main{    
-        height:auto;
-        display: fixed;
-
-    } */
-    form{
-        margin-left: 10px;
+    .content{
+        margin-left: 350px;
     }
     </style>
 </head>
@@ -22,9 +17,9 @@
 	<main>
         
 		<!-- <div class="row"> -->
-            <% include ../partials/SideBar %>
+        <% include ../partials/SideBar %>
 			
-        <!-- <div class = "col-10"> -->
+        <div class = "content">
         <form method="POST" action="/profile/update">
             <label for="username"><b>Username</b></label>
             <input type="text" name="username" value="<%=data[0].username%>" disabled>
@@ -76,6 +71,7 @@
                 <h6>Insert a short biography to tell other users who you are:</h6>
                 <textarea id = "bio" name="biography" rows="5" cols="60" disabled><%=data[1]%></textarea>
                 <!-- Buttons -->
+                <hr>
                 <button type="button" data-toggle="modal" data-target="#bioUpdate">Update Bio</button>
                     <!-- Modal -->
                     <div id="bioUpdate" class="modal fade" role="dialog">
@@ -106,7 +102,7 @@
                         
 
 
-        <!-- </div> -->
+        </div>
     <!-- </div> -->
         
 

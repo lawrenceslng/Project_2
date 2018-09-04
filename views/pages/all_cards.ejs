@@ -6,11 +6,13 @@
 <body class="container-fluid">
 
 	<header>
-		<% include ../partials/header %>
-		<% include ../partials/deck_header %>
+		<% include ../partials/headerLoggedIn %>
+		
 	</header>
 	
 	<main>
+		<% include ../partials/sidebar %>
+		<% include ../partials/deck_header %>
 		<div class="container-fluid">
 				<form action="/flashcards/categories/community_cards" method ="GET">
 					<label>Filter Based on Topic:<label>
