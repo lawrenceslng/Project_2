@@ -2,6 +2,7 @@ $(document).ready(function(){
     showDecks();
     showCards();
     // currCards();
+    
 });
 
 function showDecks(){
@@ -39,30 +40,4 @@ function showCards(){
         }
     });
 }
-// '/flashcards/view_cards/deck/'
-function currCards(){
-    var address = '/decks/edit'; 
-    $.ajax({
-        url: address,
-        method: 'GET'
-    }).then(function(res){
-        var length = res.length
-            for(var i = 0; i<length;i++){
-                var cardFront = res[i].front;
-                var newDiv = $('<div>').text('Card # ' + res[i].id + ' : ').append(cardFront);
-               
-                $('#currCards').append(newDiv);
-        }
-    });
-}
 
-// function addCards(){
-//     var address = '/add/:id'
-//     $.ajax({
-//         url: address,
-//         method: 'POST'
-//     }).then(function(res){
-       
-
-//     });
-// }
