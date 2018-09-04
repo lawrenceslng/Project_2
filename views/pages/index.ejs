@@ -2,47 +2,73 @@
 <html lang="en">
 <head>
 	<% include ../partials/head %>
+	<style>
+		a{
+			color: white;
+			text-decoration: none;
+			align-content: center;
+		}
+		a:hover{
+			color: white;
+		}
+		.row{
+			margin: 15px 0;
+		}
+		img{
+			border-radius: 5px;
+		}
+	</style>
 </head>
 <body>
-	<div class="container">
-			<header>
-					<% include ../partials/header %>
-				</header>
+	<div class="container">	
+		<header>
+			<% include ../partials/header %>
+		</header>
 			
-				<main>
 					<div class="jumbotron">
 						<h1>Welcome to Web Development Flashcard Studies!</h1>
 						<p>See what we have to offer!</p>
-						<button>Click Here to Join</button>
+						
+							<a class="btn btn-primary" href="/signup" role="button">Click Here to Join</a>
+						
 					</div>
-					<div class="content">
-						<div class="row">
+			
+			
+			<div class="index-content">
+				<div class="row">
+					<div class="col-6">
+						
+						<h6 class="text-center">
+							<img src="/assets/images/community.png" alt="community" height="42" width="42">
+							Community Driven</h6>
+						<span>The Internet connects you to millions of people online, so why work by yourself? Indulge in the knowledge shared by others. See what others are doing. Keep up with the rest of the world. With a growing userbase and daily updates, this site helps give you the skills needed to be a successful web developer. </span>
+					</div>
+					<div class ="col-6">
+						<h6 class="text-center">
+								<img src="/assets/images/technology.jpg" alt="technology" height="42" width="42">
+								Up to Date Technologies</h6>
+						<span>Don't know where to start or what to learn? Check out the various topics in our databases. All categories of knowledge are selected to give you the needed skills to succeed in today's fast-pace world. From basic to advanced topics, the flashcards in here will keep you up to date with the latest trends and technologies in web development.</span>
+					</div>
+				</div>
+					<div class="row">
 							<div class="col-6">
-								Community Driven
+								<h6 class="text-center">
+										<img src="/assets/images/flashcard.jpg" alt="flashcard" height="42" width="42">
+										Create Your Own Flashcards</h6>
+								<span>Can't find what you need? See something you want to add to it? Create your own flashcards! Consolidate your own decks! Create your own tools to help make this community work FOR you. We are always excited to see contributions from users to improve the knowledge base day by day!</span>
 							</div>
 							<div class ="col-6">
-								Up to Date Technologies
+								<h6 class="text-center">
+										<img src="/assets/images/community_tree.png" alt="community tree" height="42" width="42">
+										Contribute to Community</h6>
+								<span>Help make this community great! Make flashcards and share with others. Connect with novice users! Provide feedback to contributors! Think you have what it takes to make this site even better? Have great ideas to share? Contact us at WebFlash@email.com and become a certified contributor to the community!</span>
 							</div>
 						</div>
-						<div class="row">
-								<div class="col-6">
-									Create Your Own
-								</div>
-								<div class ="col-6">
-									Level Up In Reputation
-								</div>
-							</div>
-					</div>
-				</main>
+			</div>
 			
-				<footer>
-					<% include ../partials/footer %>
-				</footer>
-
-
-
-	</div>
-	
-	
+			<footer>
+				<% include ../partials/footer %>
+			</footer>	
+		</div>
 </body>
 </html>

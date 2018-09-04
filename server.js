@@ -103,7 +103,7 @@ app.get('/construction', function(req, res){
 });
 
 app.get('/FAQ', function(req, res){
-  if(req.session.username)  res.render('pages/faq',{data: req.session});
+  if(req.session.username)  res.render('pages/faq',{data: [req.session]});
   else res.sendFile(path.join(__dirname, 'public/unauthorized.html'));
 });
 
