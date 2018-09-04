@@ -3,6 +3,13 @@
 <head>
     <title>Registration Form</title>
     <% include ../partials/head %>
+    <style>
+        form{
+            border: 1px gray;
+            border-style:ridge;
+            padding: 5px 10px 5px 15px;
+        }
+    </style>
 </head>
 <body>
     
@@ -11,7 +18,10 @@
         <% if (data == true){ %>
             <p>The username is taken</p>
         <% } %>
-        <h1>Register for a Web Development Flashcard Studies Account below!</h1>
+        <h1>Register for a Web Development Flashcard Studies Account!</h1>
+        <br>
+        <br>
+        
         <form>
             <div class="form-group">
             <label for="username"><b>Username</b></label>
@@ -31,7 +41,10 @@
             <br>
             <label for="password_reenter"><b>Re-Enter Password</b></label>
             <input class="repw" type="password" placeholder="Enter Password" name="password_reenter" required>
-            <br>
+            
+            <hr>
+            <span class="font-weight-light">Password must be between 8 - 16 characters in length</span>
+            <br><br>
             <button type="submit" class="btn btn-primary">Create Account!</button>
         </div>
 

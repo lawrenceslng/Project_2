@@ -43,14 +43,11 @@ footer{
     background-color: lightslategray;
     width: 100%;
     height: 50px;
+    color: white;
+    text-align: center;
 }
 .container{
     min-height: calc(100vh-50px);
 }
-/* footer span{
-    position:fixed;
-    bottom:0;
-    
 
-} */
 
