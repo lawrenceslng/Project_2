@@ -50,12 +50,6 @@ router.get('/', function(req,res){
 });
 
 router.get('/dash', function(req, res){
-    
-
-// 	connection.connect(function(err) {
-// 	  if (err) {
-// 	    console.error("error connecting: " + err.stack);
-// 	  }
 
 	    connection.query('SELECT * FROM decks WHERE users_id = ?;', [req.session.user_id], function (error, results, fields) {
         if (error) throw error;
@@ -86,33 +80,31 @@ var deckIden;
 router.get('/edit/:id', function(req,res){
     //Need to write code to check id of deck and if all params are met directs to route
     deckIden = req.params.id;
-    console.log(deckIden);
-    if(deckIden ==3){
-        connection.query('SELECT * FROM deck_cards LEFT JOIN cards ON cards_id = id', function(error, results, fields){
-            // console.log(results)
-            var front = '';
-            var cardsIden = '';
+    // console.log(deckIden);
+    
+    connection.query('SELECT * FROM cards WHERE id IN (SELECT cards_id FROM deck_cards WHERE decks_id = ?)',[req.params.id], function(error, results, fields){
+        // console.log(results)
+        var front = '';
+        var cardsIden = '';
+        if(results.length>0){
             for(var i =0; i<results.length;i++){
-                    
+                
                 front += results[i].front +'<br>'; 
                 // cardsIden += results[i].cards_id + '<br>'
             }
-            if(front !=""){
-            var split = front.split('<br>');
-            // var cardSplit = cardsIden.split('<br>');
-            // console.log(cardSplit);
-            }   
-            
-            res.render('pages/edit_decks',{
-                data: split
-                // JSON.stringify(results) 
-            });
-            })  
-    }
-    else{ 
-        res.send('Error. ')
-    }
-
+            console.log('For Loop Ran')
+        }
+        
+        console.log(front);
+        var split = front.split('<br>');
+        // var cardSplit = cardsIden.split('<br>');
+        // console.log(cardSplit); 
+        
+        
+        res.render('pages/edit_decks',{
+            data: split
+        });
+    })  
 });
 
 router.get('/edit', function(req,res){
@@ -120,10 +112,18 @@ router.get('/edit', function(req,res){
 
 })
 
-router.post('/add/:id', function(req,res){
-    connection.query('INSERT INTO decks_cards (decks_id, cards_id) VALUES (?,?);',[3,req.params.id],function(err,result,fields){
+router.get('/add/:id', function(req,res){
+    console.log(req.params.id);
+    console.log(deckIden);
+    connection.query('INSERT INTO deck_cards (decks_id, cards_id) VALUES (?,?);',[deckIden,req.params.id],function(err,result,fields){
         // console.log('successfully added card #' + req.params.id);
+        console.log(result);
+        res.redirect('/decks/edit/'+ deckIden);
     })
-})
+});
+
+// router.get('/add/:id', function(req, res){
+//     res.redirect('/')
+// });
 
 module.exports = router;

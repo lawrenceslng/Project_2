@@ -1,7 +1,7 @@
 $(document).ready(function(){
     showDecks();
     showCards();
-    // addCards();
+    // currCards();
 });
 
 function showDecks(){
@@ -39,9 +39,9 @@ function showCards(){
         }
     });
 }
-
+// '/flashcards/view_cards/deck/'
 function currCards(){
-    var address = '/edit/:id'; 
+    var address = '/decks/edit'; 
     $.ajax({
         url: address,
         method: 'GET'
