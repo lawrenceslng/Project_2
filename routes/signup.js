@@ -75,7 +75,7 @@ router.get('/', function(req, res){
               connection.query('SELECT id FROM users WHERE username = ?', [username],function (error, results, fields) {
                 if(error) throw error;
                 console.log(results[0].id);
-                connection.query('INSERT INTO userProfile (users_id, avatarPath) VALUES (?,?)', [results[0].id, avatarPath],function (error, results, fields) {
+                connection.query('INSERT INTO userProfile (users_id, avatarPath) VALUES (?,?)', [results[0].id,avatarPath],function (error, results, fields) {
                   if(error) throw error;
                 });
               
