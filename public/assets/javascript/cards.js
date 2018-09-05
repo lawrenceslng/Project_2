@@ -20,7 +20,7 @@ function updateCard(int){
 
 function fillCard (res, int){
     length = res.length;
-        console.log(res);
+        // console.log(res);
         if (length > 0){
             
             var category = $("<p>").html(res[int].category).addClass('edit ').attr('id', 'category').attr('data-cardId', res[int].id);
@@ -100,7 +100,7 @@ function doneEditText(event){
                 method: 'PUT',
                 data: dataOb
             }).then(function(res){
-                console.log(res);
+                // console.log(res);
             });
         }
     }
@@ -162,7 +162,7 @@ $(window).ready(function(){
     }
     // else if(window.location.href.indexOf('/flashcards/categories') > -1){
     // }
-    console.log(i);
+    // console.log(i);
     updateCard(i);
     fillFilter();
 
@@ -211,8 +211,8 @@ function addDeckName(urlD){
         url: urlD,
         method: 'GET'
     }).then(function(res){
-        console.log(res);
-        console.log(res[0].name);
+        // console.log(res);
+        // console.log(res[0].name);
         deckName = res[0].name;
         $('#deckName').html(`${deckName} Deck`);
         $('#editLink').attr('href', `/decks/edit/${res[0].id}`)
