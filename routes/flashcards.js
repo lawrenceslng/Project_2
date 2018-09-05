@@ -175,7 +175,7 @@ router.get('/view_cards/deck/:deckID', function(req, res){
 });
 
 router.get('/deckName/:deckID', function(req, res){
-    connection.query('SELECT name FROM decks WHERE id = ?',[req.params.deckID],function(error, results,fields){
+    connection.query('SELECT * FROM decks WHERE id = ?',[req.params.deckID],function(error, results,fields){
         if (error) throw error;
         res.json(results);
     })
@@ -184,7 +184,7 @@ router.get('/deckName/:deckID', function(req, res){
 });
 
 router.post('/add_to_deck', function(req, res){
-    console.log(req.body);
+    // console.log(req.body);
     connection.query('INSERT INTO deck_cards (decks_id, cards_id) VALUES (?, ?);', [req.body.deck_id, req.body.cards_id],function(error, deckRes, fields){
         if (error) throw error;
         // console.log(deckRes);
@@ -194,7 +194,68 @@ router.post('/add_to_deck', function(req, res){
    
 });
 
+router.get('/categories/community_cards', function(req, res){
+    res.redirect('/flashcards/all_cards');
+    
+});
 
+router.post('/categories/community_cards', function(req, res){
+    // console.log(req.body.category);
+    var cat = req.body.category
+    connection.query('DELETE FROM filterCategories WHERE users_id = ?',[req.session.user_id],function (error, results, fields) {
+        if (error) throw error;
+
+        for (var i in cat){
+            connection.query('INSERT INTO filterCategories (users_id, category) VALUES (?,?)',[req.session.user_id, cat[i]],function (error, results, fields) {
+                if (error) throw error;
+            });
+        }
+        res.render('pages/all_cards.ejs');
+    });
+});
+
+router.get('/categories/my_cards', function(req, res){
+    res.redirect('/flashcards/my_cards');
+});
+
+
+router.post('/categories/my_cards', function(req, res){
+    var cat = req.body.category
+    connection.query('DELETE FROM filterCategories WHERE users_id = ?',[req.session.user_id],function (error, results, fields) {
+        if (error) throw error;
+
+        for (var i in cat){
+            connection.query('INSERT INTO filterCategories (users_id, category) VALUES (?,?)',[req.session.user_id, cat[i]],function (error, results, fields) {
+                if (error) throw error;
+            });
+        }
+        res.render('pages/flashcards.ejs');
+    });
+});
+
+
+
+router.get('/filter/community_cards', function(req, res){
+    connection.query('SELECT * FROM cards WHERE category IN (SELECT category FROM filterCategories WHERE users_id = ?)',[req.session.user_id],function(error, results,fields){
+        if (error) throw error;
+        res.json(results);
+    })
+});
+
+
+router.get('/filter/my_cards', function(req, res){
+    connection.query('SELECT * FROM cards WHERE creator_id = ? AND category IN (SELECT category FROM filterCategories WHERE users_id = ?)',[req.session.user_id, req.session.user_id],function(error, results,fields){
+        if (error) throw error;
+        res.json(results);
+    })
+});
+
+router.get('/filter/category_names', function(req, res){
+    connection.query('SELECT category FROM filterCategories WHERE users_id = ?',[req.session.user_id],function(error, results,fields){
+        if (error) throw error;
+        res.json(results);
+    })
+});
 
 
 module.exports = router;
