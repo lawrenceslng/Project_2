@@ -122,7 +122,7 @@ router.post('/create', function(req, res){
 
 router.get('/all_cards', function(req, res){
     
-        res.render('pages/all_cards');
+        res.render('pages/all_cards', {data: [req.session]});
 });
 
 router.get('/community_cards', function(req, res){

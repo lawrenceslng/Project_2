@@ -5,21 +5,42 @@
 <!DOCTYPE html>
 <html>
 <head>
-	<title>Portal Login</title>
+    <title>Portal Login</title>
+    <link rel="stylesheet" href="https://meyerweb.com/eric/tools/css/reset/reset.css">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.2/css/bootstrap.min.css" integrity="sha384-Smlep5jCw/wG7hdkwQ/Z5nLIefveQRIY9nfy6xoR1uRYBtpZgI6339F5dgvm/e9B" crossorigin="anonymous">
+    <style>
+        body {
+            background-image: url("/assets/images/qbkls/qbkls/qbkls.png");
+            background-color: #cccccc;
+}
+        .container{
+            margin: auto;
+            margin-top: 200px;
+            width: 300px;
+        }
+        form{
+            border: 2px solid gray;
+            text-align: center;
+            padding: 10px;
+        }
+        button{
+            margin-top: 10px;
+        }
+    </style>
 </head>
 <body>
     <div class = "container">
         <form method="POST" action ="/login">
             <label for="username"><b>Username</b></label>
-            <input type="text" placeholder="Enter Username" name="username" required>
+            <input type="text" placeholder="" name="username" required>
             <br>
             <label for="password"><b>Password</b></label>
-            <input type="password" placeholder="Enter Password" name="password" required>
+            <input type="password" placeholder="" name="password" required>
             <br>
-            <button type="submit">Login</button>
-            <label>
+            <button class="btn btn-primary" type="submit">Login</button>
+            <!-- <label>
               <input type="checkbox" checked="unchecked" name="remember"> Remember me
-            </label>
+            </label> -->
 
 
         </form>

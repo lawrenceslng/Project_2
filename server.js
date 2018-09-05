@@ -77,9 +77,7 @@ app.post('/login', function(req, res){
               req.session.username = results[0].username;
               req.session.firstName = results[0].first_name;
               req.session.lastName = results[0].last_name;
-              res.redirect('/home');
-              // res.send('you are logged in:');
-              // console.log('/home/'+ req.session.username);
+              res.redirect('decks');
             }else{
               res.redirect('/login');
             }
@@ -103,7 +101,7 @@ app.get('/construction', function(req, res){
 });
 
 app.get('/FAQ', function(req, res){
-  if(req.session.username)  res.render('pages/faq',{data: req.session});
+  if(req.session.username)  res.render('pages/faq',{data: [req.session]});
   else res.sendFile(path.join(__dirname, 'public/unauthorized.html'));
 });
 
