@@ -1,8 +1,6 @@
 $(document).ready(function(){
     showDecks();
     showCards();
-    // currCards();
-    
 });
 
 function showDecks(){
