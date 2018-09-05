@@ -9,6 +9,10 @@
             border-style:ridge;
             padding: 5px 10px 5px 15px;
         }
+        img{
+            width: 125px;
+            height: 150px;
+        }
     </style>
 </head>
 <body>
@@ -22,8 +26,10 @@
         <br>
         <br>
         
+            
         <form>
-            <div class="form-group">
+            <div class="form-group row">
+                <div class="col-8">
             <label for="username"><b>Username</b></label>
             <input type="text" placeholder="Enter Username" name="username" required>
             <br>
@@ -41,19 +47,69 @@
             <br>
             <label for="password_reenter"><b>Re-Enter Password</b></label>
             <input class="repw" type="password" placeholder="Enter Password" name="password_reenter" required>
-            
             <hr>
             <span class="font-weight-light">Password must be between 8 - 16 characters in length</span>
             <br><br>
-            <button type="submit" class="btn btn-primary">Create Account!</button>
+            <button id="createAccount" type="submit" class="btn btn-primary">Create Account!</button>
         </div>
+        <div class="col-4">
+            <div class="card" style="width: 18rem;">
+                    <img class="card-img-top" src="/assets/images/avatars/boy-1.png" alt="Card image cap">
+                    <div class="card-body">
+                      <h5 class="card-title">Card title</h5>
+                      <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+                      <button class = "btn btn-primary" type="button" data-toggle="modal" data-target="#avatar">Choose Avatar</button>
+                      <!-- Modal -->
+                      <div id="avatar" class="modal fade" role="dialog">
+                              <div class="modal-dialog modal-lg">
+                              
+                                <!-- Modal content-->
+                                <div class="modal-content">
+                                  <div class="modal-header">
+                                      <h1>Pick an Avatar!</h1>
+                                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                                    
+                                  </div>
+                                  <div class="modal-body">
+                                      
+                                        <img src = "/assets/images/avatars/boy-1.png" alt="boy-1">
+                                        <img src = "/assets/images/avatars/boy.png" alt="boy">
+                                        <img src = "/assets/images/avatars/girl-1.png" alt="girl-1">
+                                        <img src = "/assets/images/avatars/girl.png" alt="girl">
+                                        <img src = "/assets/images/avatars/man-1.png" alt="man-1">
+                                        <img src = "/assets/images/avatars/man-2.png" alt="man-2">
+                                        <img src = "/assets/images/avatars/man-3.png" alt="man-3">
+                                        <img src = "/assets/images/avatars/man-4.png" alt="man-4">
+                                        <img src = "/assets/images/avatars/man.png" alt="man">
 
-        </form>
+                                    </div>
+                                    <div class="modal-footer">
+                                            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                                            <button type="submit" class="btn btn-default bionext">Next</button>
+                                    </div>
+                                </div>
+                            
+                              </div>
+                            </div>
+      
+                    </div>
+                </div>
+            </div>
+        </div>
+    </form>
+
+        
+    <!-- </div> -->
+   
     </div>
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js"     integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49"     crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.2/js/bootstrap.min.js" integrity="sha384-o+RDsa0aLu++PJvFqy8fFScvbHFLtbvScb8AjopnFD+iEQ7wo/CG0xlczd+2O/em" crossorigin="anonymous"></script>
+    <% include ../partials/script %>
+    <!-- <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script> -->
     <script type="text/javascript">
       //on click of submit button, javascript checks whether password is between 8 - 16 characters long
-        $("button").on("click",function(event){
+        $("#createAccount").on("click",function(event){
             event.preventDefault();
             var PW = $(".pw").val();
             var RePW = $(".repw").val();
