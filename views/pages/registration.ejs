@@ -56,8 +56,8 @@
             <div class="card" style="width: 18rem;">
                     <img class="card-img-top" src="/assets/images/avatars/boy-1.png" alt="Card image cap">
                     <div class="card-body">
-                      <h5 class="card-title">Card title</h5>
-                      <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+                      <h5 class="card-title">Pick an Avatar</h5>
+                      <!-- <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p> -->
                       <button class = "btn btn-primary" type="button" data-toggle="modal" data-target="#avatar">Choose Avatar</button>
                       <!-- Modal -->
                       <div id="avatar" class="modal fade" role="dialog">
@@ -108,6 +108,7 @@
     <!-- <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script> -->
     <script type="text/javascript">
       //on click of submit button, javascript checks whether password is between 8 - 16 characters long
+      var path;
         $("#createAccount").on("click",function(event){
             event.preventDefault();
             if($("#username").val() == "" || $("#firstName").val() == "" || $("#lastName").val() == "" || $("#email").val() == "" || $("#pw").val() == "" || $("#repq").val() == "")
@@ -151,8 +152,7 @@
     $(".avatarSubmit").on("click",function(event){
         event.preventDefault();
         console.log($(this).context.attributes.src.nodeValue);
-        var path = $(this).context.attributes.src.nodeValue;
-
+        path = $(this).context.attributes.src.nodeValue;
     })
 
  
