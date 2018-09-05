@@ -42,10 +42,8 @@ var connection = mysql.createConnection({
 var collection = []; 
 
 router.get('/', function(req,res){
-    res.render('pages/decks')
-    , {
-        data: req
-    }
+    res.render('pages/decks',{
+        data: [req.session]});
     console.log(module.filename);
 });
 

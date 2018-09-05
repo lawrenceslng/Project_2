@@ -32,9 +32,9 @@ h2{
 .content.active{
     width: 100%;
 }
-textarea{
+/* textarea{
     align-content: center;
-}
+} */
 /* main{
     height:auto;
     display: flex;
