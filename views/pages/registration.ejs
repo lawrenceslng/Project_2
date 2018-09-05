@@ -47,6 +47,8 @@
             <br>
             <label for="password_reenter"><b>Re-Enter Password</b></label>
             <input id="repw"  class="repw" type="password" placeholder="Enter Password" name="password_reenter" required>
+            <label for="profileAvatar"><b>profileAvatar</b></label>
+            <input id="av" class="av" type="text" placeholder="profileAvatarPath" name="profileAvatar" style="width: 250px;"></span> 
             <hr>
             <span class="font-weight-light">Password must be between 8 - 16 characters in length</span>
             <br><br>
@@ -54,10 +56,12 @@
         </div>
         <div class="col-4">
             <div class="card" style="width: 18rem;">
-                    <img class="card-img-top" src="/assets/images/avatars/boy-1.png" alt="Card image cap">
+                    <img class="card-img-top" src="/assets/images/avatars/boy-1.png" alt="Card image cap" style="width:130px;height:150px;">
                     <div class="card-body">
                       <h5 class="card-title">Pick an Avatar</h5>
-                      <!-- <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p> -->
+                       <span class="card-text">
+                           <!-- <label for="profileAvatar"><b>profileAvatar</b></label>
+                            <input id="profileAvatar" class="profileAvatar" type="text" placeholder="profileAvatarPath" name="profileAvatar" disabled style="width: 250px;"></span>  -->
                       <button class = "btn btn-primary" type="button" data-toggle="modal" data-target="#avatar">Choose Avatar</button>
                       <!-- Modal -->
                       <div id="avatar" class="modal fade" role="dialog">
@@ -71,8 +75,16 @@
                                     
                                   </div>
                                   <div class="modal-body">
-                                        <input type="image" class="avatarSubmit" alt="Login" data-dismiss="modal" src="/assets/images/avatars/boy-1.png" >
-                                        <img src = "/assets/images/avatars/boy-1.png" alt="boy-1">
+                                        <img type="image" class="avatarSubmit" alt="Login" data-dismiss="modal" src="/assets/images/avatars/boy-1.png" style="width:125px;height:150px;">
+                                        <img type="image" class="avatarSubmit" alt="Login" data-dismiss="modal" src="/assets/images/avatars/boy.png" style="width:125px;height:150px;">
+                                        <img type="image" class="avatarSubmit" alt="Login" data-dismiss="modal" src="/assets/images/avatars/girl-1.png" style="width:125px;height:150px;">
+                                        <img type="image" class="avatarSubmit" alt="Login" data-dismiss="modal" src="/assets/images/avatars/girl.png" style="width:125px;height:150px;">
+                                        <img type="image" class="avatarSubmit" alt="Login" data-dismiss="modal" src="/assets/images/avatars/man-1.png" style="width:125px;height:150px;">
+                                        <img type="image" class="avatarSubmit" alt="Login" data-dismiss="modal" src="/assets/images/avatars/man-2.png"style="width:125px;height:150px;" >
+                                        <img type="image" class="avatarSubmit" alt="Login" data-dismiss="modal" src="/assets/images/avatars/man-3.png" style="width:125px;height:150px;">
+                                        <img type="image" class="avatarSubmit" alt="Login" data-dismiss="modal" src="/assets/images/avatars/man-4.png"style="width:125px;height:150px;">
+                                        <img type="image" class="avatarSubmit" alt="Login" data-dismiss="modal" src="/assets/images/avatars/man.png" style="width:125px;height:150px;">
+                                        <!-- <img src = "/assets/images/avatars/boy-1.png" alt="boy-1">
                                         <img src = "/assets/images/avatars/boy.png" alt="boy">
                                         <img src = "/assets/images/avatars/girl-1.png" alt="girl-1">
                                         <img src = "/assets/images/avatars/girl.png" alt="girl">
@@ -80,8 +92,8 @@
                                         <img src = "/assets/images/avatars/man-2.png" alt="man-2">
                                         <img src = "/assets/images/avatars/man-3.png" alt="man-3">
                                         <img src = "/assets/images/avatars/man-4.png" alt="man-4">
-                                        <img src = "/assets/images/avatars/man.png" alt="man">
-
+                                        <img src = "/assets/images/avatars/man.png" alt="man"> -->
+                                        
                                     </div>
                                     <div class="modal-footer">
                                             <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
@@ -116,7 +128,7 @@
                 alert("must fill out all fields");
             }
             else{
-
+            //get path and post it along with other form info and upload path to userProfile table
             
             var PW = $(".pw").val();
             var RePW = $(".repw").val();
@@ -153,6 +165,9 @@
         event.preventDefault();
         console.log($(this).context.attributes.src.nodeValue);
         path = $(this).context.attributes.src.nodeValue;
+        //set a new src path for the card img so the img reflects what was picked
+        $(".card-img-top").attr("src",path);
+        $("#av").val(path);
     })
 
  
