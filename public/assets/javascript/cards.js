@@ -127,12 +127,13 @@ function switchCards(){
 $(window).ready(function(){
     // window.location.href returns the href (URL) of the current page
     // setting the URL request for ajax query based on the href of the current page
-    if (window.location.href.split('/flashcards/')[1] == 'all_cards'){
+    var hrefLocation = window.location.href.split('/flashcards/')[1];
+    if (hrefLocation == 'all_cards'){
         URL = '/flashcards/community_cards';
         fillURL = '/flashcards/fill';
         deckName = 'Community';
         $('#deckName').html(`${deckName} Deck`);
-    }else if(window.location.href.split('/flashcards/')[1] == "my_cards" ){
+    }else if(hrefLocation == "my_cards" ){
         URL = '/flashcards/view_all_my_cards';
         fillURL = '/flashcards/fill_user';
         $(document).on('click', '.edit', editText);
@@ -144,6 +145,20 @@ $(window).ready(function(){
         URL = '/flashcards/view_cards/deck/'+ deckID;
         var nameURL = '/flashcards/deckName/' + deckID;
         addDeckName(nameURL);
+    }
+    else if(hrefLocation == 'categories/community_cards'){
+        URL = '/flashcards/filter/community_cards';
+        fillURL = '/flashcards/fill';
+        deckName = 'Filtered Community Cards Deck';
+        filterDeckName(deckName);
+        
+    }
+    else if(hrefLocation == 'categories/my_cards'){
+        URL = '/flashcards/filter/my_cards';
+        fillURL = '/flashcards/fill_user';
+        deckName = 'Filtered My Cards Deck';
+        filterDeckName(deckName);
+        
     }
     // else if(window.location.href.indexOf('/flashcards/categories') > -1){
     // }
@@ -171,6 +186,25 @@ $('.flashcard').on('click', function(){
     $('.flashcard').toggleClass('is-flipped');
 });
 
+function filterDeckName(deckName){
+    var generalTitle = deckName;
+    $.ajax({
+        url: '/flashcards/filter/category_names',
+        method: 'GET'
+    }).then(function(res){
+        selectedCat = "";
+        for (var i in res){
+            if (i != res.length-1){
+                selectedCat += res[i].category + " , "
+            }
+            else{
+                selectedCat += res[i].category 
+            }
+        }
+        $('#deckName').html(`${generalTitle} <br> <h3> Categories: ${selectedCat} </h3>`);
+    });
+}
+
 function addDeckName(urlD){
 
     $.ajax({
@@ -181,6 +215,7 @@ function addDeckName(urlD){
         console.log(res[0].name);
         deckName = res[0].name;
         $('#deckName').html(`${deckName} Deck`);
+        $('#editLink').attr('href', `/decks/edit/${res[0].id}`)
     });
 
 }
@@ -206,9 +241,5 @@ function fillFilter(){
 
 }
 
-// function newCards(){
-//     URL = '/flashcards/categories/community_cards';
-//     i= 0;
-//     updateCard(i);
-// }
+
 
