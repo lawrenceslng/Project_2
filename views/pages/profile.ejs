@@ -20,6 +20,8 @@
         <% include ../partials/SideBar %>
 			
         <div class = "content">
+            <div class="row">
+                <div class = "col-6">
         <form method="POST" action="/profile/update">
             <label for="username"><b>Username</b></label>
             <input type="text" name="username" value="<%=data[0].username%>" disabled>
@@ -70,6 +72,14 @@
                           </div>
                 <h6>Insert a short biography to tell other users who you are:</h6>
                 <textarea id = "bio" name="biography" rows="5" cols="60" disabled><%=data[1]%></textarea>
+            </div><!-- end div for 1st col-->
+                <!-- div for profile image -->
+                
+                <div class="profileImage col-6">
+                        <img src = "<%=data[2]%>" style="width:130px; height:150px">
+
+                    </div>
+                </div> <!-- end div for row-->
                 <!-- Buttons -->
                 <hr>
                 <button type="button" data-toggle="modal" data-target="#bioUpdate">Update Bio</button>
@@ -99,7 +109,8 @@
                           </div>
     
         
-                        
+                
+
 
 
         </div>

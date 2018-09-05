@@ -49,7 +49,7 @@ app.get('/', function(req, res) {
 });
 app.get('/home', function(req, res) {
   // res.sendFile(path.join(__dirname, 'public/home.html'));
-  if(req.session.username)   res.render('pages/decks', {data: req.session.username});
+  if(req.session.username)   res.render('pages/decks', {data: [req.session]});
   else res.render('pages/index');
 });
 app.get('/login', function(req, res) {
@@ -85,11 +85,7 @@ app.post('/login', function(req, res){
       }
     });
   });
-// app.get('/home/:username', function(req, res) {
-//   if(req.session.username)   res.render('pages/decks', {data: req.params.username});
-//   else  res.sendFile(path.join(__dirname, 'public/unauthorized.html'));
-//   // console.log(req.session.username);
-// });
+
 app.get('/logout', function(req, res){
   req.session.destroy(function(err){
     res.redirect("/home");
@@ -115,20 +111,6 @@ app.use('/decks', deckRoutes);
 app.use('/signup', signupRoutes);
 app.use('/profile',profileRoutes);
 
-
-    // console.log(results[0]);
-    // console.log("logged in");
-    // res.redirect('/home');
-
-// app.get('/user-info', function(req, res){
-//   var user_info = {
-//     user_id : req.session.user_id,
-//     email: req.session.email
-//   }
-
-//   res.json(user_info);
-// });
-
 app.post('/bio', function(req, res){
     console.log(req.body);
         connection.query('UPDATE userProfile SET biography = ? WHERE users_id = ? ;', [req.body.biography,req.session.user_id],function(error, results, fields){
@@ -137,18 +119,5 @@ app.post('/bio', function(req, res){
         });
         res.redirect("/home");
       });
-    
-
-
-
-
-//Uncomment below to enable routing
-// var questionRoutes = require('./routes/questions.js');
-// // var commentRoutes = require('./routes/comments.js');
-// var classmateRoutes = require('./routes/classmates.js');
-
-
-// app.use('/questions', questionRoutes);
-
 
 app.listen(3000);

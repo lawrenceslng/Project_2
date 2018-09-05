@@ -42,10 +42,10 @@ var connection = mysql.createConnection({
 router.get('/', function(req, res){
     console.log(req.session);
     if(req.session.username) {
-        connection.query('SELECT biography FROM userProfile WHERE users_id = ? ;', [req.session.user_id],function(error, results, fields){
+        connection.query('SELECT biography, avatarPath FROM userProfile WHERE users_id = ? ;', [req.session.user_id],function(error, results, fields){
             if (error) throw error;
             console.log(results[0]);
-            res.render('pages/profile', {data: [req.session, results[0].biography]});
+            res.render('pages/profile', {data: [req.session, results[0].biography, results[0].avatarPath]});
             // console.log(data);
         });
     }
