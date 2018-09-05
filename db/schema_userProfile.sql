@@ -8,6 +8,3 @@ CREATE TABLE userProfile(
 	PRIMARY KEY (id),
 	FOREIGN KEY (users_id) REFERENCES users(id)
 );
-
-INSERT INTO userProfile(users_id, biography)
-VALUES (17, "");

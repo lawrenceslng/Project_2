@@ -144,7 +144,6 @@ $(window).ready(function(){
         URL = '/flashcards/view_cards/deck/'+ deckID;
         var nameURL = '/flashcards/deckName/' + deckID;
         addDeckName(nameURL);
-        
     }
     // else if(window.location.href.indexOf('/flashcards/categories') > -1){
     // }
