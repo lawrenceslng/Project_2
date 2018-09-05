@@ -47,17 +47,18 @@
             <br>
             <label for="password_reenter"><b>Re-Enter Password</b></label>
             <input id="repw"  class="repw" type="password" placeholder="Enter Password" name="password_reenter" required>
-            <label for="profileAvatar"><b>profileAvatar</b></label>
-            <input id="av" class="av" type="text" placeholder="profileAvatarPath" name="profileAvatar" style="width: 250px;"></span> 
+            <label class="d-none" for="profileAvatar"><b>profileAvatar</b></label>
+            <input id="av" class="av d-none" type="text" placeholder="profileAvatarPath" name="profileAvatar" style="width: 250px;"></span> 
             <hr>
             <span class="font-weight-light">Password must be between 8 - 16 characters in length</span>
             <br><br>
             <button id="createAccount" type="submit" class="btn btn-primary">Create Account!</button>
         </div>
         <div class="col-4">
-            <div class="card" style="width: 18rem;">
+            <div class="card" style="width: 15rem;">
+                    <div class="card-body mx-auto">
                     <img class="card-img-top" src="/assets/images/avatars/boy-1.png" alt="Card image cap" style="width:130px;height:150px;">
-                    <div class="card-body">
+                    
                       <h5 class="card-title">Pick an Avatar</h5>
                        <span class="card-text">
                            <!-- <label for="profileAvatar"><b>profileAvatar</b></label>
