@@ -49,7 +49,7 @@ router.get('/my_cards', function(req,res){
 })
 
 router.put('/edit', function(req, res){
-    console.log(req.body);
+    // console.log(req.body);
 
     if(req.body.front){
         connection.query('UPDATE cards SET front = ? WHERE id = ?', [req.body.front, req.body.id],function(error, results, fields){
@@ -105,12 +105,12 @@ router.post('/create', function(req, res){
     if(req.session.user_id && req.body.category && req.body.front && req.body.back && req.body.difficulty && req.body.deck_id){
         connection.query('INSERT INTO cards (creator_id, category, front, back, difficulty) VALUES (?,?, ?, ?, ?);', [req.session.user_id, req.body.category, req.body.front, req.body.back, req.body.difficulty],function(error, results, fields){
             if (error) throw error;
-            console.log(results);
-            console.log(results.insertId);
+            // console.log(results);
+            // console.log(results.insertId);
         
             connection.query('INSERT INTO deck_cards (decks_id, cards_id) VALUES (?, ?);', [req.body.deck_id, results.insertId],function(error, deckRes, fields){
                 if (error) throw error;
-                console.log(deckRes);
+                // console.log(deckRes);
                 res.redirect('/flashcards/new_card');
             })       
         })
