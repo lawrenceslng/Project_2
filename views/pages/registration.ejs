@@ -4,6 +4,10 @@
     <title>Registration Form</title>
     <% include ../partials/head %>
     <style>
+         body {
+            background-image: url("/assets/images/qbkls/qbkls/qbkls.png");
+            background-color: #cccccc;
+         }
         form{
             border: 1px gray;
             border-style:ridge;
@@ -17,30 +21,29 @@
             margin-top: 1rem;
         }
         .card {
-  position: relative;
-  width: 50%;
-}
-        .card-img-top {
-  display: block;
-  width: 100%;
-  height: auto;
-}
-        .overlay {
-  position: absolute;
-  top: 0;
-  bottom: 0;
-  left: 0;
-  right: 0;
-  height: 100%;
-  width: 100%;
-  opacity: 0;
-  transition: .5s ease;
-  background-color: #008CBA;
-}
-        .card:hover .overlay {
-        opacity: 1;
+            position: relative;
+            width: 50%;
         }
-
+        .card-img-top {
+            display: block;
+            width: 100%;
+            height: auto;
+        }
+        .overlay {
+            position: absolute;
+            top: 0;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            height: 100%;
+            width: 100%;
+            opacity: 0;
+            transition: .5s ease;
+            background-color: #008CBA;
+        }
+        .card:hover .overlay {
+            opacity: 1;
+        }
         .text {
             color: white;
             font-size: 20px;
@@ -52,6 +55,9 @@
             transform: translate(-50%, -50%);
             text-align: center;
         }
+        .alert{
+            text-align: center;
+        }
     </style>
 </head>
 <body>
@@ -59,7 +65,7 @@
     <div class = "container align-items-center">
         <!-- errors go here -->
         <% if (data == true){ %>
-            <p>The username is taken</p>
+            <p class="alert d-none">The username is taken</p>
         <% } %>
         <h1>Register for a Web Development Flashcard Studies Account!</h1>
         <br>
@@ -153,6 +159,7 @@
     <script type="text/javascript">
       //on click of submit button, javascript checks whether password is between 8 - 16 characters long
       var path;
+      console.log($(".alert").length);
         $("#createAccount").on("click",function(event){
             event.preventDefault();
             if($("#username").val() == "" || $("#firstName").val() == "" || $("#lastName").val() == "" || $("#email").val() == "" || $("#pw").val() == "" || $("#repq").val() == "")
@@ -202,6 +209,10 @@
         $("#av").val(path);
     })
 
+    if($(".alert").length)
+    {
+        alert("Username is taken, pick another Username");
+    }
  
     </script>
 
