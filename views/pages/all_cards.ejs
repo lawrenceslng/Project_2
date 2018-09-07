@@ -1,21 +1,21 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <% include ../partials/head %>
+	<% include ../partials/head %>
+	
 </head>
 <body class="container-fluid">
 
 	<header>
 		<% include ../partials/headerLoggedIn %>
-		
-	</header>
 	
+	</header>
+		<% include ../partials/navbar_sidebar%>
 	<main>
-		<% include ../partials/sidebar %>
 		<% include ../partials/deck_header %>
 		<div class="container-fluid">
-				<form action="/flashcards/categories/community_cards" method ="POST" class="filterCards">
-					<label>Filter Based on Topic:<label>
+				<form action="/flashcards/categories/community_cards" method ="POST" class="filterCards text-center">
+					<label>Filter Based on Topic:<label> <br>
 						<div class="checkboxes">
 		
 						</div>
@@ -36,6 +36,7 @@
 	<% include ../partials/script %>
 	<script src = "/assets/javascript/create_new_card.js"></script>
 	
+
 	
 </body>
 </html>
