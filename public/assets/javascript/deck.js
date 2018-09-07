@@ -20,7 +20,6 @@ function showDecks(){
             var spinnerView = $('<div>').attr('class', 'spin').append(viewDeck);
             var spinnerEdit = $('<div>').attr('class', 'spin').append(editDeck);
             var newDiv = $('<div>').attr('class','box').append(nametag, spinnerView, spinnerEdit);
-            
             $('.deckHolder').append(newDiv);
         }
     });
