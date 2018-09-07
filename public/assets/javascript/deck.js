@@ -1,6 +1,7 @@
 $(document).ready(function(){
     showDecks();
     showCards();
+    toggleBubbles();
 });
 
 function showDecks(){
@@ -15,9 +16,9 @@ function showDecks(){
                 var deckName = res[i].name;
                 var viewDeck = $('<a>').attr('href','/flashcards/deck/' + res[i].id).text('  view deck'); 
                 var editDeck = $('<a>').attr('href','/decks/edit/' + res[i].id).text('  edit deck'); 
-                var newLi = $('<li>').append(deckName, viewDeck, editDeck);
+                var newDiv = $('<div>').attr('class','p-2 bd-highlight').append(deckName, viewDeck, editDeck);
                
-                $('.deckHolder').append(newLi);
+                $('.deckHolder').append(newDiv);
         }
     });
 }
@@ -39,3 +40,9 @@ function showCards(){
     });
 }
 
+function toggleBubbles() {
+    $('#toggle').on('click', function() {
+        $('.speech-bubble').toggle();
+        $('.speech-bubble-t2').toggle();
+    })
+};
