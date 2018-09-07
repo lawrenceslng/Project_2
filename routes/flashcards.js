@@ -45,7 +45,7 @@ router.get('/', function(req, res){
 });
 
 router.get('/my_cards', function(req,res){
-    res.render('pages/flashcards');
+    res.render('pages/flashcards', {data: [req.session]});
 })
 
 router.put('/edit', function(req, res){
@@ -96,7 +96,7 @@ router.get('/view_all_my_cards', function(req, res){
 
 
 router.get('/new_card', function(req, res){
-    res.render('pages/create_cards');
+    res.render('pages/create_cards', {data: [req.session]});
 
 })
 
@@ -162,7 +162,7 @@ router.get('/deck/:id', function(req,res){
             
         }
         else{
-            res.render('pages/cards_in_deck');
+            res.render('pages/cards_in_deck', {data: [req.session]});
         }
     })
 });
@@ -212,7 +212,7 @@ router.post('/categories/community_cards', function(req, res){
                 if (error) throw error;
             });
         }
-        res.render('pages/all_cards.ejs');
+        res.render('pages/all_cards.ejs', {data: [req.session]});
     });
 });
 
@@ -231,7 +231,7 @@ router.post('/categories/my_cards', function(req, res){
                 if (error) throw error;
             });
         }
-        res.render('pages/flashcards.ejs');
+        res.render('pages/flashcards.ejs', {data: [req.session]});
     });
 });
 
