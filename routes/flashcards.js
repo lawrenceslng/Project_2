@@ -45,7 +45,7 @@ router.get('/', function(req, res){
 });
 
 router.get('/my_cards', function(req,res){
-    res.render('pages/flashcards');
+    res.render('pages/flashcards', {data: [req.session]});
 })
 
 router.put('/edit', function(req, res){
@@ -96,23 +96,25 @@ router.get('/view_all_my_cards', function(req, res){
 
 
 router.get('/new_card', function(req, res){
-    res.render('pages/create_cards');
+    res.render('pages/create_cards', {data: [req.session]});
 
 })
 
 router.post('/create', function(req, res){
     // console.log(req.body);
-    if(req.session.user_id && req.body.category && req.body.front && req.body.back && req.body.difficulty && req.body.deck_id){
+    if(req.session.user_id && req.body.category && req.body.front && req.body.back && req.body.difficulty){
         connection.query('INSERT INTO cards (creator_id, category, front, back, difficulty) VALUES (?,?, ?, ?, ?);', [req.session.user_id, req.body.category, req.body.front, req.body.back, req.body.difficulty],function(error, results, fields){
             if (error) throw error;
             // console.log(results);
             // console.log(results.insertId);
-        
-            connection.query('INSERT INTO deck_cards (decks_id, cards_id) VALUES (?, ?);', [req.body.deck_id, results.insertId],function(error, deckRes, fields){
-                if (error) throw error;
-                // console.log(deckRes);
-                res.redirect('/flashcards/new_card');
-            })       
+            if(req.body.deck_id){
+                connection.query('INSERT INTO deck_cards (decks_id, cards_id) VALUES (?, ?);', [req.body.deck_id, results.insertId],function(error, deckRes, fields){
+                    if (error) throw error;
+                    // console.log(deckRes);
+                    
+                }) 
+            } 
+            res.redirect('/flashcards/new_card');     
         })
     }
     else{
@@ -127,7 +129,7 @@ router.get('/all_cards', function(req, res){
 
 router.get('/community_cards', function(req, res){
     
-    connection.query('SELECT * FROM cards',function (error, results, fields) {
+    connection.query('SELECT * FROM cards ORDER BY id DESC',function (error, results, fields) {
         if (error) throw error;
         res.json(results);
     });
@@ -160,7 +162,7 @@ router.get('/deck/:id', function(req,res){
             
         }
         else{
-            res.render('pages/cards_in_deck');
+            res.render('pages/cards_in_deck', {data: [req.session]});
         }
     })
 });
@@ -210,7 +212,7 @@ router.post('/categories/community_cards', function(req, res){
                 if (error) throw error;
             });
         }
-        res.render('pages/all_cards.ejs');
+        res.render('pages/all_cards.ejs', {data: [req.session]});
     });
 });
 
@@ -229,7 +231,7 @@ router.post('/categories/my_cards', function(req, res){
                 if (error) throw error;
             });
         }
-        res.render('pages/flashcards.ejs');
+        res.render('pages/flashcards.ejs', {data: [req.session]});
     });
 });
 

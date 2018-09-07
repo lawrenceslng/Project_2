@@ -3,22 +3,26 @@
 <head>
     <% include ../partials/head %>
 </head>
-<body class="container">
+<body class="container-fluid">
 
 	<header>
 		<% include ../partials/headerLoggedIn %>
 	</header>
+        <% include ../partials/navbar_sidebar%>
 
 	<main>
-        
-        <div class="container">
-            <form method = "POST" action="/flashcards/create">
+        <div class="center jumbotron py-2">
+            <h1>Create a New Flashcard</h1>
+        </div>
+
+        <div class="container-fluid center">
+            <form method = "POST" action="/flashcards/create" id="createCardForm" class="card d-inline-block p-5 mb-4">
                 <ul>
-                    <li><label>Category:</label><input type="text" name="category" placeholder="Enter Category ex. HTML"></li>
-                    <li><label>Question:</label><textarea type="text" name ="front" placeholder="Front of Card"></textarea></li>
-                    <li><label>Answer:</label><textarea type="text" name ="back" placeholder="Back of Card"></textarea></li> 
+                    <li><label class="mr-3 pb-3">Topic:</label><input type="text" name="category" placeholder="Enter Topic ex. HTML" class="catInput"></li>
+                    <li class="pb-2"><label class="mr-3 pb-1 question">Question:</label><br><textarea type="text" name ="front" placeholder="Front of Card" class="textarea"></textarea></li>
+                    <li class="pb-2"><label class="mr-3 pb-1 answer">Answer:</label><br><textarea type="text" name ="back" placeholder="Back of Card" class="textarea"></textarea></li> 
                     <li><label>Select Difficulty:<label>
-                        <select name="difficulty">
+                        <select class="ml-3 pb-3" name="difficulty">
                             <option name="difficulty" value="Easy">Easy</option>
                             <option name="difficulty" value="Medium">Medium</option>
                             <option name="difficulty" value="Hard">Hard</option>
@@ -26,7 +30,7 @@
                     <% include ../partials/add_card_to_deck %>
                 </ul>
 
-                <button>Submit</button>
+                <button class="btn btn-primary">Submit</button>
             </form>
         </div>
 

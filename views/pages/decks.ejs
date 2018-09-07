@@ -8,6 +8,7 @@
 	<header>
 		<% include ../partials/headerLoggedIn %>    
 	</header>
+  
     <!--This is where the bubble animation is housed-->
     <ul class= "bubble">
             <li></li>
@@ -31,12 +32,18 @@
             <li></li>
             <li></li>
     </ul>
-<main>
-    <div class="container-fluid">
-        <div class="row">
-            <div class="col-md-2">
-            <% include ../partials/SideBar %>
-            </div>
+
+		<% include ../partials/navbar_sidebar%>
+
+
+	<main>
+
+		<div class="row">
+
+
+        <div class="jumbotron">
+                <h1>This is your deck information</h1>
+        </div>
             <div class="col-md-6 cards">
             <div class="decks"> 
             </div>
