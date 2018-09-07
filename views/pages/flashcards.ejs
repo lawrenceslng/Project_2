@@ -13,18 +13,32 @@
 
 	<% include ../partials/navbar_sidebar%>
 
+	<input type="checkbox" id="sidebartogglerFilter">
+
+		<div class="page-wrap">
+
+			<label for="sidebartogglerFilter" id= "tabFilter" class="toggle"><div id="plus">+</div></label>
+
+		
+			<div class="sidebarFilter">
+				<div class="container-fluid">
+						<form action="/flashcards/categories/my_cards" method ="POST" class="filterCards text-left">
+							<label><h5> Filter Based on Topic:</h5></label> <br>
+								<div class="checkboxes pb-4">
+				
+								</div>
+							<button class="btn btn-warning">Submit</button>
+						</form>
+				</div>
+				
+			</div>
+
+		</div>
+
 
 	<main>
 		<% include ../partials/deck_header %>
-		<div class="container-fluid">
-				<form action="/flashcards/categories/my_cards" method ="POST" class="text-center">
-					<h6>Filter Based on Topic:<h6>
-						<div class="checkboxes">
 		
-						</div>
-					<button>Submit</button>
-				</form>
-		</div>
         <h5>Double Click on the flashcard text to edit and hit return/enter when done editing the cell</h5>
 		<% include ../partials/card %>
 
