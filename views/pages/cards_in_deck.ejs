@@ -3,17 +3,17 @@
 <head>
     <% include ../partials/head %>
 </head>
-<body class="container">
+<body class="container-fluid">
 
 	<header>
 
-			<% include ../partials/headerLoggedIn %>
+		<% include ../partials/headerLoggedIn %>
 
-		<% include ../partials/deck_header %>
 	</header>
 	
-
+	<% include ../partials/navbar_sidebar%>
 	<main>
+		<% include ../partials/deck_header %>
 		<% include ../partials/card %>
 		<div class="container-fluid center" id='editDeck'>
 				<a class="btn-btn-dark" href="/flashcards/new_card">Create New Cards to add to this deck</a> <br>
