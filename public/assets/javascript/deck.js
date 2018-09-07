@@ -12,13 +12,15 @@ function showDecks(){
     }).then(function(res){
         //res is the array of objects for my decks
         var length = res.length
-            for(var i = 0; i<length;i++){
-                var deckName = res[i].name;
-                var viewDeck = $('<a>').attr('href','/flashcards/deck/' + res[i].id).text('  view deck'); 
-                var editDeck = $('<a>').attr('href','/decks/edit/' + res[i].id).text('  edit deck'); 
-                var newDiv = $('<div>').attr('class','p-2 bd-highlight').append(deckName, viewDeck, editDeck);
-               
-                $('.deckHolder').append(newDiv);
+        for(var i = 0; i<length;i++){
+            var deckName = res[i].name;
+            var nametag = $('<div>').attr('class', 'nametag').text(deckName);
+            var viewDeck = $('<a>').attr('href','/flashcards/deck/' + res[i].id).text('View');
+            var editDeck = $('<a>').attr('href','/decks/edit/' + res[i].id).text('Edit'); 
+            var spinnerView = $('<div>').attr('class', 'spin').append(viewDeck);
+            var spinnerEdit = $('<div>').attr('class', 'spin').append(editDeck);
+            var newDiv = $('<div>').attr('class','box').append(nametag, spinnerView, spinnerEdit);
+            $('.deckHolder').append(newDiv);
         }
     });
 }
@@ -34,7 +36,6 @@ function showCards(){
             var cardFront = res[i].front;
             var add = $('<a>').attr('href','/decks/add/'+ res[i].id).text('[+]');
             var newDiv = $('<div>').text('Card # ' + res[i].id + ' : ').append(cardFront, add);
-            
             $('#availCards').append(newDiv);
         }
     });
