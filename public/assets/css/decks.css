@@ -84,7 +84,7 @@ input{
     position: absolute;
     top: 0;
     left: 0;
-    width: 80%;
+    width: 100%;
     height: 100%;
     z-index: 0; 
     transform: translateZ(0);
@@ -95,7 +95,7 @@ input{
     list-style: none; 
     display: block;
     background-color:#FFFFFF; 
-    bottom: -100px; 
+    bottom: -150px; 
     animation: square 20s infinite; 
     transition-timing-function: linear;
 }
@@ -240,7 +240,7 @@ input{
     height: 75px; 
     left: 95%; 
     animation-delay: 10s; 
-    animation-duration: 65s;
+    animation-duration: 35s;
 }
 
 .bubble :nth-child(19){
@@ -256,7 +256,7 @@ input{
     height: 100px; 
     left: 110%; 
     animation-delay: 20s; 
-    animation-duration: 60s;
+    animation-duration: 20s;
 }
 
 @keyframes square{
@@ -266,12 +266,12 @@ input{
     }
 
     100% {
-        -webkit-transform: translateY(-1080px) rotate(680deg);
+        -webkit-transform: translateY(calc(-1080px)) rotate(680deg);
         transform: translateY(-1080px) rotate(680deg);
     }
 }
 
-body{
+main{
     background-color:#F0F8FF;
     z-index: 1; 
 }
@@ -279,8 +279,4 @@ body{
 nav{
     z-index:1;
 }
-
-/* footer {
-    z-index:1;
-} */
 
