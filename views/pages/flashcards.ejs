@@ -1,19 +1,24 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <% include ../partials/head %>
+	<% include ../partials/head %>
+	
 </head>
 <body class="container-fluid">
 
 	<header>
 		<% include ../partials/headerLoggedIn %>
-		<% include ../partials/deck_header %>
+
 	</header>
 
+	<% include ../partials/navbar_sidebar%>
+
+
 	<main>
+		<% include ../partials/deck_header %>
 		<div class="container-fluid">
-				<form action="/flashcards/categories/my_cards" method ="POST">
-					<label>Filter Based on Topic:<label>
+				<form action="/flashcards/categories/my_cards" method ="POST" class="text-center">
+					<h6>Filter Based on Topic:<h6>
 						<div class="checkboxes">
 		
 						</div>
@@ -22,11 +27,14 @@
 		</div>
         <h5>Double Click on the flashcard text to edit and hit return/enter when done editing the cell</h5>
 		<% include ../partials/card %>
-		<form action="/flashcards/add_to_deck" method="POST" id='addCardDeck'>
-			<% include ../partials/add_card_to_deck %>
-			<input type="hidden" name ="cards_id" id="card_deck">
-		<button>Submit</button>
-		</form>
+
+			<form action="/flashcards/add_to_deck" method="POST" id='addCardDeck' class="text-left">
+				<% include ../partials/add_card_to_deck %>
+				<input type="hidden" name ="cards_id" id="card_deck">
+				<button>Submit</button>
+			</form>
+
+
 	</main>
 
 	<footer>
@@ -34,5 +42,7 @@
 	</footer>
 	<% include ../partials/script %>
 	<script src = "/assets/javascript/create_new_card.js"></script>
+
+
 </body>
 </html>
