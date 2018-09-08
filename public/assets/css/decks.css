@@ -1,22 +1,116 @@
-/* .deckHolder{
-    
-    height: 30rem;
-    min-height: fit-content;
-    width: 80%;
-    margin: 0 auto;
-    border: 1px black solid;
-} */
+* {
+    box-sizing: border-box;
+}
 
-/* .decks{
-    margin-top: 5rem;
-} */
+.deckHolder{
+    margin: auto;
+}
 
-input{
+/* input{
     margin-top: 1rem;
+    top: 50%;
+    left: 50%;
+} */
+
+.form{ 
+    align-content: center;
+}
+
+.check{
+    display: inline-block;
 }
 
 .card{
     margin: 2rem;
+}
+
+main{
+    background-color:#F0F8FF;
+    z-index: 1; 
+}
+
+h3 {
+    margin-top: 25px;
+    text-align: center;
+}
+
+nav{
+    z-index:1;
+}
+
+.box{
+    width: 200px;
+    height: 200px;
+    background-color: whitesmoke;
+    display: block;
+    float: left;
+    margin: 6.5px;
+}
+
+.box ul{
+    margin: 0;
+    padding: 0;
+    text-align: center;
+    position: relative;
+    top: 40%;
+    transform: translateY(-40%);
+ } 
+
+.nametag{
+    margin:  auto;
+    width: 150px;
+    position: relative;
+    text-align: center;
+    display: block;
+    top: 25%;
+    transform: translateY(-25%);
+}
+
+.spin{ 
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    background: #eee;
+    display: inline-block;
+    margin: 10px;
+}
+
+.spin a{
+    text-align: center;
+    position: relative;
+    top: 25%;
+    transform: translateY(-25%); 
+
+} 
+
+.spin::before{
+    content: '';
+    display: block;
+    border-radius: 50%;
+    position: absolute;
+    height: 50px;
+    width: 50px;
+    border:2px solid transparent;
+    border-top-color: blue;
+    border-bottom-color: blue;
+    animation: spinner 4s linear infinite;
+    animation-play-state: running;
+}
+
+/* .running{
+    animation-play-state: running;
+} */
+
+@keyframes spinner {
+    0% {
+        transform: rotate(0deg)scale(1);
+    }
+    50% {
+        transform: rotate(180deg)scale(1.4);
+    }
+    100%{
+        transform: rotate(360deg)scale(1);
+    }
 }
 
 /* .speech-bubble {
@@ -76,7 +170,7 @@ input{
 #locater-sb2 { position: absolute; visibility: visible; left: -650px; top: 425px; height: 100px; width: 150px; z-index: 200; }
 #locater-sb3 { position: absolute; visibility: visible; left: -150px; top: 50px; height: 100px; width: 150px; z-index: 200; } */
 
-.hover:hover {
+.spin:hover {
     background-color: red;
 }
 
@@ -266,42 +360,8 @@ input{
     }
 
     100% {
-        -webkit-transform: translateY(calc(-1080px)) rotate(680deg);
-        transform: translateY(-1080px) rotate(680deg);
+        -webkit-transform: translateY(calc(-720px)) rotate(680deg);
+        transform: translateY(-720px) rotate(680deg);
     }
 }
 
-main{
-    background-color:#F0F8FF;
-    z-index: 1; 
-}
-
-nav{
-    z-index:1;
-}
-
-.box{
-    width: 200px;
-    height: 200px;
-    border: 5px;
-    background-color: whitesmoke;
-    float: left;
-    display: block;
-    margin-top: 5px;
-    margin-left: auto;
-    margin-right: auto;
-    text-align: center;
-    /* position: absolute; */
-}
-
-.spin{ 
-    width: 50px;
-    height: 50px;
-    border-radius: 50%;
-    background: #eee;
-    position: relative; 
-    display: inline-block;
-    text-align: center;
-    vertical-align: middle;
-    margin: auto;
-}
