@@ -2,13 +2,27 @@
 <html>
 <head>
     <title>Registration Form</title>
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://meyerweb.com/eric/tools/css/reset/reset.css">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+    <style>
+    body{
+        height: 100vh;
+        background-image: url("/assets/images/qbkls/qbkls/qbkls.png");
+        background-color: #cccccc;
+    }
+    img{
+        width: 250px;
+        height:450px;
+    }
+    </style>
 </head>
 <body>
-    <div class = "container">
+    <div class = "container text-center">
         <h1>Whoops! Looks like you are trying to access a restricted page!</h1>
+        <img src="assets/images/restricted.jpeg">
         <h2>Click below button to login!</h2>
-        <a href="/login">Login</a>
+        <a href="/home"><button class="btn btn-primary">Home</button></a>
+        <a href="/login"><button class="btn btn-primary">Login</button></a>  
     </div>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
     <script type="text/javascript">

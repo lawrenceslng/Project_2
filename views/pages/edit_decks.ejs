@@ -23,10 +23,11 @@
                 <div class="col" id="currCards">
                 <h2>Current Cards</h2>
                 <div>
-                    <% for(var i =0; i<data.length; i++) { %> 
-                        <ul><%= phrase[i] %><a href= '/decks/delete/<%=data[i]%>'>
-                        [x]
-                        </a></ul>
+                    <% for(var i =0; i<random.length; i++) { %> 
+                        <ul>
+                            <%= phrase[i] %>
+                            <a href= '/decks/delete/<%=random[i]%>'>[x]</a>
+                        </ul>
                     <% } %>
                 </div>
                 </div>

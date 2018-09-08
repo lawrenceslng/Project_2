@@ -81,18 +81,22 @@ router.get('/edit/:id', function(req,res){
 
         //First for loop separates the array of objects and combines it into a long string
         var front = '';
-        console.log('this is front' + JSON.stringify(results));
+        // console.log('this is front' + JSON.stringify(results));
         if(results.length>0){
             for(var i =0; i<results.length;i++) {
                 front += results[i].id +'/'+  results[i].front+'<br>';
             }
         }
         //splitID then splits the long string and puts it into an array
+        console.log(front);
         
         var splitID = front.split('<br>');
         var phrase =[]; 
         var iden =[];
-
+        splitID.splice(splitID.length-1, 1);
+        // console.log(phrase);
+        // console.log(iden);
+        // console.log(splitID);
         //For loop separates the cardIden and question, pushes it to an array, and allows EJS to create ul for each position of the array
         if(splitID){
             for(var s =0; s<splitID.length; s++){
@@ -104,8 +108,10 @@ router.get('/edit/:id', function(req,res){
                 iden.push(num);
             }
         }   
+        console.log(phrase);
         res.render('pages/edit_decks', {
-            data: iden,
+            data: [req.session],
+            random: iden,
             phrase: phrase
         });
     })  

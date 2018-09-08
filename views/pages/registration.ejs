@@ -4,6 +4,10 @@
     <title>Registration Form</title>
     <% include ../partials/head %>
     <style>
+         body {
+            background-image: url("/assets/images/qbkls/qbkls/qbkls.png");
+            background-color: #cccccc;
+         }
         form{
             border: 1px gray;
             border-style:ridge;
@@ -13,6 +17,47 @@
             width: 125px;
             height: 150px;
         }
+        .form-group{
+            margin-top: 1rem;
+        }
+        .card {
+            position: relative;
+            width: 50%;
+        }
+        .card-img-top {
+            display: block;
+            width: 100%;
+            height: auto;
+        }
+        .overlay {
+            position: absolute;
+            top: 0;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            height: 100%;
+            width: 100%;
+            opacity: 0;
+            transition: .5s ease;
+            background-color: #008CBA;
+        }
+        .card:hover .overlay {
+            opacity: 1;
+        }
+        .text {
+            color: white;
+            font-size: 20px;
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            -webkit-transform: translate(-50%, -50%);
+            -ms-transform: translate(-50%, -50%);
+            transform: translate(-50%, -50%);
+            text-align: center;
+        }
+        .alert{
+            text-align: center;
+        }
     </style>
 </head>
 <body>
@@ -20,7 +65,7 @@
     <div class = "container align-items-center">
         <!-- errors go here -->
         <% if (data == true){ %>
-            <p>The username is taken</p>
+            <p class="alert d-none">The username is taken</p>
         <% } %>
         <h1>Register for a Web Development Flashcard Studies Account!</h1>
         <br>
@@ -29,7 +74,7 @@
             
         <form>
             <div class="form-group row">
-                <div class="col-8">
+                <div class="col-7">
             <label for="username"><b>Username</b></label>
             <input id="username" type="text" placeholder="Enter Username" name="username" required>
             <br>
@@ -54,16 +99,18 @@
             <br><br>
             <button id="createAccount" type="submit" class="btn btn-primary">Create Account!</button>
         </div>
-        <div class="col-4">
-            <div class="card" style="width: 15rem;">
+        <div class="col-5 my-auto">
+            <div class="card mx-auto" style="width: 15rem;">
                     <div class="card-body mx-auto">
-                    <img class="card-img-top" src="/assets/images/avatars/boy-1.png" alt="Card image cap" style="width:130px;height:150px;">
-                    
-                      <h5 class="card-title">Pick an Avatar</h5>
+                    <img class="card-img-top" src="https://via.placeholder.com/130x150" alt="Card image cap" style="width:130px;height:150px;">
+                    <div class="overlay">
+                            <div class="text"><button class = "overlay-btn btn btn-primary" type="button" data-toggle="modal" data-target="#avatar">Choose Avatar</button></div>
+                    </div>
+                      <h5 class="card-title">Profile Avatar</h5>
                        <span class="card-text">
                            <!-- <label for="profileAvatar"><b>profileAvatar</b></label>
                             <input id="profileAvatar" class="profileAvatar" type="text" placeholder="profileAvatarPath" name="profileAvatar" disabled style="width: 250px;"></span>  -->
-                      <button class = "btn btn-primary" type="button" data-toggle="modal" data-target="#avatar">Choose Avatar</button>
+                      <!-- <button class = "btn btn-primary" type="button" data-toggle="modal" data-target="#avatar">Choose Avatar</button> -->
                       <!-- Modal -->
                       <div id="avatar" class="modal fade" role="dialog">
                               <div class="modal-dialog modal-lg">
@@ -84,17 +131,7 @@
                                         <img type="image" class="avatarSubmit" alt="Login" data-dismiss="modal" src="/assets/images/avatars/man-2.png"style="width:125px;height:150px;" >
                                         <img type="image" class="avatarSubmit" alt="Login" data-dismiss="modal" src="/assets/images/avatars/man-3.png" style="width:125px;height:150px;">
                                         <img type="image" class="avatarSubmit" alt="Login" data-dismiss="modal" src="/assets/images/avatars/man-4.png"style="width:125px;height:150px;">
-                                        <img type="image" class="avatarSubmit" alt="Login" data-dismiss="modal" src="/assets/images/avatars/man.png" style="width:125px;height:150px;">
-                                        <!-- <img src = "/assets/images/avatars/boy-1.png" alt="boy-1">
-                                        <img src = "/assets/images/avatars/boy.png" alt="boy">
-                                        <img src = "/assets/images/avatars/girl-1.png" alt="girl-1">
-                                        <img src = "/assets/images/avatars/girl.png" alt="girl">
-                                        <img src = "/assets/images/avatars/man-1.png" alt="man-1">
-                                        <img src = "/assets/images/avatars/man-2.png" alt="man-2">
-                                        <img src = "/assets/images/avatars/man-3.png" alt="man-3">
-                                        <img src = "/assets/images/avatars/man-4.png" alt="man-4">
-                                        <img src = "/assets/images/avatars/man.png" alt="man"> -->
-                                        
+                                        <img type="image" class="avatarSubmit" alt="Login" data-dismiss="modal" src="/assets/images/avatars/man.png" style="width:125px;height:150px;">                                
                                     </div>
                                     <div class="modal-footer">
                                             <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
@@ -122,6 +159,7 @@
     <script type="text/javascript">
       //on click of submit button, javascript checks whether password is between 8 - 16 characters long
       var path;
+      console.log($(".alert").length);
         $("#createAccount").on("click",function(event){
             event.preventDefault();
             if($("#username").val() == "" || $("#firstName").val() == "" || $("#lastName").val() == "" || $("#email").val() == "" || $("#pw").val() == "" || $("#repq").val() == "")
@@ -171,6 +209,10 @@
         $("#av").val(path);
     })
 
+    if($(".alert").length)
+    {
+        alert("Username is taken, pick another Username");
+    }
  
     </script>
 
