@@ -20,7 +20,7 @@ body {
 
 #tabFilter{
   background-color: coral;
-  position: absolute;
+  position: fixed;
   top: 110px;
   z-index: 2;
 }
