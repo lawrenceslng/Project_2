@@ -236,13 +236,22 @@ router.post('/categories/community_cards', function(req, res){
     var cat = req.body.category
     connection.query('DELETE FROM filterCategories WHERE users_id = ?',[req.session.user_id],function (error, results, fields) {
         if (error) throw error;
-
-        for (var i in cat){
-            connection.query('INSERT INTO filterCategories (users_id, category) VALUES (?,?)',[req.session.user_id, cat[i]],function (error, results, fields) {
+        if(typeof cat == 'string'){
+            connection.query('INSERT INTO filterCategories (users_id, category) VALUES (?,?)',[req.session.user_id, cat],function (error, results, fields) {
                 if (error) throw error;
             });
+            res.render('pages/all_cards.ejs', {data: [req.session]});
         }
-        res.render('pages/all_cards.ejs', {data: [req.session]});
+        else{
+            for (var i in cat){
+                connection.query('INSERT INTO filterCategories (users_id, category) VALUES (?,?)',[req.session.user_id, cat[i]],function (error, results, fields) {
+                    if (error) throw error;
+                });
+            }
+            res.render('pages/all_cards.ejs', {data: [req.session]});
+        }
+       
+        
     });
 });
 
