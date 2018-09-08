@@ -75,44 +75,44 @@
         <form>
             <div class="form-group row">
                 <div class="col-7">
-            <label for="username"><b>Username</b></label>
-            <input id="username" type="text" placeholder="Enter Username" name="username" required>
-            <br>
-            <label for="first_name"><b>First Name</b></label>
-            <input id="firstName" type="text" placeholder="Enter your first name" name="first_name" required>
-            <br>
-            <label for="last_name"><b>Last Name</b></label>
-            <input id="lastName" type="text" placeholder="Enter your last name" name="last_name" required>
-            <br>
-            <label for="email"><b>Email</b></label>
-            <input id="email" type="email" placeholder="Enter Email" name="email" required>
-            <br>
-            <label for="password"><b>Password</b></label>
-            <input id="pw" class="pw" type="password" placeholder="Enter Password" name="password" required>
-            <br>
-            <label for="password_reenter"><b>Re-Enter Password</b></label>
-            <input id="repw"  class="repw" type="password" placeholder="Enter Password" name="password_reenter" required>
-            <label class="d-none" for="profileAvatar"><b>profileAvatar</b></label>
-            <input id="av" class="av d-none" type="text" placeholder="profileAvatarPath" name="profileAvatar" style="width: 250px;"></span> 
-            <hr>
-            <span class="font-weight-light">Password must be between 8 - 16 characters in length</span>
-            <br><br>
-            <button id="createAccount" type="submit" class="btn btn-primary">Create Account!</button>
-        </div>
-        <div class="col-5 my-auto">
-            <div class="card mx-auto" style="width: 15rem;">
-                    <div class="card-body mx-auto">
-                    <img class="card-img-top" src="https://via.placeholder.com/130x150" alt="Card image cap" style="width:130px;height:150px;">
-                    <div class="overlay">
-                            <div class="text"><button class = "overlay-btn btn btn-primary" type="button" data-toggle="modal" data-target="#avatar">Choose Avatar</button></div>
-                    </div>
-                      <h5 class="card-title">Profile Avatar</h5>
-                       <span class="card-text">
+                    <label for="username"><b>Username</b></label>
+                    <input id="username" type="text" placeholder="Enter Username" name="username" required>
+                    <br>
+                    <label for="first_name"><b>First Name</b></label>
+                    <input id="firstName" type="text" placeholder="Enter your first name" name="first_name" required>
+                    <br>
+                    <label for="last_name"><b>Last Name</b></label>
+                    <input id="lastName" type="text" placeholder="Enter your last name" name="last_name" required>
+                    <br>
+                    <label for="email"><b>Email</b></label>
+                    <input id="email" type="email" placeholder="Enter Email" name="email" required>
+                    <br>
+                    <label for="password"><b>Password</b></label>
+                    <input id="pw" class="pw" type="password" placeholder="Enter Password" name="password" required>
+                    <br>
+                    <label for="password_reenter"><b>Re-Enter Password</b></label>
+                    <input id="repw"  class="repw" type="password" placeholder="Enter Password" name="password_reenter"         required>
+                    <label class="d-none" for="profileAvatar"><b>profileAvatar</b></label>
+                    <input id="av" class="av d-none" type="text" placeholder="profileAvatarPath" name="profileAvatar"       style="width: 250px;"></span> 
+                    <hr>
+                    <span class="font-weight-light">Password must be between 8 - 16 characters in length</span>
+                    <br><br>
+                    <button id="createAccount" type="submit" class="btn btn-primary">Create Account!</button>
+                </div>
+                <div class="col-5 my-auto">
+                    <div class="card mx-auto" style="width: 15rem;">
+                        <div class="card-body mx-auto">
+                            <img class="card-img-top" src="https://via.placeholder.com/130x150" alt="Card image cap"    style="width:130px;height:150px;">
+                        <div class="overlay">
+                                <div class="text"><button class = "overlay-btn btn btn-primary" type="button"   data-toggle="modal" data-target="#avatar">Choose Avatar</button></div>
+                        </div>
+                    <h5 class="card-title">Profile Avatar</h5>
+                    <span class="card-text">
                            <!-- <label for="profileAvatar"><b>profileAvatar</b></label>
                             <input id="profileAvatar" class="profileAvatar" type="text" placeholder="profileAvatarPath" name="profileAvatar" disabled style="width: 250px;"></span>  -->
                       <!-- <button class = "btn btn-primary" type="button" data-toggle="modal" data-target="#avatar">Choose Avatar</button> -->
                       <!-- Modal -->
-                      <div id="avatar" class="modal fade" role="dialog">
+                    <div id="avatar" class="modal fade" role="dialog">
                               <div class="modal-dialog modal-lg">
                               
                                 <!-- Modal content-->
@@ -123,15 +123,55 @@
                                     
                                   </div>
                                   <div class="modal-body">
-                                        <img type="image" class="avatarSubmit" alt="Login" data-dismiss="modal" src="/assets/images/avatars/boy-1.png" style="width:125px;height:150px;">
-                                        <img type="image" class="avatarSubmit" alt="Login" data-dismiss="modal" src="/assets/images/avatars/boy.png" style="width:125px;height:150px;">
-                                        <img type="image" class="avatarSubmit" alt="Login" data-dismiss="modal" src="/assets/images/avatars/girl-1.png" style="width:125px;height:150px;">
-                                        <img type="image" class="avatarSubmit" alt="Login" data-dismiss="modal" src="/assets/images/avatars/girl.png" style="width:125px;height:150px;">
-                                        <img type="image" class="avatarSubmit" alt="Login" data-dismiss="modal" src="/assets/images/avatars/man-1.png" style="width:125px;height:150px;">
-                                        <img type="image" class="avatarSubmit" alt="Login" data-dismiss="modal" src="/assets/images/avatars/man-2.png"style="width:125px;height:150px;" >
-                                        <img type="image" class="avatarSubmit" alt="Login" data-dismiss="modal" src="/assets/images/avatars/man-3.png" style="width:125px;height:150px;">
-                                        <img type="image" class="avatarSubmit" alt="Login" data-dismiss="modal" src="/assets/images/avatars/man-4.png"style="width:125px;height:150px;">
-                                        <img type="image" class="avatarSubmit" alt="Login" data-dismiss="modal" src="/assets/images/avatars/man.png" style="width:125px;height:150px;">                                
+                                      <div class = "row">
+                                        <div class = "col-3">
+                                                <img type="image" class="avatarSubmit" alt="Login" data-dismiss="modal" src="/assets/images/avatars/boy-1.png" style="width:125px;height:150px;">
+                                        </div>
+                                        <div class = "col-3">
+                                                <img type="image" class="avatarSubmit" alt="Login" data-dismiss="modal" src="/assets/images/avatars/boy.png" style="width:125px;height:150px;">
+
+                                        </div>
+                                        <div class = "col-3">
+                                                <img type="image" class="avatarSubmit" alt="Login" data-dismiss="modal" src="/assets/images/avatars/girl-1.png" style="width:125px;height:150px;">
+                                            
+                                        </div>
+                                        <div class = "col-3">
+                                                <img type="image" class="avatarSubmit" alt="Login" data-dismiss="modal" src="/assets/images/avatars/girl.png" style="width:125px;height:150px;">
+                                            
+                                        </div>
+                                        <!-- <div class = "col-3">
+                                                <img type="image" class="avatarSubmit" alt="Login" data-dismiss="modal" src="/assets/images/avatars/man-1.png" style="width:125px;height:150px;">
+                                            
+                                        </div> -->
+                                        
+                                      </div>
+                                      <div class = "row">
+                                        <div class = "col-3">
+                                                <img type="image" class="avatarSubmit" alt="Login" data-dismiss="modal" src="/assets/images/avatars/man-2.png"style="width:125px;height:150px;" >
+
+                                        </div>
+                                        <div class = "col-3">
+                                                <img type="image" class="avatarSubmit" alt="Login" data-dismiss="modal" src="/assets/images/avatars/man-3.png" style="width:125px;height:150px;">
+                                            
+                                        </div>
+                                        <div class = "col-3">
+                                                <img type="image" class="avatarSubmit" alt="Login" data-dismiss="modal" src="/assets/images/avatars/man-4.png"style="width:125px;height:150px;">
+                                            
+                                            </div>
+                                            <div class = "col-3">
+                                                    <img type="image" class="avatarSubmit" alt="Login" data-dismiss="modal" src="/assets/images/avatars/man.png" style="width:125px;height:150px;">   
+                                            
+                                                </div>
+
+                                      </div>
+                                        
+                                        
+                                       
+                                       
+                                       
+                                        
+                                        
+                                                                    
                                     </div>
                                     <div class="modal-footer">
                                             <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
