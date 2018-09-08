@@ -1,32 +1,54 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <% include ../partials/head %>
+	<% include ../partials/head %>
+	
 </head>
 <body class="container-fluid">
 
 	<header>
 		<% include ../partials/headerLoggedIn %>
-		<% include ../partials/deck_header %>
+
 	</header>
 
-	<main>
-		<div class="container-fluid">
-				<form action="/flashcards/categories/my_cards" method ="POST">
-					<label>Filter Based on Topic:<label>
-						<div class="checkboxes">
+	<% include ../partials/navbar_sidebar%>
+
+	<input type="checkbox" id="sidebartogglerFilter">
+
+		<div class="page-wrap">
+
+			<label for="sidebartogglerFilter" id= "tabFilter" class="toggle"><div id="plus">+</div></label>
+
 		
-						</div>
-					<button>Submit</button>
-				</form>
+			<div class="sidebarFilter">
+				<div class="container-fluid">
+						<form action="/flashcards/categories/my_cards" method ="POST" class="filterCards text-left">
+							<label><h5> Filter Based on Topic:</h5></label> <br>
+								<div class="checkboxes pb-4">
+				
+								</div>
+							<button class="btn btn-warning">Submit</button>
+						</form>
+				</div>
+				
+			</div>
+
 		</div>
+
+
+	<main>
+		<% include ../partials/deck_header %>
+		
         <h5>Double Click on the flashcard text to edit and hit return/enter when done editing the cell</h5>
 		<% include ../partials/card %>
-		<form action="/flashcards/add_to_deck" method="POST" id='addCardDeck'>
-			<% include ../partials/add_card_to_deck %>
-			<input type="hidden" name ="cards_id" id="card_deck">
-		<button>Submit</button>
-		</form>
+
+			<form action="/flashcards/add_to_deck" method="POST" id='addCardDeck' class="text-left">
+				<% include ../partials/add_card_to_deck %>
+				<input type="hidden" name ="cards_id" id="card_deck">
+				<button>Submit</button>
+			</form>
+
+
 	</main>
 
 	<footer>
@@ -34,5 +56,7 @@
 	</footer>
 	<% include ../partials/script %>
 	<script src = "/assets/javascript/create_new_card.js"></script>
+
+
 </body>
 </html>

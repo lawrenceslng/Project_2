@@ -36,9 +36,12 @@ function fillCard (res, int){
         }
         else{
             $('main').hide();
-            var noCards = $('<h4>').html('You have no cards in this deck.')
-            var createCards = $('<a>').attr('href', '/flashcards/new_card').html('Create Cards and Add them to this deck');
-            $('body').append(noCards, createCards);
+            var newDiv = $('<div>').addClass('center');
+            var noCards = $('<h2>').html('You have no cards in this deck').addClass('mb-4')
+            var createCards = $('<a>').attr('href', '/flashcards/new_card').html('Create New Cards').addClass('createCards');
+            $(newDiv).append(noCards, createCards)
+            $('body').append(newDiv);
+            $('.footer , .sidebarFilter, #sidebartogglerFilter, #tabFilter').hide();
         }
 }
  
@@ -226,7 +229,7 @@ function fillFilter(){
         method: 'GET'
     }).then(function(response){
         for(var i = 0 ; i < response.length; i++ ){
-            var checkDiv = $('<div>').addClass("form-check form-check-inline");
+            var checkDiv = $('<div>').addClass("form-check");
             var input = $('<input>').addClass('form-check-input').attr({
                 type: "checkbox", 
                 name: "category",
