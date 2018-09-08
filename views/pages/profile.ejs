@@ -4,7 +4,13 @@
     <% include ../partials/head %>
     <style>
     .content{
-        margin-left: 350px;
+        /* margin-left: 350px; */
+        width: auto;
+        margin-left: 100px;
+        margin-right: 100px;
+    }
+    .profileImage{
+
     }
     </style>
 </head>
@@ -37,6 +43,7 @@
             <br>
             <label for="email"><b>Email</b></label>
             <input type="email" name="email" value="<%=data[0].email%>" required>
+            <br>
             <br>
             <button class="btn btn-primary" type="submit">Update Email Address</button>
         </form>
@@ -73,6 +80,7 @@
                           
                             </div>
                           </div>
+                        
                 <h6>Insert a short biography to tell other users who you are:</h6>
                 <textarea id = "bio" name="biography" rows="5" cols="60" disabled><%=data[1]%></textarea>
             </div><!-- end div for 1st col-->
@@ -80,11 +88,12 @@
                 
                 <div class="profileImage col-6">
                         <img src = "<%=data[2]%>" style="width:130px; height:150px">
-
+                        
                     </div>
                 </div> <!-- end div for row-->
                 <!-- Buttons -->
                 <hr>
+                <div class="row col-1">
                 <button class = "btn btn-primary" type="button" data-toggle="modal" data-target="#bioUpdate">Update Bio</button>
                     <!-- Modal -->
                     <div id="bioUpdate" class="modal fade" role="dialog">
@@ -110,6 +119,7 @@
                           
                             </div>
                           </div>
+                        </div>
     
         
                 
