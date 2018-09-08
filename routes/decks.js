@@ -76,9 +76,9 @@ var deckIden;
 router.get('/edit/:id', function(req,res){
     
     deckIden = req.params.id;
-    
+    console.log("database Connection");
     connection.query('SELECT * FROM cards WHERE id IN (SELECT cards_id FROM deck_cards WHERE decks_id = ?)',[req.params.id], function(error, results, fields){
-
+        
         //First for loop separates the array of objects and combines it into a long string
         var front = '';
         // console.log('this is front' + JSON.stringify(results));
@@ -88,7 +88,7 @@ router.get('/edit/:id', function(req,res){
             }
         }
         //splitID then splits the long string and puts it into an array
-        console.log(front);
+        console.log("FRONT: " + front);
         
         var splitID = front.split('<br>');
         var phrase =[]; 
@@ -108,7 +108,7 @@ router.get('/edit/:id', function(req,res){
                 iden.push(num);
             }
         }   
-        console.log(phrase);
+        console.log("PHRASE: " + phrase);
         res.render('pages/edit_decks', {
             data: [req.session],
             random: iden,

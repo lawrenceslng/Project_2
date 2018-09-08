@@ -74,7 +74,8 @@ app.post('/login', function(req, res){
         req.session.username = results[0].username;
         req.session.firstName = results[0].first_name;
         req.session.lastName = results[0].last_name;
-        res.redirect('decks');
+        // res.redirect('decks');
+        res.render('pages/decks', {data: [req.session]});
       }
       else{
         res.redirect('/login');
