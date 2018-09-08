@@ -33,6 +33,7 @@ function fillCard (res, int){
               }
             $('.front').append(category, front, cardNum);
             $('.back').append(back, difficulty);
+            $('#delete_card_id').attr('value', res[int].id);
         }
         else{
             $('main').hide();
@@ -141,7 +142,7 @@ $(window).ready(function(){
         fillURL = '/flashcards/fill_user';
         $(document).on('click', '.edit', editText);
         deckName =  "My Cards"
-        $('#deckName').html(`${deckName} Deck`);
+        $('#deckName').html(`${deckName} Deck <h3> All the cards I have created </h3>`);
     }
     else if(window.location.href.indexOf('/flashcards/deck/') > -1){
         var deckID = window.location.href.split('/deck/')[1]
