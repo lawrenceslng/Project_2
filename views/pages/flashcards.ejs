@@ -5,7 +5,7 @@
 	
 </head>
 <body class="container-fluid">
-
+	<!-- My Cards Deck -->
 	<header>
 		<% include ../partials/headerLoggedIn %>
 
@@ -17,7 +17,7 @@
 
 		<div class="page-wrap">
 
-			<label for="sidebartogglerFilter" id= "tabFilter" class="toggle"><div id="plus">+</div></label>
+			<label for="sidebartogglerFilter" id= "tabFilter" class="toggle"><div id="plus">+</div><p id="filterLabel">FILTER</p></label>
 
 		
 			<div class="sidebarFilter">
@@ -42,11 +42,48 @@
         <h5>Double Click on the flashcard text to edit and hit return/enter when done editing the cell</h5>
 		<% include ../partials/card %>
 
-			<form action="/flashcards/add_to_deck" method="POST" id='addCardDeck' class="text-left">
+		<div class="container d-flex align-items-center justify-content-center w-60 my-4">
+			<form action="/flashcards/add_to_deck" method="POST" id='addCardDeck' class="text-left mr-auto">
 				<% include ../partials/add_card_to_deck %>
-				<input type="hidden" name ="cards_id" id="card_deck">
-				<button>Submit</button>
+				<input type="hidden" name ="cards_id" id="card_deck"> <br>
+				<button class="btn btn-success">Submit</button>
 			</form>
+
+			<!-- Button to Open the Modal -->
+			<button type="button" class="btn btn-danger ml-auto" data-toggle="modal" data-target="#deleteModal" id="deleteModalButton">
+					Delete This Card
+			</button>
+			
+			<!-- The Modal -->
+			<div class="modal" id="deleteModal">
+				<div class="modal-dialog">
+				<div class="modal-content">
+			
+					<!-- Modal Header -->
+					<div class="modal-header">
+						<h4 class="modal-title"></h4>
+						<button type="button" class="close" data-dismiss="modal">&times;</button>
+					</div>
+			
+					<!-- Modal body -->
+					<div class="modal-body">
+						<h4>Are you sure you want to permanently delete this card?</h4>
+					</div>
+			
+					<!-- Modal footer -->
+					<div class="modal-footer">
+						<form action= "/flashcards/delete_my_card" method="POST" id="deleteMyCard">
+							<input type="hidden" name = "id" id = "delete_card_id">
+							<button class="btn btn-danger">Delete Card</button>
+						</form>
+
+						<button type="button" class="btn btn-success" data-dismiss="modal">Cancel</button>
+					</div>
+			
+				</div>
+				</div>
+			</div>
+		</div>
 
 
 	</main>

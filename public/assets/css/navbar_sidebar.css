@@ -20,14 +20,14 @@ body {
 
 #tabFilter{
   background-color: coral;
-  position: absolute;
+  position: fixed;
   top: 110px;
   z-index: 2;
 }
 
 #plus{
-  margin-top: 10px;
-  margin-left: 15px;
+  margin-top: 2px;
+  margin-left: 12px;
   transition: all .7s ease-in-out;
 }
 
@@ -131,4 +131,18 @@ main.active {
 
 .filterCards{
   color: black;
+}
+
+#menuLabel, #filterLabel{
+  writing-mode: vertical-rl;
+  text-orientation: upright;
+  font-size: 12px;
+  margin-left: 11px;
+  visibility: hidden;
+  opacity: 0;
+}
+
+#tab:hover #menuLabel, #tabFilter:hover #filterLabel{
+  visibility: visible;
+  opacity: 1;
 }

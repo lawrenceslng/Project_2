@@ -39,13 +39,22 @@ var connection = mysql.createConnection({
 });
 
 router.get('/', function(req, res){
-	 res.redirect('/flashcards/my_cards')   
-    
+    if(req.session.user_id){
+        res.redirect('/flashcards/my_cards') 
+    }
+    else{
+        res.redirect('/')
+    }  
 
 });
 
 router.get('/my_cards', function(req,res){
-    res.render('pages/flashcards', {data: [req.session]});
+    if(req.session.user_id){
+        res.render('pages/flashcards', {data: [req.session]});
+    }
+    else{
+        res.redirect('/')
+    } 
 })
 
 router.put('/edit', function(req, res){
@@ -96,7 +105,12 @@ router.get('/view_all_my_cards', function(req, res){
 
 
 router.get('/new_card', function(req, res){
-    res.render('pages/create_cards', {data: [req.session]});
+    if(req.session.user_id){
+        res.render('pages/create_cards', {data: [req.session]});
+    }
+    else{
+        res.redirect('/')
+    }
 
 })
 
@@ -123,8 +137,13 @@ router.post('/create', function(req, res){
 });
 
 router.get('/all_cards', function(req, res){
-    
+
+    if(req.session.user_id){
         res.render('pages/all_cards', {data: [req.session]});
+    }
+    else{
+        res.redirect('/')
+    } 
 });
 
 router.get('/community_cards', function(req, res){
@@ -153,18 +172,24 @@ router.get('/fill_user', function(req,res){
 
 
 router.get('/deck/:id', function(req,res){
-    connection.query('SELECT * FROM decks WHERE id = ? AND users_id = ?;',[req.params.id, req.session.user_id], function (error, results, fields){
-        // console.log(results.length);
-        if (error) throw error;
+    if(req.session.user_id){
+        connection.query('SELECT * FROM decks WHERE id = ? AND users_id = ?;',[req.params.id, req.session.user_id], function (error, results, fields){
+            // console.log(results.length);
+            if (error) throw error;
 
-        else if(!results.length){
-            res.render('pages/invalid_deck');
-            
-        }
-        else{
-            res.render('pages/cards_in_deck', {data: [req.session]});
-        }
-    })
+            else if(!results.length){
+                res.render('pages/invalid_deck');
+                
+            }
+            else{
+                res.render('pages/cards_in_deck', {data: [req.session]});
+            }
+        })
+    }
+    else{
+        res.redirect('/')
+    } 
+
 });
 
 router.get('/view_cards/deck/:deckID', function(req, res){
@@ -197,7 +222,12 @@ router.post('/add_to_deck', function(req, res){
 });
 
 router.get('/categories/community_cards', function(req, res){
-    res.redirect('/flashcards/all_cards');
+    if(req.session.user_id){
+        res.redirect('/flashcards/all_cards');
+    }
+    else{
+        res.redirect('/')
+    }
     
 });
 
@@ -217,7 +247,12 @@ router.post('/categories/community_cards', function(req, res){
 });
 
 router.get('/categories/my_cards', function(req, res){
-    res.redirect('/flashcards/my_cards');
+    if(req.session.user_id){
+        res.redirect('/flashcards/my_cards');
+    }
+    else{
+        res.redirect('/') 
+    }
 });
 
 
@@ -257,6 +292,18 @@ router.get('/filter/category_names', function(req, res){
         if (error) throw error;
         res.json(results);
     })
+});
+
+router.post('/delete_my_card', function(req, res){
+
+    connection.query('DELETE FROM deck_cards WHERE cards_id = ?', [req.body.id], function(error, results,fields){
+        if (error) throw error;
+        connection.query('DELETE FROM cards WHERE ?',[req.body],function(error, results,fields){
+            if (error) throw error;
+            res.redirect('/flashcards/my_cards');
+        });
+    });
+
 });
 
 

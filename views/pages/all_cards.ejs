@@ -5,7 +5,7 @@
 	
 </head>
 <body class="container-fluid">
-
+	<!-- Community Cards Deck -->
 	<header>
 		<% include ../partials/headerLoggedIn %>
 	
@@ -17,7 +17,7 @@
 
 		<div class="page-wrap">
 
-			<label for="sidebartogglerFilter" id= "tabFilter" class="toggle"><div id="plus">+</div></label>
+			<label for="sidebartogglerFilter" id= "tabFilter" class="toggle"><div id="plus">+</div><p id="filterLabel">FILTER</p></label>
 
 		
 			<div class="sidebarFilter">
@@ -40,13 +40,13 @@
 		<% include ../partials/deck_header %>
 		
 		<% include ../partials/card %>
-
-		<form action="/flashcards/add_to_deck" method="POST" id='addCardDeck'>
-			<% include ../partials/add_card_to_deck %>
-			<input type="hidden" name ="cards_id" id="card_deck">
-		<button>Submit</button>
-		</form>
-		
+		<div class="container d-flex align-items-center justify-content-center w-60 my-4">
+			<form action="/flashcards/add_to_deck" method="POST" id='addCardDeck' class="text-left mr-auto">
+				<% include ../partials/add_card_to_deck %>
+				<input type="hidden" name ="cards_id" id="card_deck"> <br>
+			<button class="btn btn-success">Submit</button>
+			</form>
+		</div>
 	</main>
 
 	<footer>
