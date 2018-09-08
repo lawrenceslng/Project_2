@@ -1,6 +1,6 @@
 $("#tab").click(function() {
     // $("#plus").toggleClass("rotate");
-    $(this).children().toggleClass("rotate");
+    $(this).children(":first").toggleClass("rotate");
     if($('#sidebartoggler').prop('checked')){
         $('main').removeClass('active');
     }
@@ -19,7 +19,7 @@ $("#tab").click(function() {
 });
 
 $("#tabFilter").click(function(){
-    $(this).children().toggleClass("rotate");
+    $(this).children(":first").toggleClass("rotate");
     if($('#sidebartogglerFilter').prop('checked')){
         $('main').removeClass('active');
     }
@@ -31,4 +31,4 @@ $("#tabFilter").click(function(){
 $(document).ready( function(){
     $("#sidebartoggler, #sidebartogglerFilter").prop('checked', false); 
 });
-    
+
