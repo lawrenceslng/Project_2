@@ -64,7 +64,7 @@ app.post('/login', function(req, res){
   
     //  res.json(results);
     if (results.length == 0){
-      res.send('try again');
+      res.redirect('/login');
     }
     else {
       bcrypt.compare(password, results[0].password, function(err, result) {
