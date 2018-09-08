@@ -11,9 +11,9 @@
     margin-top: 2%;
 }
 
-#leftArrow{
+/* #leftArrow{
     margin-right: 1%;
-}
+} */
 
 .flashcard{
     text-align: center;
@@ -113,4 +113,8 @@ h5{
 
 .createCards{
     font-size: 18px;
+}
+
+.w-60{
+    width: 60%;
 }
