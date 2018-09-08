@@ -4,7 +4,7 @@
     <% include ../partials/head %>
 </head>
 <body class="container-fluid">
-
+	<!-- User Specific Deck -->
 	<header>
 
 		<% include ../partials/headerLoggedIn %>
@@ -15,9 +15,9 @@
 	<main>
 		<% include ../partials/deck_header %>
 		<% include ../partials/card %>
-		<div class="container-fluid center" id='editDeck'>
-				<a class="btn-btn-dark" href="/flashcards/new_card">Create New Cards to add to this deck</a> <br>
-				<a class="btn-btn-dark" id="editLink">Edit this Deck</a>
+		<div class="container d-flex justify-content-center my-4 w-60" id='editDeck'>
+				<a class="btn btn-warning mr-auto" href="/flashcards/new_card">Create & Add to this Deck</a> <br>
+				<a class="btn btn-warning ml-auto" id="editLink">Edit this Deck</a>
 		</div>
 		
 	</main>
