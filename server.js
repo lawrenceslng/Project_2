@@ -28,18 +28,18 @@ app.set('view engine', 'ejs');
 
 // Initializes the connection variable to sync with a MySQL database
 var connection = mysql.createConnection({
-    host: process.env.DB_HOST,
+  host: process.env.DB_HOST,
   
-    // Your port; if not 3306
-    port: 3306,
+  // Your port; if not 3306
+  port: 3306,
   
-    // Your username
-    user: process.env.DB_USER,
+  // Your username
+  user: process.env.DB_USER,
   
-    // Your password
-    password: process.env.DB_PASSWORD,  //placeholder for your own mySQL password that you store in your own .env file
-    database: process.env.DB_NAME    //TBD
-  });
+  // Your password
+  password: process.env.DB_PASSWORD,  //placeholder for your own mySQL password that you store in your own .env file
+  database: process.env.DB_NAME    //TBD
+});
 
 
 //base routes (Home page, login, registration page, logout)  
@@ -56,7 +56,6 @@ app.get('/login', function(req, res) {
 	res.sendFile(path.join(__dirname, 'public/login.html'));
 });
 app.post('/login', function(req, res){
-	
   var username = req.body.username;
   var password = req.body.password;
   console.log(username + " " + password);
@@ -64,27 +63,26 @@ app.post('/login', function(req, res){
     if (error) throw error;
   
     //  res.json(results);
-      
-      if (results.length == 0){
-        res.send('try again');
-      }else {
-        bcrypt.compare(password, results[0].password, function(err, result) {
-            
-            if (result == true){
-  
-              req.session.user_id = results[0].id;
-              req.session.email = results[0].email;
-              req.session.username = results[0].username;
-              req.session.firstName = results[0].first_name;
-              req.session.lastName = results[0].last_name;
-              res.redirect('decks');
-            }else{
-              res.redirect('/login');
-            }
-        });
+    if (results.length == 0){
+      res.send('try again');
+    }
+    else {
+      bcrypt.compare(password, results[0].password, function(err, result) {
+      if (result == true){
+        req.session.user_id = results[0].id;
+        req.session.email = results[0].email;
+        req.session.username = results[0].username;
+        req.session.firstName = results[0].first_name;
+        req.session.lastName = results[0].last_name;
+        res.redirect('decks');
       }
-    });
+      else{
+        res.redirect('/login');
+      }
+      });
+    }
   });
+});
 
 app.get('/logout', function(req, res){
   req.session.destroy(function(err){
@@ -112,12 +110,11 @@ app.use('/signup', signupRoutes);
 app.use('/profile',profileRoutes);
 
 app.post('/bio', function(req, res){
-    console.log(req.body);
-        connection.query('UPDATE userProfile SET biography = ? WHERE users_id = ? ;', [req.body.biography,req.session.user_id],function(error, results, fields){
-          if (error) throw error;
-          
-        });
-        res.redirect("/home");
-      });
+  console.log(req.body);
+    connection.query('UPDATE userProfile SET biography = ? WHERE users_id = ? ;', [req.body.biography,req.session.user_id],function(error, results, fields){
+      if (error) throw error;
+    });
+    res.redirect("/home");
+});
 
 app.listen(3000);
