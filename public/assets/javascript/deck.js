@@ -14,12 +14,13 @@ function showDecks(){
         var length = res.length
         for(var i = 0; i<length;i++){
             var deckName = res[i].name;
-            var nametag = $('<div>').attr('class', 'nametag').text(deckName);
+            var nametag = $('<li>').attr('class', 'nametag').text(deckName);
             var viewDeck = $('<a>').attr('href','/flashcards/deck/' + res[i].id).text('View');
             var editDeck = $('<a>').attr('href','/decks/edit/' + res[i].id).text('Edit'); 
-            var spinnerView = $('<div>').attr('class', 'spin').append(viewDeck);
-            var spinnerEdit = $('<div>').attr('class', 'spin').append(editDeck);
-            var newDiv = $('<div>').attr('class','box').append(nametag, spinnerView, spinnerEdit);
+            var spinnerView = $('<li>').addClass('active spin').append(viewDeck);
+            var spinnerEdit = $('<li>').addClass('active spin').append(editDeck);
+            var collector = $('<ul>').append(nametag,spinnerView,spinnerEdit);
+            var newDiv = $('<div>').attr('class','box').append(collector);
             $('.deckHolder').append(newDiv);
         }
     });
@@ -47,3 +48,7 @@ function toggleBubbles() {
         $('.speech-bubble-t2').toggle();
     })
 };
+
+// $('.spin').on('click', function(){
+//     $('this').toggleClass('running')
+// });
