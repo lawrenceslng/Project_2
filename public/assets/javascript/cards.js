@@ -182,6 +182,7 @@ $(document).on('keydown', function(){
 
 function flipCards(){
     if((event.keyCode || event.which) == 32){
+        event.preventDefault();
         $('.flashcard').toggleClass('is-flipped');
     }
 }
